@@ -45,7 +45,6 @@ kotlin {
             implementation(project(":data"))
             implementation(project(":domain"))
             implementation(project(":feature"))
-            implementation(project(":shared"))
 
             implementation(libs.kermit)
         }

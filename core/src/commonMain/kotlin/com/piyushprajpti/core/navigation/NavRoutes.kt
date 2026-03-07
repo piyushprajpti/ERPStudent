@@ -1,0 +1,16 @@
+package com.piyushprajpti.core.navigation
+
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
+
+@Serializable
+sealed interface NavRoutes: NavKey  {
+    @Serializable
+    data object Tenant : NavRoutes, NavKey
+
+    @Serializable
+    data object Login : NavRoutes, NavKey
+
+    @Serializable
+    data object Home : NavRoutes, NavKey
+}

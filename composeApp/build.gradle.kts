@@ -20,7 +20,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ERP Student"
+            baseName = "composeApp"
             isStatic = true
         }
     }
@@ -47,6 +47,9 @@ kotlin {
             implementation(project(":feature"))
 
             implementation(libs.kermit)
+
+            implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+            implementation(libs.jetbrains.navigation3.ui)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -57,6 +57,8 @@ kotlin {
                 // Add KMP dependencies here
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.koin.core)
+
+                implementation(project(":core"))
             }
         }
     }

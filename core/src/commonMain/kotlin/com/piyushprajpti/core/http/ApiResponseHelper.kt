@@ -14,13 +14,14 @@ object ApiResponseHelper {
         return try {
             val response = block()
             val data: T = response.body()
+            Logger.e(tag = "TAG") { data.toString() }
             Result.Success(data)
         } catch (exception: ApiException) {
-            Logger.e(tag = "API_EXCEPTION") { exception.message }
+            Logger.e(tag = "TAG") { exception.message }
             Result.Error(exception)
         } catch (exception: Exception) {
             if (exception is CancellationException) throw exception
-            Logger.e(tag = "API_EXCEPTION") { "${exception.message}" }
+            Logger.e(tag = "TAG") { "${exception.message}" }
             val apiException = when (exception) {
                 is ConnectTimeoutException, is IOException -> ApiException(
                     error = ErrorCode.NO_INTERNET,

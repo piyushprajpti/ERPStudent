@@ -16,7 +16,8 @@ data class CustomColorScheme(
     val errorRed: Color,
     val successGreen: Color,
     val warningYellow: Color,
-
+    val white: Color,
+    val black: Color,
 )
 
 val LocalCustomColorScheme = staticCompositionLocalOf<CustomColorScheme> {
@@ -35,7 +36,9 @@ val CustomDarkColorScheme = CustomColorScheme(
     darkGray = Color.DarkGray,
     errorRed = Color.Red,
     successGreen = Color.Green,
-    warningYellow = Color.Yellow
+    warningYellow = Color.Yellow,
+    white = Color(0xFFFFFFFF),
+    black = Color(0xFF000000),
 )
 
 val CustomLightColorScheme = CustomColorScheme(
@@ -50,5 +53,7 @@ val CustomLightColorScheme = CustomColorScheme(
     darkGray = Color.DarkGray,
     errorRed = Color.Red,
     successGreen = Color.Green,
-    warningYellow = Color.Yellow
+    warningYellow = Color.Yellow,
+    white = Color(0xFFFFFFFF),
+    black = Color(0xFF000000),
 )

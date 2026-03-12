@@ -2,52 +2,78 @@ package com.piyushprajpti.feature.auth.tenant
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.domain.model.auth.Tenant
+import com.piyushprajpti.domain.usecase.auth.GetTenantListUseCase
+import com.piyushprajpti.domain.usecase.auth.SaveTenantUseCase
+import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class TenantViewModel : ViewModel() {
+class TenantViewModel(
+    private val getTenantListUseCase: GetTenantListUseCase,
+    private val saveTenantUseCase: SaveTenantUseCase,
+) : ViewModel() {
     private val _state = MutableStateFlow(TenantState())
     val state = _state.onStart {
-        // load initial data here
+        fetchTenantList()
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = TenantState()
     )
+    val loadingHelper = LoadingHelper()
 
-    init {
-        _state.update {
-            it.copy(
-                tenantList = dummyTenantList.sortedBy { tenant -> tenant.name }
-            )
+//    init {
+//        _state.update {
+//            it.copy(
+//                tenantList = dummyTenantList.sortedBy { tenant -> tenant.name }
+//            )
+//        }
+//    }
+
+    private fun fetchTenantList() {
+        viewModelScope.launch {
+            loadingHelper.setLoading(true)
+            when (val result = getTenantListUseCase()) {
+                is Result.Success -> {
+                    val tenantList = result.data.sortedBy { t -> t.name }
+                    _state.update {
+                        it.copy(
+                            originalTenantList = tenantList,
+                            filteredTenantList = tenantList
+                        )
+                    }
+                }
+
+                is Result.Error -> {
+                    _state.update { it.copy(error = result.error.message) }
+                }
+            }
+            loadingHelper.setLoading(false)
         }
     }
 
     fun onEvent(event: TenantEvent) {
         when (event) {
-            is TenantEvent.OnContinueClick -> {}
+            is TenantEvent.OnContinueClick -> onContinueClick(event.onSuccess)
             is TenantEvent.OnTenantChange -> onTenantChange(event.data)
             is TenantEvent.OnSearchQueryChange -> onSearchQueryChange(event.query)
 
         }
     }
 
-    private fun onSearchQueryChange(query: String) {
-        _state.update {
-            it.copy(
-                searchQuery = query,
-                tenantList = if (query.isBlank()) {
-                    dummyTenantList.sortedBy { tenant -> tenant.name }
-                } else {
-                    dummyTenantList.filter { tenant ->
-                        tenant.name.contains(query, ignoreCase = true)
-                    }.sortedBy { tenant -> tenant.name }
-                }
-            )
+    private fun onContinueClick(onSuccess: () -> Unit) {
+        val selectedTenant = state.value.selectedTenant ?: return
+        viewModelScope.launch {
+            setLoading(true)
+            val result = saveTenantUseCase(selectedTenant)
+            if (result is Result.Success) onSuccess()
+            setLoading(false)
         }
     }
 
@@ -64,6 +90,22 @@ class TenantViewModel : ViewModel() {
                     searchQuery = data.name
                 )
             }
+        }
+    }
+
+    private fun onSearchQueryChange(query: String) {
+        _state.update {
+            val filtered = if (query.isBlank()) {
+                it.originalTenantList
+            } else {
+                it.originalTenantList.filter { tenant ->
+                    tenant.name.contains(query, ignoreCase = true)
+                }
+            }
+            it.copy(
+                searchQuery = query,
+                filteredTenantList = filtered
+            )
         }
     }
 

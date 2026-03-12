@@ -1,5 +1,6 @@
 package com.piyushprajpti.core.module
 
+import com.piyushprajpti.core.constants.ApiConstants
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -31,6 +32,7 @@ val networkModule = module {
             }
 
             install(DefaultRequest) {
+                url(ApiConstants.BASE_URL)
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
             }
         }

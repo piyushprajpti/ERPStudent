@@ -1,5 +1,12 @@
 package com.piyushprajpti.feature.auth.login
 
+import com.piyushprajpti.domain.model.auth.Tenant
+
 data class LoginState(
-    val isLoading: Boolean = false
+    val email: String = "",
+    val password: String = "",
+    val isPasswordVisible: Boolean = false,
+    val isLoading: Boolean = false,
+    val error: String? = null,
+    val tenant: Tenant = Tenant()
 )

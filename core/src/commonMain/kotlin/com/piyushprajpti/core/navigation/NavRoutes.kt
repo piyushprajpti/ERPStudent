@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed interface NavRoutes: NavKey  {
+    // auth
     @Serializable
     data object Tenant : NavRoutes, NavKey
 
@@ -13,4 +14,8 @@ sealed interface NavRoutes: NavKey  {
 
     @Serializable
     data object Home : NavRoutes, NavKey
+
+    // profile
+    @Serializable
+    data object Profile: NavRoutes, NavKey
 }

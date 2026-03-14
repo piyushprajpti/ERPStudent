@@ -13,5 +13,9 @@ val serializableNavModule = SerializersModule {
         // home
         subclass(NavRoutes.Home::class, NavRoutes.Home.serializer())
 
+        //profile
+        subclass(NavRoutes.Profile::class, NavRoutes.Profile.serializer())
+
+
     }
 }

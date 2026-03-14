@@ -3,23 +3,26 @@ package com.piyushprajpti.feature.auth.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onusant.learnohub.utils.message_helper.MessageHelper
+import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.domain.usecase.auth.GetSavedTenantUseCase
+import com.piyushprajpti.domain.usecase.auth.LoginUseCase
 import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
-import com.piyushprajpti.feature.utils.message_helper.model.AlertMessageType
+import com.piyushprajpti.feature.utils.message_helper.model.Toast
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val getSavedTenantUseCase: GetSavedTenantUseCase
+    private val getSavedTenantUseCase: GetSavedTenantUseCase,
+    private val loginUseCase: LoginUseCase
 ) : ViewModel() {
-    
+
     val loadingHelper = LoadingHelper()
     val messageHelper = MessageHelper()
 
@@ -35,15 +38,17 @@ class LoginViewModel(
     private fun loadTenant() {
         viewModelScope.launch {
             loadingHelper.setLoading(true)
-            
+
             // Timeout logic
             val timeoutJob = launch {
                 delay(5000)
-                if (_state.value.tenant == null) {
+                if (_state.value.tenant.id.isBlank()) {
                     loadingHelper.setLoading(false)
-                    messageHelper.setAlert(Alert(
-                        message = AlertMessageType.String("Tenant not found or taking too long to load.")
-                    ))
+                    messageHelper.setAlert(
+                        Alert(
+                            message = "Tenant not found or taking too long to load."
+                        )
+                    )
                 }
             }
 
@@ -62,27 +67,61 @@ class LoginViewModel(
             is LoginEvent.OnEmailChange -> {
                 _state.update { it.copy(email = event.email) }
             }
+
             is LoginEvent.OnPasswordChange -> {
                 _state.update { it.copy(password = event.password) }
             }
+
             LoginEvent.OnTogglePasswordVisibility -> {
                 _state.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
             }
-            LoginEvent.OnLoginClick -> {
-                login()
-            }
+
+            is LoginEvent.OnLoginClick -> login(event.onSuccess)
+
             LoginEvent.OnForgotPasswordClick -> {
                 // handle forgot password
             }
+
             LoginEvent.OnContactAdminClick -> {
                 // handle contact admin
             }
         }
     }
 
-    private fun login() {
-        setLoading(true)
-        // Perform login logic using _state.value.tenant?.id, email, and password
+    private fun login(onSuccess: () -> Unit) {
+        val email = state.value.email
+        val password = state.value.password
+
+        if (email.isBlank() || password.isBlank()) {
+            messageHelper.setToast(
+                Toast(
+                    isError = true,
+                    text = "Please enter both email and password"
+                )
+            )
+            return
+        }
+
+        viewModelScope.launch {
+            loadingHelper.setLoading(true)
+            val result = loginUseCase(email, password)
+            loadingHelper.setLoading(false)
+
+            when (result) {
+                is Result.Success -> {
+                    onSuccess()
+                }
+
+                is Result.Error -> {
+                    messageHelper.setToast(
+                        Toast(
+                            isError = true,
+                            text = result.error.message
+                        )
+                    )
+                }
+            }
+        }
     }
 
     private fun setLoading(value: Boolean) {

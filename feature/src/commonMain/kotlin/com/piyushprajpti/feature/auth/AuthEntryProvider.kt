@@ -19,7 +19,9 @@ fun authEntryProvider(
         }
 
         is NavRoutes.Login -> NavEntry(key) {
-            LoginScreen()
+            LoginScreen(
+                onLoginClick = { backStack.add(NavRoutes.Profile) }
+            )
         }
 
         else -> null

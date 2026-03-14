@@ -1,19 +1,31 @@
 package com.piyushprajpti.data.repository.auth
 
+import androidx.datastore.preferences.core.stringPreferencesKey
+import com.piyushprajpti.core.constants.ACCESS_TOKEN
+import com.piyushprajpti.core.constants.REFRESH_TOKEN
+import com.piyushprajpti.core.http.ApiException
+import com.piyushprajpti.core.http.ErrorCode
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.data.local.dao.auth.TenantDao
+import com.piyushprajpti.data.local.dao.auth.UserDao
+import com.piyushprajpti.data.local.datastore.PreferenceDataStore
 import com.piyushprajpti.data.local.entity.auth.toDomain
 import com.piyushprajpti.data.local.entity.auth.toEntity
+import com.piyushprajpti.data.remote.request.LoginRequest
 import com.piyushprajpti.data.remote.response.toDomain
+import com.piyushprajpti.data.remote.response.toEntity
 import com.piyushprajpti.data.remote.service.auth.AuthApiService
 import com.piyushprajpti.domain.model.auth.Tenant
 import com.piyushprajpti.domain.repository.auth.AuthRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class AuthRepositoryImpl(
     private val apiService: AuthApiService,
-    private val tenantDao: TenantDao
+    private val tenantDao: TenantDao,
+    private val userDao: UserDao,
+    private val preferenceDataStore: PreferenceDataStore
 ) : AuthRepository {
     override suspend fun getTenantList(): Result<List<Tenant>> {
         return when (val result = apiService.getTenants()) {
@@ -32,8 +44,8 @@ class AuthRepositoryImpl(
             Result.Success(true)
         } catch (e: Exception) {
             Result.Error(
-                com.piyushprajpti.core.http.ApiException(
-                    error = com.piyushprajpti.core.http.ErrorCode.UNKNOWN,
+                ApiException(
+                    error = ErrorCode.UNKNOWN,
                     message = e.message ?: "Failed to save tenant"
                 )
             )
@@ -42,5 +54,55 @@ class AuthRepositoryImpl(
 
     override fun getSavedTenant(): Flow<Tenant?> {
         return tenantDao.getSavedTenant().map { it?.toDomain() }
+    }
+
+    override suspend fun login(email: String, password: String): Result<Boolean> {
+        val savedTenant = getSavedTenant().first()
+            ?: return Result.Error(
+                ApiException(
+                    error = ErrorCode.NOT_FOUND,
+                    message = "No tenant selected"
+                )
+            )
+
+        val loginRequest = LoginRequest(
+            email = email,
+            password = password,
+            tenantId = savedTenant.id
+        )
+
+        return when (val result = apiService.login(loginRequest)) {
+            is Result.Success -> {
+                try {
+                    // Clear existing user data first to ensure only one user exists
+                    userDao.clearUser()
+
+                    // Save tokens
+                    preferenceDataStore.setValue(
+                        stringPreferencesKey(ACCESS_TOKEN),
+                        result.data.data.accessToken
+                    )
+                    preferenceDataStore.setValue(
+                        stringPreferencesKey(REFRESH_TOKEN),
+                        result.data.data.refreshToken
+                    )
+
+                    // Save user data to Room
+                    userDao.insertUser(result.data.data.user.toEntity())
+
+                    Result.Success(true)
+                } catch (e: Exception) {
+                    Result.Error(
+                        ApiException(
+                            error = ErrorCode.UNKNOWN,
+                            message = e.message
+                                ?: "Login successful, but failed to save user data locally."
+                        )
+                    )
+                }
+            }
+
+            is Result.Error -> Result.Error(result.error)
+        }
     }
 }

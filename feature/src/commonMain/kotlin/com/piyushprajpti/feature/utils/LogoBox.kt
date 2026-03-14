@@ -1,11 +1,13 @@
 package com.piyushprajpti.feature.utils
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -20,14 +22,14 @@ fun LogoBox(
         Icon(
             imageVector = Icons.Default.School,
             contentDescription = "logo",
-            modifier = modifier.padding(5.dp),
+            modifier = modifier.clip(CircleShape).padding(5.dp),
             tint = CustomTheme.colors.primaryText
         )
     } else {
         AsyncImage(
             model = imageUrl,
             contentDescription = "logo",
-            modifier = modifier,
+            modifier = modifier.clip(CircleShape),
             contentScale = ContentScale.Crop
         )
     }

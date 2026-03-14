@@ -16,6 +16,7 @@ actual class RoomDBFactory {
         return Room.databaseBuilder<LocalDatabase>(dbFile)
             .setDriver(androidx.sqlite.driver.bundled.BundledSQLiteDriver())
             .setQueryCoroutineContext(Dispatchers.IO)
+            .fallbackToDestructiveMigration(true)
             .build()
     }
 

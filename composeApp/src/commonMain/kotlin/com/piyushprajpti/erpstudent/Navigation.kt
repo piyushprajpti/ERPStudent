@@ -17,7 +17,7 @@ fun Navigation(userToken: String?) {
         configuration = SavedStateConfiguration {
             serializersModule = serializableNavModule
         },
-        if (userToken == null) NavRoutes.Tenant else NavRoutes.Home
+        if (userToken == null) NavRoutes.Tenant else NavRoutes.Profile
     )
 
     NavDisplay(

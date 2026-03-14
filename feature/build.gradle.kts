@@ -6,6 +6,10 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
+compose.resources {
+    packageOfResClass = "com.piyushprajpti.feature"
+}
+
 kotlin {
 
     // Target declarations - add or remove as needed below. These define
@@ -58,8 +62,8 @@ kotlin {
                 implementation(libs.kotlin.stdlib)
                 // Add KMP dependencies here
 
-                implementation(project(":core"))
-                implementation(project(":domain"))
+                implementation(projects.core)
+                implementation(projects.domain)
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
                 implementation(libs.koin.compose.viewmodel)

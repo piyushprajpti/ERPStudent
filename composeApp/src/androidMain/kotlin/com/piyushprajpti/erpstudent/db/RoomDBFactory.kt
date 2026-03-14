@@ -13,6 +13,7 @@ actual class RoomDBFactory(private val context: Context) {
         return Room.databaseBuilder<LocalDatabase>(context, dbFile.absolutePath)
             .setDriver(BundledSQLiteDriver())
             .setQueryCoroutineContext(Dispatchers.IO)
+            .fallbackToDestructiveMigration(true)
             .build()
     }
 }

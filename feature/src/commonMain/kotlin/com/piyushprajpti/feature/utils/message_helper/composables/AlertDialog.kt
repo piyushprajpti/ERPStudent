@@ -31,12 +31,6 @@ import androidx.compose.ui.zIndex
 import com.onusant.learnohub.utils.message_helper.MessageHelper
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
-import com.piyushprajpti.feature.utils.message_helper.model.AlertMessageType
-import erpstudent.feature.generated.resources.Res
-import erpstudent.feature.generated.resources.text_cancel
-import erpstudent.feature.generated.resources.text_confirm
-import erpstudent.feature.generated.resources.text_ok
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AlertDialog(messageHelper: MessageHelper) {
@@ -48,14 +42,8 @@ fun AlertDialog(messageHelper: MessageHelper) {
 @Composable
 fun AlertDialogBase(alert: Alert?, onDismissRequest: () -> Unit) {
     if (alert == null) return
-    val label = when (alert.label) {
-        is AlertMessageType.StringRes -> stringResource(alert.label.value)
-        is AlertMessageType.String -> alert.label.value
-    }
-    val message = when (alert.message) {
-        is AlertMessageType.StringRes -> stringResource(alert.message.value)
-        is AlertMessageType.String -> alert.message.value
-    }
+    val label = alert.label
+    val message = alert.message
 
     Surface(
         Modifier
@@ -116,7 +104,7 @@ fun AlertDialogBase(alert: Alert?, onDismissRequest: () -> Unit) {
                             )
                     ) {
                         Text(
-                            text = stringResource(Res.string.text_cancel),
+                            text = "Cancel",
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxHeight()
@@ -137,7 +125,7 @@ fun AlertDialogBase(alert: Alert?, onDismissRequest: () -> Unit) {
                             color = Color.Black
                         )
                         Text(
-                            text = stringResource(Res.string.text_confirm),
+                            text = "Confirm",
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxHeight()
@@ -160,7 +148,7 @@ fun AlertDialogBase(alert: Alert?, onDismissRequest: () -> Unit) {
                     }
                 } else {
                     Text(
-                        text = stringResource(Res.string.text_ok),
+                        text = "Ok",
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(

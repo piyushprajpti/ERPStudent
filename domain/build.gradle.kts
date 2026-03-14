@@ -58,7 +58,8 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.koin.core)
 
-                implementation(project(":core"))
+                implementation(projects.core)
+                implementation(libs.kermit)
             }
         }
     }

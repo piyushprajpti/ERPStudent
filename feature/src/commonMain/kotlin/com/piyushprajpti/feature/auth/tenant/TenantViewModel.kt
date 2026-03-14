@@ -2,11 +2,14 @@ package com.piyushprajpti.feature.auth.tenant
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.onusant.learnohub.utils.message_helper.MessageHelper
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.domain.model.auth.Tenant
 import com.piyushprajpti.domain.usecase.auth.GetTenantListUseCase
 import com.piyushprajpti.domain.usecase.auth.SaveTenantUseCase
 import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
+import com.piyushprajpti.feature.utils.message_helper.model.Alert
+import com.piyushprajpti.feature.utils.message_helper.model.Toast
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -27,14 +30,7 @@ class TenantViewModel(
         initialValue = TenantState()
     )
     val loadingHelper = LoadingHelper()
-
-//    init {
-//        _state.update {
-//            it.copy(
-//                tenantList = dummyTenantList.sortedBy { tenant -> tenant.name }
-//            )
-//        }
-//    }
+    val messageHelper = MessageHelper()
 
     private fun fetchTenantList() {
         viewModelScope.launch {
@@ -51,7 +47,19 @@ class TenantViewModel(
                 }
 
                 is Result.Error -> {
-                    _state.update { it.copy(error = result.error.message) }
+                    messageHelper.setAlert(
+                        Alert(
+                            label = "Error",
+                            message = result.error.message,
+                            cancelable = true
+                        )
+                    )
+                    messageHelper.setToast(
+                        Toast(
+                            isError = true,
+                            text = result.error.message
+                        )
+                    )
                 }
             }
             loadingHelper.setLoading(false)
@@ -73,6 +81,19 @@ class TenantViewModel(
             setLoading(true)
             val result = saveTenantUseCase(selectedTenant)
             if (result is Result.Success) onSuccess()
+            when (result) {
+                is Result.Success -> {
+                    onSuccess()
+                }
+                is Result.Error -> {
+                    messageHelper.setToast(
+                        Toast(
+                            isError = true,
+                            text = result.error.message
+                        )
+                    )
+                }
+            }
             setLoading(false)
         }
     }

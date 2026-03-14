@@ -16,8 +16,6 @@ import androidx.compose.ui.window.PopupProperties
 import com.onusant.learnohub.utils.message_helper.MessageHelper
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
 import com.piyushprajpti.feature.utils.message_helper.model.Toast
-import com.piyushprajpti.feature.utils.message_helper.model.ToastMessage
-import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ToastWidget(messageHelper: MessageHelper) {
@@ -31,13 +29,8 @@ private fun ToastWidgetBase(
     toast: Toast? = null,
     onDismissRequest: () -> Unit
 ) {
-    val text =
-        if (toast != null) {
-            when (toast.text) {
-                is ToastMessage.String -> toast.text.value
-                is ToastMessage.StringRes -> stringResource(toast.text.value)
-            }
-        } else return onDismissRequest()
+    if (toast == null) return onDismissRequest()
+    val text = toast.text
 
     val color = if (toast.isError) CustomTheme.colors.errorRed else CustomTheme.colors.successGreen
 

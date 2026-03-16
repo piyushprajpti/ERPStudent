@@ -1,10 +1,9 @@
-package com.piyushprajpti.data.remote.request
+package com.piyushprajpti.data.remote.request.common
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginRequest(
+data class ForgotPasswordRequest(
     val email: String,
-    val password: String,
     val tenantId: String
 )

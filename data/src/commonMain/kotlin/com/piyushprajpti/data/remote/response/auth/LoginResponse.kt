@@ -1,4 +1,4 @@
-package com.piyushprajpti.data.remote.response
+package com.piyushprajpti.data.remote.response.auth
 
 import com.piyushprajpti.data.local.entity.auth.UserEntity
 import com.piyushprajpti.domain.model.auth.User
@@ -23,7 +23,6 @@ data class UserData(
     val tenantId: String,
     val email: String,
     val name: String,
-    val password: String,
     val avatar: String? = null,
     val phone: String? = null,
     val dob: String? = null,
@@ -31,17 +30,7 @@ data class UserData(
     val address: String? = null,
     val createdAt: String,
     val updatedAt: String,
-    val credential: CredentialData,
-    val userRoles: List<String> = emptyList()
-)
-
-@Serializable
-data class CredentialData(
-    val id: String,
-    val userId: String,
-    val passwordHash: String,
-    val salt: String,
-    val updatedAt: String
+    val roles: List<String> = emptyList()
 )
 
 fun UserData.toEntity() = UserEntity(

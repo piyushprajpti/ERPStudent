@@ -4,6 +4,10 @@ import com.piyushprajpti.domain.usecase.auth.GetSavedTenantUseCase
 import com.piyushprajpti.domain.usecase.auth.GetTenantListUseCase
 import com.piyushprajpti.domain.usecase.auth.LoginUseCase
 import com.piyushprajpti.domain.usecase.auth.SaveTenantUseCase
+import com.piyushprajpti.domain.usecase.common.ForgotPasswordUseCase
+import com.piyushprajpti.domain.usecase.common.ResetPasswordUseCase
+import com.piyushprajpti.domain.usecase.common.SubmitSupportUseCase
+import com.piyushprajpti.domain.usecase.common.VerifyOtpUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -12,4 +16,10 @@ val domainModule = module {
     factory { SaveTenantUseCase(get()) }
     factory { GetSavedTenantUseCase(get()) }
     factory { LoginUseCase(get()) }
+    factory { ForgotPasswordUseCase(get()) }
+    factory { VerifyOtpUseCase(get()) }
+    factory { ResetPasswordUseCase(get()) }
+
+    // common use cases
+    factory { SubmitSupportUseCase(get()) }
 }

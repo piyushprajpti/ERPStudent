@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.OutlinedTextField
@@ -25,21 +26,25 @@ fun CustomTextField(
     onValueChange: (String) -> Unit,
     label: String? = null,
     placeholder: String,
-    modifier: Modifier = Modifier,
+    columnModifier: Modifier = Modifier,
+    textFieldModifier: Modifier = Modifier,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
-    errorMessage: String? = null
+    errorMessage: String? = null,
+    enabled: Boolean = true,
+    singleLine: Boolean = true
 ) {
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(modifier = columnModifier.fillMaxWidth()) {
         if (label != null) {
             Text(
                 text = label,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
-                color = CustomTheme.colors.secondaryText
+                color = if (enabled) CustomTheme.colors.secondaryText else CustomTheme.colors.mediumGray
             )
             Spacer(modifier = Modifier.height(5.dp))
         }
@@ -47,7 +52,7 @@ fun CustomTextField(
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = textFieldModifier.fillMaxWidth(),
             placeholder = {
                 Text(
                     text = placeholder,
@@ -56,27 +61,35 @@ fun CustomTextField(
             },
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
-            singleLine = true,
+            singleLine = singleLine,
             shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = CustomTheme.colors.secondaryBack,
                 unfocusedContainerColor = CustomTheme.colors.secondaryBack,
+                disabledContainerColor = CustomTheme.colors.lightGray.copy(alpha = 0.3f),
 
                 focusedBorderColor = CustomTheme.colors.primary.copy(alpha = 0.5f),
                 unfocusedBorderColor = CustomTheme.colors.lightGray,
+                disabledBorderColor = CustomTheme.colors.lightGray.copy(alpha = 0.5f),
 
                 focusedTextColor = CustomTheme.colors.primaryText,
                 unfocusedTextColor = CustomTheme.colors.secondaryText,
+                disabledTextColor = CustomTheme.colors.mediumGray,
+                
                 cursorColor = CustomTheme.colors.primary,
 
                 selectionColors = TextSelectionColors(
                     handleColor = CustomTheme.colors.primary,
                     backgroundColor = CustomTheme.colors.primary.copy(0.3f)
-                )
+                ),
+                disabledPlaceholderColor = CustomTheme.colors.mediumGray.copy(alpha = 0.5f),
+                disabledLabelColor = CustomTheme.colors.mediumGray
             ),
-            isError = isError
+            isError = isError,
+            enabled = enabled
         )
         if (isError && errorMessage != null) {
             Text(

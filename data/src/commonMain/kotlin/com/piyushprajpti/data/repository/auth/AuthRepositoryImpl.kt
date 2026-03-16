@@ -11,9 +11,9 @@ import com.piyushprajpti.data.local.dao.auth.UserDao
 import com.piyushprajpti.data.local.datastore.PreferenceDataStore
 import com.piyushprajpti.data.local.entity.auth.toDomain
 import com.piyushprajpti.data.local.entity.auth.toEntity
-import com.piyushprajpti.data.remote.request.LoginRequest
-import com.piyushprajpti.data.remote.response.toDomain
-import com.piyushprajpti.data.remote.response.toEntity
+import com.piyushprajpti.data.remote.request.auth.LoginRequest
+import com.piyushprajpti.data.remote.response.auth.toDomain
+import com.piyushprajpti.data.remote.response.auth.toEntity
 import com.piyushprajpti.data.remote.service.auth.AuthApiService
 import com.piyushprajpti.domain.model.auth.Tenant
 import com.piyushprajpti.domain.repository.auth.AuthRepository

@@ -6,6 +6,7 @@ import androidx.navigation3.runtime.NavKey
 import com.piyushprajpti.core.navigation.NavRoutes
 import com.piyushprajpti.feature.auth.login.LoginScreen
 import com.piyushprajpti.feature.auth.tenant.TenantScreen
+import com.piyushprajpti.feature.common.support.SupportScreen
 
 fun authEntryProvider(
     key: NavKey,
@@ -20,7 +21,18 @@ fun authEntryProvider(
 
         is NavRoutes.Login -> NavEntry(key) {
             LoginScreen(
-                onLoginClick = { backStack.add(NavRoutes.Profile) }
+                onLoginClick = {
+                    backStack.clear()
+                    backStack.add(NavRoutes.Profile)
+                },
+                onForgotPasswordClick = { backStack.add(NavRoutes.ResetPassword) },
+                onContactSupportClick = { backStack.add(NavRoutes.Support) }
+            )
+        }
+
+        is NavRoutes.Support -> NavEntry(key) {
+            SupportScreen(
+                onBackClick = { backStack.removeLast() },
             )
         }
 

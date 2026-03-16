@@ -1,6 +1,7 @@
 package com.piyushprajpti.feature.auth.login
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -24,7 +26,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -43,9 +48,12 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun LoginScreen(
     onLoginClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit,
+    onContactSupportClick: () -> Unit,
     viewModel: LoginViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val focusManager = LocalFocusManager.current
 
     LoadingWidget(viewModel.loadingHelper.state.value)
     ToastWidget(viewModel.messageHelper)
@@ -53,44 +61,36 @@ fun LoginScreen(
 
     fun onLoginClick() {
         viewModel.onEvent(
-            LoginEvent.OnLoginClick(
-                onSuccess = onLoginClick
-            )
+            LoginEvent.OnLoginClick(onSuccess = onLoginClick)
         )
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = { focusManager.clearFocus() })
+            }
             .padding(15.dp)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(100.dp))
+        Spacer(modifier = Modifier.height(60.dp))
 
         LogoBox(
             modifier = Modifier.size(100.dp),
-            imageUrl = state.tenant.logo /*"https://tse2.mm.bing.net/th/id/OIP.dJRgtbtpJ827mCUmbDVeBAHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3"*/
+            imageUrl = state.tenant.logo
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = state.tenant.name /*"Raffles University"*/,
+            text = state.tenant.name,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
             style = MaterialTheme.typography.bodyMedium,
             color = CustomTheme.colors.primaryText
         )
-
-//        Spacer(modifier = Modifier.height(24.dp))
-//
-//        Text(
-//            text = "Welcome Back!",
-//            fontSize = 20.sp,
-//            fontWeight = FontWeight.SemiBold,
-//            color = CustomTheme.colors.primaryText
-//        )
 
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -99,7 +99,10 @@ fun LoginScreen(
             onValueChange = { viewModel.onEvent(LoginEvent.OnEmailChange(it)) },
             label = "Email Address",
             placeholder = "example@email.com",
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Next
+            )
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -110,7 +113,16 @@ fun LoginScreen(
             label = "Password",
             placeholder = "Password",
             visualTransformation = if (state.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    focusManager.clearFocus()
+                    onLoginClick()
+                }
+            ),
             trailingIcon = {
                 IconButton(onClick = { viewModel.onEvent(LoginEvent.OnTogglePasswordVisibility) }) {
                     Icon(
@@ -132,7 +144,7 @@ fun LoginScreen(
             modifier = Modifier
                 .align(Alignment.End)
                 .clickable {
-                    viewModel.onEvent(LoginEvent.OnForgotPasswordClick)
+                    onForgotPasswordClick()
                 }
         )
 
@@ -151,7 +163,7 @@ fun LoginScreen(
         HorizontalDivider(
             modifier = Modifier.fillMaxWidth(),
             thickness = 1.dp,
-            color = CustomTheme.colors.lightGray/*.copy(alpha = 0.5f)*/
+            color = CustomTheme.colors.lightGray
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -165,12 +177,12 @@ fun LoginScreen(
                 color = CustomTheme.colors.secondaryText
             )
             Text(
-                text = "Contact Admin",
+                text = "Contact Support",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 color = CustomTheme.colors.primary,
                 modifier = Modifier.clickable {
-                    viewModel.onEvent(LoginEvent.OnContactAdminClick)
+                    onContactSupportClick()
                 }
             )
         }

@@ -51,13 +51,8 @@ class TenantViewModel(
                         Alert(
                             label = "Error",
                             message = result.error.message,
-                            cancelable = true
-                        )
-                    )
-                    messageHelper.setToast(
-                        Toast(
-                            isError = true,
-                            text = result.error.message
+                            cancelable = false,
+                            neutralAction = { fetchTenantList() }
                         )
                     )
                 }
@@ -85,6 +80,7 @@ class TenantViewModel(
                 is Result.Success -> {
                     onSuccess()
                 }
+
                 is Result.Error -> {
                     messageHelper.setToast(
                         Toast(
@@ -142,7 +138,7 @@ val dummyTenantList = listOf(
         name = "Alpha University",
         slug = "alpha-university",
         domain = "www.alpha-uni.edu",
-        logo = "https://static.vecteezy.com/system/resources/thumbnails/011/883/284/small/colorful-star-logo-good-for-technology-logo-vintech-logo-company-logo-browser-logo-dummy-logo-bussiness-logo-free-vector.jpg",
+        logo = "https://static.vecteezy.com/system/resources/thumbnails/011/883/284/small/colorful-star-logo-good-for-technology-logo-vintech-logo-company-logo-browser-logo-dummy-logo-browser-logo-dummy-logo-bussiness-logo-free-vector.jpg",
         address = "123 Academic Way, Boston, MA",
         contactEmail = "admin@alpha-university.com",
         contactPhone = "+1-555-0101",

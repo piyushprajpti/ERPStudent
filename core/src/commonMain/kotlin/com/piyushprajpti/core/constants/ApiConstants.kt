@@ -11,4 +11,12 @@ object ApiConstants {
     object User {
         const val PROFILE = "user/profile"
     }
+
+    object Common {
+        const val SUPPORT = "support"
+
+        const val FORGOT_PASSWORD = "auth/forgot-password"
+        const val VERIFY_OTP = "auth/verify-otp"
+        const val RESET_PASSWORD = "auth/reset-password"
+    }
 }

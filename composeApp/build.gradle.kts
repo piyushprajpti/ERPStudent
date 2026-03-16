@@ -43,10 +43,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
-            implementation(project(":core"))
-            implementation(project(":data"))
-            implementation(project(":domain"))
-            implementation(project(":feature"))
+            implementation(projects.core)
+            implementation(projects.data)
+            implementation(projects.domain)
+            implementation(projects.feature)
 
             implementation(libs.kermit)
 
@@ -60,6 +60,9 @@ kotlin {
             // DataStore
             implementation(libs.androidx.datastore)
             implementation(libs.androidx.datastore.preferences)
+
+            //koin
+            implementation(libs.koin.compose.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -8,7 +8,7 @@ data class Tenant(
     val logo: String? = null,
     val address: String? = null,
     val contactEmail: String = "",
-    val contactPhone: String? = null,
+    val contactPhone: String? = "7014986896",
     val createdAt: String = "",
     val updatedAt: String = ""
 )

@@ -1,7 +1,9 @@
 package com.piyushprajpti.feature.auth.login
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,10 +19,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -68,6 +68,7 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(CustomTheme.colors.primaryBackground)
             .pointerInput(Unit) {
                 detectTapGestures(onTap = { focusManager.clearFocus() })
             }
@@ -75,43 +76,69 @@ fun LoginScreen(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(80.dp))
 
         LogoBox(
-            modifier = Modifier.size(100.dp),
+            modifier = Modifier.size(80.dp),
             imageUrl = state.tenant.logo
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = state.tenant.name.ifBlank { "Raffles University" },
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            color = CustomTheme.colors.primaryText
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = state.tenant.name,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.SemiBold,
-            style = MaterialTheme.typography.bodyMedium,
-            color = CustomTheme.colors.primaryText
+            text = "Sign in to access your dashboard",
+            fontSize = 14.sp,
+            color = CustomTheme.colors.secondaryText
         )
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(48.dp))
 
         CustomTextField(
             value = state.email,
             onValueChange = { viewModel.onEvent(LoginEvent.OnEmailChange(it)) },
             label = "Email Address",
-            placeholder = "example@email.com",
+            placeholder = "Enter your email address",
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email,
                 imeAction = ImeAction.Next
             )
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         CustomTextField(
             value = state.password,
             onValueChange = { viewModel.onEvent(LoginEvent.OnPasswordChange(it)) },
-            label = "Password",
-            placeholder = "Password",
+            labelContent = {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Password",
+                        fontSize = 14.sp,
+                        color = CustomTheme.colors.secondaryText
+                    )
+                    Text(
+                        text = "Forgot Password?",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = CustomTheme.colors.primary,
+                        modifier = Modifier.clickable { onForgotPasswordClick() }
+                    )
+                }
+            },
+            placeholder = "Enter your password",
             visualTransformation = if (state.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password,
@@ -128,45 +155,23 @@ fun LoginScreen(
                     Icon(
                         imageVector = if (state.isPasswordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
                         contentDescription = "Toggle password visibility",
-                        tint = CustomTheme.colors.primaryText
+                        tint = CustomTheme.colors.secondaryText
                     )
                 }
             }
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Text(
-            text = "Forgot Password?",
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium,
-            color = CustomTheme.colors.primary,
-            modifier = Modifier
-                .align(Alignment.End)
-                .clickable {
-                    onForgotPasswordClick()
-                }
-        )
-
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         PrimaryActionButton(
-            text = "Login",
+            text = "Log In",
             onClick = { onLoginClick() },
             isLoading = state.isLoading,
             containerColor = CustomTheme.colors.primary,
             contentColor = CustomTheme.colors.white
         )
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        HorizontalDivider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = 1.dp,
-            color = CustomTheme.colors.lightGray
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         Row(
             verticalAlignment = Alignment.CenterVertically

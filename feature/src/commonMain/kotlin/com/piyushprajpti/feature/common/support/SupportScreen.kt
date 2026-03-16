@@ -1,5 +1,6 @@
 package com.piyushprajpti.feature.common.support
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,15 +15,18 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
 import com.piyushprajpti.feature.utils.CustomTextField
@@ -49,6 +53,7 @@ fun SupportScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(CustomTheme.colors.primaryBackground)
             .statusBarsPadding()
             .navigationBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,8 +71,15 @@ fun SupportScreen(
                 }
                 .verticalScroll(scrollState)
                 .padding(15.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
+            
+            Text(
+                text = "Get in touch",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = CustomTheme.colors.white
+            )
 
             CustomTextField(
                 value = state.name,
@@ -117,20 +129,18 @@ fun SupportScreen(
                         viewModel.onEvent(SupportEvent.OnSubmitClick)
                     }
                 ),
-                textFieldModifier = Modifier.height(200.dp).fillMaxWidth(),
+                textFieldModifier = Modifier.height(150.dp).fillMaxWidth(),
                 singleLine = false
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             PrimaryActionButton(
                 text = "Submit Request",
                 onClick = {
                     focusManager.clearFocus()
                     viewModel.onEvent(SupportEvent.OnSubmitClick)
-                },
-                containerColor = CustomTheme.colors.primary,
-                contentColor = CustomTheme.colors.white
+                }
             )
         }
     }

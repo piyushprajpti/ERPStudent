@@ -26,11 +26,11 @@ fun PrimaryActionButton(
     isLoading: Boolean = false,
     enabled: Boolean = true,
     containerColor: Color = CustomTheme.colors.primary,
-    contentColor: Color = CustomTheme.colors.primaryText,
+    contentColor: Color = CustomTheme.colors.white,
     disabledContainerColor: Color = containerColor.copy(alpha = 0.5f),
     disabledContentColor: Color = contentColor.copy(alpha = 0.7f),
-    shape: Shape = RoundedCornerShape(12.dp),
-    height: Dp = 50.dp,
+    shape: Shape = RoundedCornerShape(25.dp),
+    height: Dp = 56.dp,
     content: @Composable (RowScope.() -> Unit)? = null
 ) {
     Button(
@@ -55,9 +55,9 @@ fun PrimaryActionButton(
             } else {
                 Text(
                     text = text,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = CustomTheme.colors.white
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = contentColor
                 )
             }
         }

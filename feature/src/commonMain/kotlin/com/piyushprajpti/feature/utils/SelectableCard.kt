@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -33,31 +32,30 @@ fun SelectableCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val backgroundColor = if (isSelected) CustomTheme.colors.primary.copy(alpha = 0.1f)
-    else Color.White
-
+    val backgroundColor = if (isSelected) CustomTheme.colors.primary.copy(alpha = 0.15f)
+    else CustomTheme.colors.secondaryBackground
 
     val borderColor = if (isSelected) CustomTheme.colors.primary
-    else CustomTheme.colors.mediumGray
+    else CustomTheme.colors.outline
 
-    val shape = RoundedCornerShape(12.dp)
+    val shape = RoundedCornerShape(20.dp)
 
     Row(
         modifier = modifier
             .fillMaxWidth()
             .clip(shape)
             .clickable { onClick() }
-            .background(backgroundColor, shape)
+            .background(backgroundColor)
             .border(
                 border = BorderStroke(1.dp, borderColor),
                 shape = shape
             )
-            .padding(12.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         LogoBox(
-            modifier = Modifier.size(60.dp),
+            modifier = Modifier.size(50.dp),
             imageUrl = icon
         )
 
@@ -69,7 +67,7 @@ fun SelectableCard(
                 style = MaterialTheme.typography.titleMedium,
                 color = CustomTheme.colors.primaryText,
                 fontWeight = FontWeight.Bold,
-                fontSize = 15.sp
+                fontSize = 16.sp
             )
             if (subtitle != null) {
                 Text(
@@ -79,7 +77,6 @@ fun SelectableCard(
                     fontSize = 13.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
-
                 )
             }
         }

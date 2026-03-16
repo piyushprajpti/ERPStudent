@@ -1,5 +1,6 @@
 package com.piyushprajpti.feature.auth.tenant
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -63,6 +64,7 @@ fun TenantScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(CustomTheme.colors.primaryBackground)
             .statusBarsPadding()
             .navigationBarsPadding()
             .clickable(
@@ -74,25 +76,25 @@ fun TenantScreen(
             .padding(15.dp)
     ) {
 
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(40.dp))
 
         Text(
             text = "Welcome Student",
             color = CustomTheme.colors.primaryText,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.W600,
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
         )
 
-        Spacer(Modifier.height(4.dp))
+        Spacer(Modifier.height(8.dp))
 
         Text(
             text = "Choose your university/college to continue",
             color = CustomTheme.colors.secondaryText,
             fontSize = 15.sp,
-            fontWeight = FontWeight.W400,
+            fontWeight = FontWeight.Normal,
         )
 
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(32.dp))
 
         CustomTextField(
             placeholder = "Search Institutions",
@@ -106,7 +108,7 @@ fun TenantScreen(
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = "search",
-                    tint = CustomTheme.colors.darkGray
+                    tint = CustomTheme.colors.secondaryText
                 )
             },
             trailingIcon = {
@@ -114,7 +116,7 @@ fun TenantScreen(
                     Icon(
                         imageVector = Icons.Default.Clear,
                         contentDescription = "clear",
-                        tint = CustomTheme.colors.darkGray,
+                        tint = CustomTheme.colors.secondaryText,
                         modifier = Modifier
                             .clip(CircleShape)
                             .clickable {
@@ -131,14 +133,14 @@ fun TenantScreen(
                 .fillMaxWidth()
                 .weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            contentPadding = PaddingValues(vertical = 10.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(vertical = 24.dp)
         ) {
             if (state.isLoading) {
                 item {
                     Spacer(Modifier.height(100.dp))
                     Text(
-                        text = "Searching",
+                        text = "Searching...",
                         color = CustomTheme.colors.secondaryText,
                         fontSize = 14.sp,
                         style = MaterialTheme.typography.bodyMedium

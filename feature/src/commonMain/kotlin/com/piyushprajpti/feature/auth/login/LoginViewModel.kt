@@ -9,6 +9,7 @@ import com.piyushprajpti.domain.usecase.auth.LoginUseCase
 import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
 import com.piyushprajpti.feature.utils.message_helper.model.Toast
+import com.piyushprajpti.feature.utils.message_helper.model.ToastType
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -95,7 +96,7 @@ class LoginViewModel(
         if (email.isBlank() || password.isBlank()) {
             messageHelper.setToast(
                 Toast(
-                    isError = true,
+                    type = ToastType.ERROR,
                     text = "Please enter both email and password"
                 )
             )
@@ -115,7 +116,7 @@ class LoginViewModel(
                 is Result.Error -> {
                     messageHelper.setToast(
                         Toast(
-                            isError = true,
+                            type = ToastType.ERROR,
                             text = result.error.message
                         )
                     )

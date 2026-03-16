@@ -8,6 +8,7 @@ import com.piyushprajpti.domain.usecase.common.SubmitSupportUseCase
 import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
 import com.piyushprajpti.feature.utils.message_helper.model.Toast
+import com.piyushprajpti.feature.utils.message_helper.model.ToastType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -40,7 +41,7 @@ class SupportViewModel(
         val description = _state.value.description
 
         if (name.isBlank() || email.isBlank() || subject.isBlank() || description.isBlank()) {
-            messageHelper.setToast(Toast(isError = true, text = "Please fill all fields"))
+            messageHelper.setToast(Toast(type = ToastType.ERROR, text = "Please fill all fields"))
             return
         }
 
@@ -60,7 +61,7 @@ class SupportViewModel(
                     )
                 }
                 is Result.Error -> {
-                    messageHelper.setToast(Toast(isError = true, text = result.error.message))
+                    messageHelper.setToast(Toast(type = ToastType.ERROR, text = result.error.message))
                 }
             }
         }

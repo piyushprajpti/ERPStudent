@@ -11,6 +11,7 @@ import com.piyushprajpti.domain.usecase.common.VerifyOtpUseCase
 import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
 import com.piyushprajpti.feature.utils.message_helper.model.Toast
+import com.piyushprajpti.feature.utils.message_helper.model.ToastType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
@@ -83,7 +84,7 @@ class ResetPasswordViewModel(
         val tenantId = _state.value.tenant.id
 
         if (email.isBlank()) {
-            messageHelper.setToast(Toast(isError = true, text = "Please enter your email"))
+            messageHelper.setToast(Toast(type = ToastType.ERROR, text = "Please enter your email"))
             return
         }
 
@@ -95,11 +96,11 @@ class ResetPasswordViewModel(
             when (result) {
                 is Result.Success -> {
                     _state.update { it.copy(isOtpSent = true) }
-                    messageHelper.setToast(Toast(text = "OTP sent successfully to your email"))
+                    messageHelper.setToast(Toast(type = ToastType.SUCCESS, text = "OTP sent successfully to your email"))
                 }
 
                 is Result.Error -> {
-                    messageHelper.setToast(Toast(isError = true, text = result.error.message))
+                    messageHelper.setToast(Toast(type = ToastType.ERROR, text = result.error.message))
                 }
             }
         }
@@ -111,7 +112,7 @@ class ResetPasswordViewModel(
         val otp = _state.value.otp
 
         if (otp.length != 6) {
-            messageHelper.setToast(Toast(isError = true, text = "Please enter 6-digit OTP"))
+            messageHelper.setToast(Toast(type = ToastType.ERROR, text = "Please enter 6-digit OTP"))
             return
         }
 
@@ -126,7 +127,7 @@ class ResetPasswordViewModel(
                 }
 
                 is Result.Error -> {
-                    messageHelper.setToast(Toast(isError = true, text = result.error.message))
+                    messageHelper.setToast(Toast(type = ToastType.ERROR, text = result.error.message))
                 }
             }
         }
@@ -138,12 +139,12 @@ class ResetPasswordViewModel(
         val confirmPassword = _state.value.confirmPassword
 
         if (password.isBlank()) {
-            messageHelper.setToast(Toast(isError = true, text = "Please enter password"))
+            messageHelper.setToast(Toast(type = ToastType.ERROR, text = "Please enter password"))
             return
         }
 
         if (password != confirmPassword) {
-            messageHelper.setToast(Toast(isError = true, text = "Passwords do not match"))
+            messageHelper.setToast(Toast(type = ToastType.ERROR, text = "Passwords do not match"))
             return
         }
 
@@ -165,7 +166,7 @@ class ResetPasswordViewModel(
                 }
 
                 is Result.Error -> {
-                    messageHelper.setToast(Toast(isError = true, text = result.error.message))
+                    messageHelper.setToast(Toast(type = ToastType.ERROR, text = result.error.message))
                 }
             }
         }

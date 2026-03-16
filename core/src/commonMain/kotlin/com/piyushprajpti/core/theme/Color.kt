@@ -5,12 +5,17 @@ import androidx.compose.ui.graphics.Color
 val White = Color(0xFFFFFFFF)
 val Black = Color(0xFF000000)
 
-// Light Colors
-val LightPrimary = Color(0xFF6750A4)
-val LightOnPrimary = Color(0xFFFFFFFF)
-val LightBackground = Color(0xFFFFFBFE)
+// New Palette from design
+val AppPrimary = Color(0xFFE16349)
+val AppBackground = Color(0xFF120B09)
+val AppSecondaryText = Color(0xFFB0B0B0)
+val AppSurface = Color(0xFF1D1513)
 
-// Dark Colors
-val DarkPrimary = Color(0xFFD0BCFF)
-val DarkOnPrimary = Color(0xFF381E72)
-val DarkBackground = Color(0xFF1C1B1F)
+// Keeping original naming for compatibility if needed, but updated values
+val LightPrimary = AppPrimary
+val LightOnPrimary = Color(0xFFFFFFFF)
+val LightBackground = AppBackground
+
+val DarkPrimary = AppPrimary
+val DarkOnPrimary = Color(0xFFFFFFFF)
+val DarkBackground = AppBackground

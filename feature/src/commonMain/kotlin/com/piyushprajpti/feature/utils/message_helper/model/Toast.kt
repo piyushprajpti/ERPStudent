@@ -1,6 +1,10 @@
 package com.piyushprajpti.feature.utils.message_helper.model
 
+enum class ToastType {
+    SUCCESS, WARNING, ERROR, INFO
+}
+
 data class Toast(
-    val isError: Boolean = false,
+    val type: ToastType = ToastType.INFO,
     val text: String = ""
 )

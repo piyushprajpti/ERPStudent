@@ -33,7 +33,7 @@ fun TopBar(
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "Back",
-                tint = CustomTheme.colors.primaryText
+                tint = CustomTheme.colors.white
             )
         }
 
@@ -42,7 +42,7 @@ fun TopBar(
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             style = MaterialTheme.typography.bodyMedium,
-            color = CustomTheme.colors.primaryText,
+            color = CustomTheme.colors.white,
             modifier = Modifier.align(Alignment.Center)
         )
     }

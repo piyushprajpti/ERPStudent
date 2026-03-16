@@ -21,7 +21,7 @@ fun App() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(CustomTheme.colors.primaryBack),
+                .background(CustomTheme.colors.primaryBackground),
             contentAlignment = Alignment.Center
         ) {
             Navigation(authState)

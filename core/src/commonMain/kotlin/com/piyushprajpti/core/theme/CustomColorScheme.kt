@@ -5,17 +5,16 @@ import androidx.compose.ui.graphics.Color
 
 data class CustomColorScheme(
     val primary: Color,
-    val secondary: Color,
+    val primaryBackground: Color,
+    val secondaryBackground: Color,
     val primaryText: Color,
     val secondaryText: Color,
-    val primaryBack: Color,
-    val secondaryBack: Color,
-    val lightGray: Color,
-    val mediumGray: Color,
-    val darkGray: Color,
-    val errorRed: Color,
-    val successGreen: Color,
-    val warningYellow: Color,
+    val tertiaryText: Color,
+    val outline: Color,
+    val error: Color,
+    val success: Color,
+    val warning: Color,
+    val info: Color,
     val white: Color,
     val black: Color,
 )
@@ -24,36 +23,21 @@ val LocalCustomColorScheme = staticCompositionLocalOf<CustomColorScheme> {
     error("No custom color provided")
 }
 
-val CustomDarkColorScheme = CustomColorScheme(
+val DarkThemeColorScheme = CustomColorScheme(
     primary = Color(0xFFE16349),
-    secondary = Color(0xFFFFDD88),
-    primaryText = Color(0xFF000000),
-    secondaryText = Color(0xFF404040),
-    primaryBack = Color(0xFFFAF8F4),
-    secondaryBack = Color(0xFFEEEEEA),
-    lightGray = Color.LightGray,
-    mediumGray = Color(0xFFB1B1B1),
-    darkGray = Color.DarkGray,
-    errorRed = Color.Red,
-    successGreen = Color.Green,
-    warningYellow = Color.Yellow,
+    primaryBackground = Color(0xFF0E0909),
+    secondaryBackground = Color(0xFF1D1513),
+    primaryText = Color(0xFFFFFFFF),
+    secondaryText = Color(0xFFB0B0B0),
+    tertiaryText = Color(0xFF757575),
+    outline = Color(0xFF3D2C28),
+    error = Color(0xFFC62828),
+    success = Color(0xFF1B9B4E),
+    warning = Color(0xFFD68A0E),
+    info = Color(0xFF215ECC),
     white = Color(0xFFFFFFFF),
     black = Color(0xFF000000),
 )
 
-val CustomLightColorScheme = CustomColorScheme(
-    primary = Color(0xFFE16349),
-    secondary = Color(0xFFFFDD88),
-    primaryText = Color(0xFF000000),
-    secondaryText = Color(0xFF404040),
-    primaryBack = Color(0xFFFAF8F4),
-    secondaryBack = Color(0xFFEEEEEA),
-    lightGray = Color.LightGray,
-    mediumGray = Color(0xFFB1B1B1),
-    darkGray = Color.DarkGray,
-    errorRed = Color.Red,
-    successGreen = Color.Green,
-    warningYellow = Color.Yellow,
-    white = Color(0xFFFFFFFF),
-    black = Color(0xFF000000),
-)
+val CustomDarkColorScheme = DarkThemeColorScheme
+val CustomLightColorScheme = DarkThemeColorScheme

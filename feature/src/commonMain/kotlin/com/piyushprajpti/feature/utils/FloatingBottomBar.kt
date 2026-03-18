@@ -1,0 +1,258 @@
+package com.piyushprajpti.feature.utils
+
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.piyushprajpti.college_erp_system.theme.CustomTheme
+import com.piyushprajpti.core.navigation.NavRoutes
+
+sealed class BottomBarTab(
+    val route: NavRoutes,
+    val title: String,
+    val icon: ImageVector
+) {
+    data object Home : BottomBarTab(
+        route = NavRoutes.Home,
+        title = "Home",
+        icon = Icons.Default.Home
+    )
+
+    data object Attendance : BottomBarTab(
+        route = NavRoutes.Attendance,
+        title = "Attendance",
+        icon = Icons.AutoMirrored.Filled.MenuBook
+    )
+
+    data object Schedule : BottomBarTab(
+        route = NavRoutes.Schedule,
+        title = "Schedule",
+        icon = Icons.Default.CalendarMonth
+    )
+
+    data object Profile : BottomBarTab(
+        route = NavRoutes.Profile,
+        title = "Profile",
+        icon = Icons.Default.Person
+    )
+}
+
+/*
+@Composable
+fun FloatingBottomBar(
+    currentRoute: NavRoutes,
+    onTabClick: (BottomBarTab) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val tabs = listOf(
+        BottomBarTab.Home,
+        BottomBarTab.Attendance,
+        BottomBarTab.Schedule,
+        BottomBarTab.Profile
+    )
+
+    Row(
+        modifier = modifier
+            .padding(25.dp)
+            .fillMaxWidth()
+            .navigationBarsPadding()
+            .clip(CircleShape)
+            .background(CustomTheme.colors.secondaryBackground.copy(alpha = 0.95f))
+            .padding(5.dp),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        tabs.forEach { tab ->
+            val isSelected = currentRoute == tab.route
+            BottomBarItem(
+                tab = tab,
+                isSelected = isSelected,
+                onClick = { onTabClick(tab) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun RowScope.BottomBarItem(
+    tab: BottomBarTab,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    val contentColor by animateColorAsState(
+        targetValue = if (isSelected) CustomTheme.colors.primary else CustomTheme.colors.secondaryText,
+        animationSpec = spring(stiffness = Spring.StiffnessLow)
+    )
+
+    val backgroundColor by animateColorAsState(
+        targetValue = if (isSelected) CustomTheme.colors.primary.copy(alpha = 0.15f) else Color.Transparent,
+        animationSpec = spring(stiffness = Spring.StiffnessLow)
+    )
+
+    Column(
+        modifier = Modifier
+            .weight(1f)
+            .clip(CircleShape)
+            .background(backgroundColor)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onClick
+            )
+            .padding(vertical = 5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Icon(
+            imageVector = tab.icon,
+            contentDescription = tab.title,
+            tint = contentColor,
+            modifier = Modifier.size(24.dp)
+        )
+        Text(
+            text = tab.title,
+            color = contentColor,
+            fontSize = 12.sp,
+            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+        )
+    }
+}
+*/
+
+/**
+ * Redesigned Floating Bottom Bar with improved contrast and dark theme colors.
+ * Only selected tab name is visible, unselected only icon visible.
+ */
+@Composable
+fun FloatingBottomBar(
+    currentRoute: NavRoutes,
+    onTabClick: (BottomBarTab) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val tabs = listOf(
+        BottomBarTab.Home,
+        BottomBarTab.Schedule,
+        BottomBarTab.Attendance,
+        BottomBarTab.Profile
+    )
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .navigationBarsPadding()
+            .padding(bottom = 20.dp, start = 15.dp, end = 15.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            modifier = Modifier
+                .animateContentSize( // Smoothly animate the bar width during transitions
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioNoBouncy,
+                        stiffness = Spring.StiffnessMedium
+                    )
+                )
+                .clip(CircleShape)
+                .background(CustomTheme.colors.secondaryBackground)
+                .border(1.dp, CustomTheme.colors.outline, CircleShape) // Border for contrast
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            tabs.forEach { tab ->
+                val isSelected = currentRoute == tab.route
+                BottomBarItem(
+                    tab = tab,
+                    isSelected = isSelected,
+                    onClick = { onTabClick(tab) }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun BottomBarItem(
+    tab: BottomBarTab,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    // Dark theme colors from CustomTheme
+    val backgroundColor by animateColorAsState(
+        targetValue = if (isSelected) CustomTheme.colors.primary else CustomTheme.colors.outline.copy(alpha = 0.5f),
+        animationSpec = spring(stiffness = Spring.StiffnessLow)
+    )
+    val contentColor by animateColorAsState(
+        targetValue = if (isSelected) Color.White else CustomTheme.colors.secondaryText,
+        animationSpec = spring(stiffness = Spring.StiffnessLow)
+    )
+
+    Box(
+        modifier = Modifier
+            .animateContentSize( // Animates the item's own width change
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioNoBouncy,
+                    stiffness = Spring.StiffnessMedium
+                )
+            )
+            .clip(CircleShape)
+            .background(backgroundColor)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+                onClick = onClick
+            )
+            .padding(horizontal = if (isSelected) 20.dp else 14.dp, vertical = 12.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Icon(
+                imageVector = tab.icon,
+                contentDescription = tab.title,
+                tint = contentColor,
+                modifier = Modifier.size(24.dp)
+            )
+            if (isSelected) {
+                Text(
+                    text = tab.title,
+                    color = contentColor,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1
+                )
+            }
+        }
+    }
+}

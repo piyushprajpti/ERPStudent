@@ -24,6 +24,15 @@ sealed interface NavRoutes: NavKey  {
     @Serializable
     data object Home : NavRoutes, NavKey
 
+    @Serializable
+    data object Attendance : NavRoutes, NavKey
+
+    @Serializable
+    data object Schedule : NavRoutes, NavKey
+
+    @Serializable
+    data object Settings : NavRoutes, NavKey
+
     // profile
     @Serializable
     data object Profile: NavRoutes, NavKey

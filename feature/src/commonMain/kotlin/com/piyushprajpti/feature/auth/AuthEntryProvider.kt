@@ -21,10 +21,7 @@ fun authEntryProvider(
 
         is NavRoutes.Login -> NavEntry(key) {
             LoginScreen(
-                onLoginClick = {
-                    backStack.clear()
-                    backStack.add(NavRoutes.Profile)
-                },
+                onLoginClick = {},
                 onForgotPasswordClick = { backStack.add(NavRoutes.ResetPassword) },
                 onContactSupportClick = { backStack.add(NavRoutes.Support) }
             )

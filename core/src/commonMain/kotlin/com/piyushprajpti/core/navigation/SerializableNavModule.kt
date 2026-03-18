@@ -9,7 +9,6 @@ val serializableNavModule = SerializersModule {
 
         subclass(NavRoutes.Splash::class, NavRoutes.Splash.serializer())
 
-
         // auth
         subclass(NavRoutes.Tenant::class, NavRoutes.Tenant.serializer())
         subclass(NavRoutes.Login::class, NavRoutes.Login.serializer())
@@ -18,13 +17,11 @@ val serializableNavModule = SerializersModule {
         subclass(NavRoutes.ResetPassword::class, NavRoutes.ResetPassword.serializer())
         subclass(NavRoutes.Support::class, NavRoutes.Support.serializer())
 
-
-        // home
+        // main tabs
         subclass(NavRoutes.Home::class, NavRoutes.Home.serializer())
-
-        //profile
+        subclass(NavRoutes.Attendance::class, NavRoutes.Attendance.serializer())
+        subclass(NavRoutes.Schedule::class, NavRoutes.Schedule.serializer())
+        subclass(NavRoutes.Settings::class, NavRoutes.Settings.serializer())
         subclass(NavRoutes.Profile::class, NavRoutes.Profile.serializer())
-
-
     }
 }

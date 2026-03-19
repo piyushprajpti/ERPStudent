@@ -21,6 +21,7 @@ import com.piyushprajpti.core.navigation.serializableNavModule
 import com.piyushprajpti.feature.auth.authEntryProvider
 import com.piyushprajpti.feature.common.commonEntryProvider
 import com.piyushprajpti.feature.mainEntryProvider
+import com.piyushprajpti.feature.settings.settingsEntryProvider
 import com.piyushprajpti.feature.utils.FloatingBottomBar
 
 @Composable
@@ -45,10 +46,8 @@ fun Navigation(authState: AuthState) {
             }
 
             is AuthState.Unauthenticated -> {
-                if (backStack.lastOrNull() == NavRoutes.Splash) {
-                    backStack.clear()
-                    backStack.add(NavRoutes.Tenant)
-                }
+                backStack.clear()
+                backStack.add(NavRoutes.Tenant)
             }
 
             AuthState.Loading -> {}
@@ -59,12 +58,13 @@ fun Navigation(authState: AuthState) {
         listOf(
             ::authEntryProvider,
             ::commonEntryProvider,
-            ::mainEntryProvider
+            ::mainEntryProvider,
+            ::settingsEntryProvider
         )
     }
 
     val bottomBarRoutes = remember {
-        setOf(NavRoutes.Home, NavRoutes.Attendance, NavRoutes.Schedule, NavRoutes.Profile)
+        setOf(NavRoutes.Home, NavRoutes.Attendance, NavRoutes.Schedule, NavRoutes.Settings)
     }
     val showBottomBar = currentRoute in bottomBarRoutes
 
@@ -75,7 +75,6 @@ fun Navigation(authState: AuthState) {
         listOf(saveableDecorator, viewModelDecorator)
     }
 
-    // Persists each tab's sub-backstack between tab switches so history is preserved
     val savedTabStacks = remember { mutableMapOf<NavKey, List<NavKey>>() }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -97,25 +96,20 @@ fun Navigation(authState: AuthState) {
             }
         )
 
-        // Safe smart-cast — no redundant 'is NavRoutes' check needed because
-        // showBottomBar already guarantees currentRoute is a member of NavRoutes
         val currentNavRoute = currentRoute as? NavRoutes
         if (showBottomBar && currentNavRoute != null) {
             FloatingBottomBar(
                 currentRoute = currentNavRoute,
                 onTabClick = { tab ->
                     if (currentRoute != tab.route) {
-                        // Save current tab's backstack portion, then restore target tab's
                         val tabRootIndex = backStack.indexOfFirst { it in bottomBarRoutes }
                         if (tabRootIndex >= 0) {
                             val currentTabRoot = backStack[tabRootIndex]
                             savedTabStacks[currentTabRoot] = backStack.drop(tabRootIndex).toList()
-                            // Remove only the current tab's entries, keeping auth/pre-tab history intact
                             while (backStack.size > tabRootIndex) {
                                 backStack.removeAt(backStack.lastIndex)
                             }
                         }
-                        // Restore target tab's saved stack or start it fresh
                         val restoredStack = savedTabStacks[tab.route] ?: listOf(tab.route)
                         restoredStack.forEach { backStack.add(it) }
                     }

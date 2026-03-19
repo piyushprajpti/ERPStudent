@@ -8,5 +8,6 @@ interface AuthRepository {
     suspend fun getTenantList(): Result<List<Tenant>>
     suspend fun saveTenant(tenant: Tenant): Result<Boolean>
     suspend fun login(email: String, password: String): Result<Boolean>
+    suspend fun logout(): Result<Boolean>
     fun getSavedTenant(): Flow<Tenant?>
 }

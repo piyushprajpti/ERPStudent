@@ -3,6 +3,7 @@ package com.piyushprajpti.domain.di
 import com.piyushprajpti.domain.usecase.auth.GetSavedTenantUseCase
 import com.piyushprajpti.domain.usecase.auth.GetTenantListUseCase
 import com.piyushprajpti.domain.usecase.auth.LoginUseCase
+import com.piyushprajpti.domain.usecase.auth.LogoutUseCase
 import com.piyushprajpti.domain.usecase.auth.SaveTenantUseCase
 import com.piyushprajpti.domain.usecase.common.ForgotPasswordUseCase
 import com.piyushprajpti.domain.usecase.common.ResetPasswordUseCase
@@ -19,6 +20,7 @@ val domainModule = module {
     factory { ForgotPasswordUseCase(get()) }
     factory { VerifyOtpUseCase(get()) }
     factory { ResetPasswordUseCase(get()) }
+    factory { LogoutUseCase(get()) }
 
     // common use cases
     factory { SubmitSupportUseCase(get()) }

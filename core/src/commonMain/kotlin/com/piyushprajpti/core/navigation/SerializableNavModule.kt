@@ -22,6 +22,8 @@ val serializableNavModule = SerializersModule {
         subclass(NavRoutes.Attendance::class, NavRoutes.Attendance.serializer())
         subclass(NavRoutes.Schedule::class, NavRoutes.Schedule.serializer())
         subclass(NavRoutes.Settings::class, NavRoutes.Settings.serializer())
+
+        //settings
         subclass(NavRoutes.Profile::class, NavRoutes.Profile.serializer())
     }
 }

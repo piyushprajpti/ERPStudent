@@ -1,4 +1,4 @@
-package com.piyushprajpti.data.local.datastore
+package com.piyushprajpti.core.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -29,7 +29,7 @@ class PreferenceDataStore(private val dataStore: DataStore<Preferences>) {
         }
     }
 
-    suspend fun <T> removeValue(key: Preferences.Key<T>) {
+    suspend fun <T> deleteValue(key: Preferences.Key<T>) {
         dataStore.edit {
             it.remove(key)
         }

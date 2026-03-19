@@ -2,13 +2,13 @@ package com.piyushprajpti.feature.common.reset_password
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.onusant.learnohub.utils.message_helper.MessageHelper
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.domain.usecase.auth.GetSavedTenantUseCase
 import com.piyushprajpti.domain.usecase.common.ForgotPasswordUseCase
 import com.piyushprajpti.domain.usecase.common.ResetPasswordUseCase
 import com.piyushprajpti.domain.usecase.common.VerifyOtpUseCase
 import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
+import com.piyushprajpti.feature.utils.message_helper.MessageHelper
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
 import com.piyushprajpti.feature.utils.message_helper.model.Toast
 import com.piyushprajpti.feature.utils.message_helper.model.ToastType

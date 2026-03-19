@@ -1,7 +1,7 @@
 package com.piyushprajpti.erpstudent.di
 
-import com.piyushprajpti.data.local.datastore.createDataStore
-import com.piyushprajpti.data.local.datastore.dataStoreFileName
+import com.piyushprajpti.core.datastore.createDataStore
+import com.piyushprajpti.core.datastore.dataStoreFileName
 import com.piyushprajpti.erpstudent.db.RoomDBFactory
 import kotlinx.cinterop.ExperimentalForeignApi
 import org.koin.core.module.Module

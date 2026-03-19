@@ -3,12 +3,13 @@ package com.piyushprajpti.erpstudent
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import com.piyushprajpti.core.constants.ACCESS_TOKEN
-import com.piyushprajpti.data.local.datastore.PreferenceDataStore
+import com.piyushprajpti.core.constants.REFRESH_TOKEN
+import com.piyushprajpti.core.datastore.PreferenceDataStore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class AppViewModel(
@@ -24,14 +25,17 @@ class AppViewModel(
 
     private fun checkAuth() {
         viewModelScope.launch {
-            preferenceDataStore.getValue(stringPreferencesKey(ACCESS_TOKEN)).collect { token ->
-                Logger.e("TAG") { "checkauth viemodel token: $token" }
-                if (token == null) {
+            combine(
+                preferenceDataStore.getValue(stringPreferencesKey(ACCESS_TOKEN)),
+                preferenceDataStore.getValue(stringPreferencesKey(REFRESH_TOKEN))
+            ) { accessToken, refreshToken ->
+                accessToken to refreshToken
+            }.collect { (accessToken, refreshToken) ->
+                if (accessToken == null || refreshToken == null) {
                     _authState.value = AuthState.Unauthenticated
                 } else {
                     _authState.value = AuthState.Authenticated
                 }
-                Logger.e("TAG") { "current authState: ${_authState.value}" }
             }
         }
     }

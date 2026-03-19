@@ -6,6 +6,8 @@ object ApiConstants {
     object Auth {
         const val TENANTS = "tenants"
         const val LOGIN = "auth/login"
+        const val LOGOUT = "auth/logout"
+        const val REFRESH_TOKEN = "auth/refresh-token"
     }
 
     object User {

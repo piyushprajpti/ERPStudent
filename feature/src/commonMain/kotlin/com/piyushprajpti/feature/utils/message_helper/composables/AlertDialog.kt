@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import androidx.compose.ui.zIndex
-import com.onusant.learnohub.utils.message_helper.MessageHelper
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
+import com.piyushprajpti.feature.utils.message_helper.MessageHelper
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
 
 @Composable
@@ -49,7 +49,7 @@ fun AlertDialogBase(alert: Alert?, onDismissRequest: () -> Unit) {
         Modifier
             .fillMaxSize()
             .zIndex(10f),
-        color = Color(0x99000000)
+        color = Color.Black.copy(alpha = 0.6f)
     ) {
         Popup(
             alignment = Alignment.Center,
@@ -63,112 +63,104 @@ fun AlertDialogBase(alert: Alert?, onDismissRequest: () -> Unit) {
                 Modifier
                     .padding(horizontal = 30.dp)
                     .width(IntrinsicSize.Max)
-                    .widthIn(min = 230.dp)
-                    .background(Color.White, RoundedCornerShape(10.dp))
+                    .widthIn(min = 280.dp)
+                    .background(CustomTheme.colors.secondaryBackground, RoundedCornerShape(16.dp))
             ) {
                 Text(
                     text = label,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(15.dp),
-                    fontSize = 18.sp,
+                        .padding(top = 24.dp, start = 20.dp, end = 20.dp, bottom = 12.dp),
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center,
-                    color = Color.Black
+                    color = CustomTheme.colors.primaryText
                 )
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .background(Color(0xFFEFEFEF))
-                )
+                
                 Text(
                     text = message,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp),
+                        .padding(horizontal = 24.dp, vertical = 12.dp),
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center,
-                    color = Color.DarkGray
+                    color = CustomTheme.colors.secondaryText
                 )
+
+                Spacer(Modifier.height(24.dp))
+
                 if (alert.requireAction) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(IntrinsicSize.Max)
-                            .clip(
-                                RoundedCornerShape(
-                                    bottomStart = 10.dp,
-                                    bottomEnd = 10.dp
-                                )
-                            )
+                            .height(56.dp)
                     ) {
-                        Text(
-                            text = "Cancel",
+                        Box(
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxHeight()
-                                .clip(
-                                    RoundedCornerShape(
-                                        bottomStart = 10.dp,
-                                    )
-                                )
-                                .background(Color(0xFFEFEFEF))
+                                .clip(RoundedCornerShape(bottomStart = 16.dp))
+                                .background(CustomTheme.colors.outline.copy(alpha = 0.5f))
                                 .clickable {
                                     alert.negativeAction()
                                     onDismissRequest()
-                                }
-                                .padding(15.dp),
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Medium,
-                            lineHeight = 16.sp,
-                            color = Color.Black
-                        )
-                        Text(
-                            text = "Confirm",
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Cancel",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = CustomTheme.colors.primaryText
+                            )
+                        }
+                        Box(
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxHeight()
-                                .clip(
-                                    RoundedCornerShape(
-                                        bottomEnd = 10.dp
-                                    )
-                                )
+                                .clip(RoundedCornerShape(bottomEnd = 16.dp))
                                 .background(CustomTheme.colors.primary)
                                 .clickable {
                                     alert.positiveAction()
                                     onDismissRequest()
-                                }
-                                .padding(15.dp),
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Medium,
-                            lineHeight = 16.sp,
-                            color = Color.White
-                        )
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "OK",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = CustomTheme.colors.white
+                            )
+                        }
                     }
                 } else {
-                    Text(
-                        text = "Ok",
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(
-                                RoundedCornerShape(
-                                    bottomStart = 10.dp,
-                                    bottomEnd = 10.dp
-                                )
-                            )
-                            .background(Color(0xFFEFEFEF))
+                            .height(56.dp)
+                            .clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
+                            .background(CustomTheme.colors.primary)
                             .clickable {
                                 alert.neutralAction()
                                 onDismissRequest()
-                            }
-                            .padding(15.dp),
-                        textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Black,
-                        color = Color.Black
-                    )
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "OK",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = CustomTheme.colors.white
+                        )
+                    }
                 }
             }
         }
     }
+}
+
+@Composable
+private fun Spacer(modifier: Modifier) {
+    Box(modifier = modifier)
 }

@@ -1,4 +1,4 @@
-package com.piyushprajpti.feature.settings
+package com.piyushprajpti.feature.settings.profile
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
 
 @Composable
-fun SettingsScreen() {
+fun ProfileScreen() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text("Settings Screen", color = CustomTheme.colors.primaryText)
+        Text("Profile Screen", color = CustomTheme.colors.primaryText)
     }
 }

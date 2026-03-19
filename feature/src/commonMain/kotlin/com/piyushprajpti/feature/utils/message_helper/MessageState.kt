@@ -1,4 +1,4 @@
-package com.onusant.learnohub.utils.message_helper
+package com.piyushprajpti.feature.utils.message_helper
 
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
 import com.piyushprajpti.feature.utils.message_helper.model.Toast

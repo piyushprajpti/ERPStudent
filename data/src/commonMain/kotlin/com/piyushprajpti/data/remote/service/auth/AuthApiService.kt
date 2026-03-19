@@ -25,4 +25,10 @@ class AuthApiService(private val httpClient: HttpClient) {
             }
         }
     }
+
+    suspend fun logout(): Result<Unit> {
+        return ApiResponseHelper.handleApiResponse {
+            httpClient.post(ApiConstants.Auth.LOGOUT)
+        }
+    }
 }

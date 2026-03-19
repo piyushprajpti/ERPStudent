@@ -1,9 +1,10 @@
-package com.onusant.learnohub.utils.message_helper
+package com.piyushprajpti.feature.utils.message_helper
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import com.piyushprajpti.feature.utils.message_helper.model.Alert
 import com.piyushprajpti.feature.utils.message_helper.model.Toast
+import com.piyushprajpti.feature.utils.message_helper.model.ToastType
 
 class MessageHelper {
 
@@ -22,4 +23,11 @@ class MessageHelper {
         )
     }
 
+    fun showMessage(message: String) {
+        setToast(Toast(type = ToastType.SUCCESS, text = message))
+    }
+
+    fun showError(message: String) {
+        setToast(Toast(type = ToastType.ERROR, text = message))
+    }
 }

@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
-import com.onusant.learnohub.utils.message_helper.MessageHelper
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
+import com.piyushprajpti.feature.utils.message_helper.MessageHelper
 import com.piyushprajpti.feature.utils.message_helper.model.Toast
 import com.piyushprajpti.feature.utils.message_helper.model.ToastType
 
@@ -80,7 +80,7 @@ private fun ToastWidgetBase(
             Text(
                 text = toast.text,
                 color = Color.White,
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontWeight = FontWeight.Medium
             )
         }

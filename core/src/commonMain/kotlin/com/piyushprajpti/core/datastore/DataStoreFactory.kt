@@ -1,4 +1,4 @@
-package com.piyushprajpti.data.local.datastore
+package com.piyushprajpti.core.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory

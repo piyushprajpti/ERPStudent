@@ -1,14 +1,15 @@
 package com.piyushprajpti.data.repository.auth
 
 import androidx.datastore.preferences.core.stringPreferencesKey
+import co.touchlab.kermit.Logger
 import com.piyushprajpti.core.constants.ACCESS_TOKEN
 import com.piyushprajpti.core.constants.REFRESH_TOKEN
+import com.piyushprajpti.core.datastore.PreferenceDataStore
 import com.piyushprajpti.core.http.ApiException
 import com.piyushprajpti.core.http.ErrorCode
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.data.local.dao.auth.TenantDao
 import com.piyushprajpti.data.local.dao.auth.UserDao
-import com.piyushprajpti.data.local.datastore.PreferenceDataStore
 import com.piyushprajpti.data.local.entity.auth.toDomain
 import com.piyushprajpti.data.local.entity.auth.toEntity
 import com.piyushprajpti.data.remote.request.auth.LoginRequest
@@ -74,10 +75,8 @@ class AuthRepositoryImpl(
         return when (val result = apiService.login(loginRequest)) {
             is Result.Success -> {
                 try {
-                    // Clear existing user data first to ensure only one user exists
                     userDao.clearUser()
 
-                    // Save tokens
                     preferenceDataStore.setValue(
                         stringPreferencesKey(ACCESS_TOKEN),
                         result.data.data.accessToken
@@ -87,7 +86,7 @@ class AuthRepositoryImpl(
                         result.data.data.refreshToken
                     )
 
-                    // Save user data to Room
+                    Logger.e("TAG") { result.data.toString() }
                     userDao.insertUser(result.data.data.user.toEntity())
 
                     Result.Success(true)
@@ -97,6 +96,29 @@ class AuthRepositoryImpl(
                             error = ErrorCode.UNKNOWN,
                             message = e.message
                                 ?: "Login successful, but failed to save user data locally."
+                        )
+                    )
+                }
+            }
+
+            is Result.Error -> Result.Error(result.error)
+        }
+    }
+
+    override suspend fun logout(): Result<Boolean> {
+        return when (val result = apiService.logout()) {
+            is Result.Success -> {
+                try {
+                    preferenceDataStore.clearAll()
+                    userDao.clearUser()
+                    tenantDao.clearTenants()
+                    Result.Success(true)
+                } catch (e: Exception) {
+                    Result.Error(
+                        ApiException(
+                            error = ErrorCode.UNKNOWN,
+                            message = e.message
+                                ?: "Logout successful, but failed to clear local data."
                         )
                     )
                 }

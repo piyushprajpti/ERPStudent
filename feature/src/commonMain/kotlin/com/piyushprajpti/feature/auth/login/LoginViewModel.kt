@@ -73,19 +73,7 @@ class LoginViewModel(
                 _state.update { it.copy(password = event.password) }
             }
 
-            LoginEvent.OnTogglePasswordVisibility -> {
-                _state.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
-            }
-
             is LoginEvent.OnLoginClick -> login(event.onSuccess)
-
-            LoginEvent.OnForgotPasswordClick -> {
-                // handle forgot password
-            }
-
-            LoginEvent.OnContactAdminClick -> {
-                // handle contact admin
-            }
         }
     }
 

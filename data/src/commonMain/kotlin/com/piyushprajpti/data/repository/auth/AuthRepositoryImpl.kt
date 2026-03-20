@@ -12,6 +12,7 @@ import com.piyushprajpti.data.local.dao.auth.TenantDao
 import com.piyushprajpti.data.local.dao.auth.UserDao
 import com.piyushprajpti.data.local.entity.auth.toDomain
 import com.piyushprajpti.data.local.entity.auth.toEntity
+import com.piyushprajpti.data.remote.request.auth.ChangePasswordRequest
 import com.piyushprajpti.data.remote.request.auth.LoginRequest
 import com.piyushprajpti.data.remote.response.auth.toDomain
 import com.piyushprajpti.data.remote.response.auth.toEntity
@@ -124,6 +125,30 @@ class AuthRepositoryImpl(
                 }
             }
 
+            is Result.Error -> Result.Error(result.error)
+        }
+    }
+
+    override suspend fun changePassword(
+        currentPassword: String,
+        newPassword: String
+    ): Result<Boolean> {
+        val user = userDao.getUser().first()
+            ?: return Result.Error(
+                ApiException(
+                    error = ErrorCode.USER_NOT_FOUND,
+                    message = "User not found. Please log in again."
+                )
+            )
+
+        val request = ChangePasswordRequest(
+            userId = user.id,
+            currentPassword = currentPassword,
+            newPassword = newPassword
+        )
+
+        return when (val result = apiService.changePassword(request)) {
+            is Result.Success -> Result.Success(true)
             is Result.Error -> Result.Error(result.error)
         }
     }

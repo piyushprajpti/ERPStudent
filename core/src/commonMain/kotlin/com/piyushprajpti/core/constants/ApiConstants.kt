@@ -8,6 +8,7 @@ object ApiConstants {
         const val LOGIN = "auth/login"
         const val LOGOUT = "auth/logout"
         const val REFRESH_TOKEN = "auth/refresh-token"
+        const val CHANGE_PASSWORD = "auth/change-password"
     }
 
     object User {

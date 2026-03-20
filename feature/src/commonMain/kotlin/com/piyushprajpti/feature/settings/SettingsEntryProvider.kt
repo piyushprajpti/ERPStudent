@@ -5,6 +5,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import com.piyushprajpti.core.navigation.NavRoutes
 import com.piyushprajpti.feature.common.support.SupportScreen
+import com.piyushprajpti.feature.settings.change_password.ChangePasswordScreen
 import com.piyushprajpti.feature.settings.profile.ProfileScreen
 
 fun settingsEntryProvider(
@@ -15,6 +16,14 @@ fun settingsEntryProvider(
 
         is NavRoutes.Profile -> NavEntry(key) {
             ProfileScreen()
+        }
+
+        is NavRoutes.ChangePassword -> NavEntry(key) {
+            ChangePasswordScreen(
+                onBackClick = { backStack.removeLast() },
+                onForgotPasswordClick = { backStack.add(NavRoutes.ResetPassword) },
+                onSuccess = { backStack.removeLast() }
+            )
         }
 
         is NavRoutes.Support -> NavEntry(key) {

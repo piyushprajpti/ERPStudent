@@ -158,7 +158,7 @@ class ResetPasswordViewModel(
                     messageHelper.setAlert(
                         Alert(
                             label = "Success",
-                            message = "Password reset successfully. Please login to continue.",
+                            message = "Password reset successfully",
                             cancelable = false,
                             neutralAction = onSuccess
                         )

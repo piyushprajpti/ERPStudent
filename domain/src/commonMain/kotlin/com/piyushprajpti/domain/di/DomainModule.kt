@@ -1,5 +1,6 @@
 package com.piyushprajpti.domain.di
 
+import com.piyushprajpti.domain.usecase.auth.ChangePasswordUseCase
 import com.piyushprajpti.domain.usecase.auth.GetSavedTenantUseCase
 import com.piyushprajpti.domain.usecase.auth.GetTenantListUseCase
 import com.piyushprajpti.domain.usecase.auth.LoginUseCase
@@ -21,6 +22,7 @@ val domainModule = module {
     factory { VerifyOtpUseCase(get()) }
     factory { ResetPasswordUseCase(get()) }
     factory { LogoutUseCase(get()) }
+    factory { ChangePasswordUseCase(get()) }
 
     // common use cases
     factory { SubmitSupportUseCase(get()) }

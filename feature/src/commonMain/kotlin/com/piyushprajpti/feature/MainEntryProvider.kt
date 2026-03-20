@@ -29,6 +29,7 @@ fun mainEntryProvider(
         is NavRoutes.Settings -> NavEntry(key) {
             SettingsScreen(
                 onProfileClick = { backStack.add(NavRoutes.Profile) },
+                onChangePasswordClick = { backStack.add(NavRoutes.ChangePassword) },
                 onSupportClick = { backStack.add(NavRoutes.Support) }
             )
         }

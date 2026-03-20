@@ -41,6 +41,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun SettingsScreen(
     onProfileClick: () -> Unit,
+    onChangePasswordClick: () -> Unit,
     onSupportClick: () -> Unit,
     viewModel: SettingsViewModel = koinViewModel()
 ) {
@@ -78,7 +79,7 @@ fun SettingsScreen(
                     title = "Change Password",
                     leadingIcon = Icons.Default.Lock,
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    onClick = { viewModel.onEvent(SettingsEvent.OnChangePasswordClick) }
+                    onClick = { onChangePasswordClick() }
                 )
                 SettingsDivider()
                 SettingsItem(

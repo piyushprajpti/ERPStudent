@@ -10,4 +10,5 @@ interface AuthRepository {
     suspend fun login(email: String, password: String): Result<Boolean>
     suspend fun logout(): Result<Boolean>
     fun getSavedTenant(): Flow<Tenant?>
+    suspend fun changePassword(currentPassword: String, newPassword: String): Result<Boolean>
 }

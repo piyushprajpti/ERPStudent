@@ -15,7 +15,9 @@ fun settingsEntryProvider(
     return when (key) {
 
         is NavRoutes.Profile -> NavEntry(key) {
-            ProfileScreen()
+            ProfileScreen(
+                onBackClick = { backStack.removeLast() },
+            )
         }
 
         is NavRoutes.ChangePassword -> NavEntry(key) {

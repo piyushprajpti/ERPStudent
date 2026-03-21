@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
 
 @Composable
-fun SettingsSection(
+fun SettingsInfoCard(
     title: String,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -53,7 +53,7 @@ fun SettingsSection(
 }
 
 @Composable
-fun SettingsItem(
+fun SettingsInfoItem(
     title: String,
     subtitle: String? = null,
     leadingIcon: ImageVector? = null,

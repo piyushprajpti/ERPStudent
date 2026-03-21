@@ -25,5 +25,6 @@ val serializableNavModule = SerializersModule {
 
         //settings
         subclass(NavRoutes.Profile::class, NavRoutes.Profile.serializer())
+        subclass(NavRoutes.ChangePassword::class, NavRoutes.ChangePassword.serializer())
     }
 }

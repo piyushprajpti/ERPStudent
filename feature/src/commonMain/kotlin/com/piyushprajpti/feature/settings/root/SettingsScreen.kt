@@ -30,8 +30,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
 import com.piyushprajpti.feature.settings.util.SettingsDivider
-import com.piyushprajpti.feature.settings.util.SettingsItem
-import com.piyushprajpti.feature.settings.util.SettingsSection
+import com.piyushprajpti.feature.settings.util.SettingsInfoCard
+import com.piyushprajpti.feature.settings.util.SettingsInfoItem
 import com.piyushprajpti.feature.settings.util.SettingsSwitchItem
 import com.piyushprajpti.feature.utils.loading_helper.LoadingWidget
 import com.piyushprajpti.feature.utils.message_helper.composables.AlertDialog
@@ -66,8 +66,8 @@ fun SettingsScreen(
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         item {
-            SettingsSection(title = "ACCOUNT") {
-                SettingsItem(
+            SettingsInfoCard(title = "ACCOUNT") {
+                SettingsInfoItem(
                     title = "View Profile",
                     subtitle = "Manage your personal information",
                     leadingIcon = Icons.Default.Person,
@@ -75,21 +75,21 @@ fun SettingsScreen(
                     onClick = { onProfileClick() }
                 )
                 SettingsDivider()
-                SettingsItem(
+                SettingsInfoItem(
                     title = "Change Password",
                     leadingIcon = Icons.Default.Lock,
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     onClick = { onChangePasswordClick() }
                 )
                 SettingsDivider()
-                SettingsItem(
+                SettingsInfoItem(
                     title = "Contact Support",
                     leadingIcon = Icons.AutoMirrored.Filled.ContactSupport,
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     onClick = { onSupportClick() }
                 )
                 SettingsDivider()
-                SettingsItem(
+                SettingsInfoItem(
                     title = "Logout",
                     leadingIcon = Icons.AutoMirrored.Filled.Logout,
                     titleColor = CustomTheme.colors.primary,
@@ -100,7 +100,7 @@ fun SettingsScreen(
         }
 
         item {
-            SettingsSection(title = "NOTIFICATIONS") {
+            SettingsInfoCard(title = "NOTIFICATIONS") {
                 SettingsSwitchItem(
                     title = "All Notifications",
                     icon = Icons.Default.NotificationsActive,
@@ -139,19 +139,19 @@ fun SettingsScreen(
         }
 
         item {
-            SettingsSection(title = "ABOUT") {
-                SettingsItem(
+            SettingsInfoCard(title = "ABOUT") {
+                SettingsInfoItem(
                     title = "App Version",
                     trailingText = state.appVersion,
                 )
                 SettingsDivider()
-                SettingsItem(
+                SettingsInfoItem(
                     title = "Terms of Service",
                     trailingIcon = Icons.AutoMirrored.Filled.OpenInNew,
                     onClick = { uriHandler.openUri("https://s8ul.live/") }
                 )
                 SettingsDivider()
-                SettingsItem(
+                SettingsInfoItem(
                     title = "Privacy Policy",
                     trailingIcon = Icons.AutoMirrored.Filled.OpenInNew,
                     onClick = { uriHandler.openUri("https://s8ul.live/") }

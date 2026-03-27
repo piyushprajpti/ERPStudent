@@ -72,7 +72,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(80.dp))
 
         LogoBox(
-            modifier = Modifier.size(80.dp),
+            modifier = Modifier.size(100.dp),
             imageUrl = state.tenant.logo
         )
 

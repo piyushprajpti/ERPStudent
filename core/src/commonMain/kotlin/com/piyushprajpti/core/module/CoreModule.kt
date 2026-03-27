@@ -5,19 +5,13 @@ import com.piyushprajpti.core.constants.ACCESS_TOKEN
 import com.piyushprajpti.core.constants.ApiConstants
 import com.piyushprajpti.core.constants.REFRESH_TOKEN
 import com.piyushprajpti.core.datastore.PreferenceDataStore
-import com.piyushprajpti.core.http.ApiException
-import com.piyushprajpti.core.http.ErrorCode
 import com.piyushprajpti.core.utils.RefreshTokenRequest
 import com.piyushprajpti.core.utils.RefreshTokenResponse
 import io.ktor.client.HttpClient
-import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
-import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.RedirectResponseException
-import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
@@ -77,94 +71,48 @@ val coreModule = module {
                             .getValue(stringPreferencesKey((REFRESH_TOKEN)))
                             .firstOrNull() ?: ""
 
-                        KermitLogger.e(tag = "TAG") { "Bearer Token being loaded: $accessToken" }
+                        KermitLogger.e(tag = "TAG") { "Access token: $accessToken" }
+                        KermitLogger.e(tag = "TAG") { "Refresh token: $refreshToken" }
 
                         BearerTokens(accessToken, refreshToken)
                     }
 
                     refreshTokens {
-                        val refreshToken = dataStore
-                            .getValue(stringPreferencesKey((REFRESH_TOKEN)))
-                            .firstOrNull() ?: ""
+                        try {
+                            val refreshToken = dataStore
+                                .getValue(stringPreferencesKey((REFRESH_TOKEN)))
+                                .firstOrNull() ?: ""
 
-                        val response = client.post(ApiConstants.Auth.REFRESH_TOKEN) {
-                            markAsRefreshTokenRequest()
-                            setBody(RefreshTokenRequest(refreshToken))
+                            val response = client.post(ApiConstants.Auth.REFRESH_TOKEN) {
+                                markAsRefreshTokenRequest()
+                                setBody(RefreshTokenRequest(refreshToken))
+                            }
+
+                            val newAccessToken = response.body<RefreshTokenResponse>().data.accessToken
+                            val newRefreshToken =
+                                response.body<RefreshTokenResponse>().data.refreshToken
+
+
+                            dataStore.setValue(stringPreferencesKey(ACCESS_TOKEN), newAccessToken)
+                            dataStore.setValue(stringPreferencesKey(REFRESH_TOKEN), newRefreshToken)
+
+                            KermitLogger.e(tag = "TAG") { "Bearer Token refreshed: $newAccessToken" }
+
+                            BearerTokens(newAccessToken, newRefreshToken)
+                        } catch (e: Exception) {
+                            KermitLogger.e(tag = "TAG") { "Refresh token failed: ${e.message}" }
+                            dataStore.deleteValue(stringPreferencesKey(ACCESS_TOKEN))
+                            dataStore.deleteValue(stringPreferencesKey(REFRESH_TOKEN))
+                            null
                         }
-
-                        val newAccessToken = response.body<RefreshTokenResponse>().data.accessToken
-                        val newRefreshToken =
-                            response.body<RefreshTokenResponse>().data.refreshToken
-
-
-                        dataStore.setValue(stringPreferencesKey(ACCESS_TOKEN), newAccessToken)
-                        dataStore.setValue(stringPreferencesKey(REFRESH_TOKEN), newRefreshToken)
-
-                        KermitLogger.e(tag = "TAG") { "Bearer Token refreshed: $newAccessToken" }
-
-                        BearerTokens(newAccessToken, newRefreshToken)
                     }
 
                 }
             }
 
             HttpResponseValidator {
-                handleResponseExceptionWithRequest { cause, httpRequest ->
-                    cause.printStackTrace()
-                    val error = when (cause) {
-                        is ClientRequestException -> {
-                            if (httpRequest.url.toString() == ApiConstants.Auth.REFRESH_TOKEN) {
-                                dataStore.deleteValue(stringPreferencesKey(ACCESS_TOKEN))
-                                dataStore.deleteValue(stringPreferencesKey(REFRESH_TOKEN))
-                            }
-                            try {
-                                ApiException(
-                                    error = ErrorCode.UNKNOWN,
-                                    message = cause.message
-                                )
-                            } catch (_: NoTransformationFoundException) {
-                                ApiException(
-                                    error = ErrorCode.UNKNOWN,
-                                    message = cause.message
-                                )
-                            }
-                        }
-
-                        is ServerResponseException -> {
-                            try {
-                                ApiException(
-                                    error = ErrorCode.UNKNOWN,
-                                    message = cause.message
-                                )
-                            } catch (_: NoTransformationFoundException) {
-                                ApiException(
-                                    error = ErrorCode.UNKNOWN,
-                                    message = cause.message
-                                )
-                            }
-                        }
-
-                        is RedirectResponseException -> {
-                            try {
-                                ApiException(
-                                    error = ErrorCode.UNKNOWN,
-                                    message = cause.message
-                                )
-                            } catch (_: NoTransformationFoundException) {
-                                ApiException(
-                                    error = ErrorCode.UNKNOWN,
-                                    message = cause.message
-                                )
-                            }
-                        }
-
-                        else -> return@handleResponseExceptionWithRequest
-
-                    }
-                    throw ApiException(
-                        error = ErrorCode.UNKNOWN,
-                        message = error.message,
-                    )
+                handleResponseExceptionWithRequest { cause, _ ->
+                    throw cause
                 }
             }
         }

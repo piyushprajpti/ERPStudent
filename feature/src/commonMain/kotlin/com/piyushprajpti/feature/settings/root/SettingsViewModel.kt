@@ -49,14 +49,6 @@ class SettingsViewModel(
                 _state.update { it.copy(announcements = event.enabled) }
             }
 
-            SettingsEvent.OnViewProfileClick -> {
-                // Handle navigation
-            }
-
-            SettingsEvent.OnChangePasswordClick -> {
-                // Handle navigation
-            }
-
             SettingsEvent.OnLogoutClick -> {
                 messageHelper.setAlert(
                     Alert(
@@ -66,18 +58,6 @@ class SettingsViewModel(
                         positiveAction = { logout() }
                     )
                 )
-            }
-
-            SettingsEvent.OnTermsOfServiceClick -> {
-                // Handle navigation
-            }
-
-            SettingsEvent.OnPrivacyPolicyClick -> {
-                // Handle navigation
-            }
-
-            SettingsEvent.OnContactSupportClick -> {
-                // Handle navigation
             }
         }
     }

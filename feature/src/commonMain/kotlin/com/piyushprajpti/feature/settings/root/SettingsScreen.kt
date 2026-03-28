@@ -3,12 +3,10 @@ package com.piyushprajpti.feature.settings.root
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
@@ -33,6 +31,7 @@ import com.piyushprajpti.feature.settings.util.SettingsDivider
 import com.piyushprajpti.feature.settings.util.SettingsInfoCard
 import com.piyushprajpti.feature.settings.util.SettingsInfoItem
 import com.piyushprajpti.feature.settings.util.SettingsSwitchItem
+import com.piyushprajpti.feature.utils.LocalBottomBarPadding
 import com.piyushprajpti.feature.utils.loading_helper.LoadingWidget
 import com.piyushprajpti.feature.utils.message_helper.composables.AlertDialog
 import com.piyushprajpti.feature.utils.message_helper.composables.ToastWidget
@@ -46,8 +45,10 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val uriHandler = LocalUriHandler.current
+
+    val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+    val bottomBarPadding = LocalBottomBarPadding.current
 
     LoadingWidget(viewModel.loadingHelper.state.value)
     ToastWidget(viewModel.messageHelper)
@@ -59,7 +60,7 @@ fun SettingsScreen(
             .background(CustomTheme.colors.primaryBackground),
         contentPadding = PaddingValues(
             top = 15.dp + statusBarPadding,
-            bottom = 15.dp,
+            bottom = bottomBarPadding,
             start = 15.dp,
             end = 15.dp
         ),
@@ -157,10 +158,6 @@ fun SettingsScreen(
                     onClick = { uriHandler.openUri("https://s8ul.live/") }
                 )
             }
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(80.dp))
         }
     }
 }

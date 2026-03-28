@@ -33,7 +33,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
@@ -74,6 +77,7 @@ sealed class BottomBarTab(
 fun FloatingBottomBar(
     currentRoute: NavRoutes,
     onTabClick: (BottomBarTab) -> Unit,
+    onHeightChanged: (Dp) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val tabs = listOf(
@@ -84,10 +88,14 @@ fun FloatingBottomBar(
     )
 
     val navBarPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    val density = LocalDensity.current
 
     Row(
         modifier = modifier
-            .padding(top = 25.dp, bottom = 10.dp + navBarPadding, start = 25.dp, end = 25.dp)
+            .onSizeChanged { size ->
+                onHeightChanged(with(density) { size.height.toDp() })
+            }
+            .padding(top = 25.dp, bottom = 10.dp + navBarPadding, start = 20.dp, end = 20.dp)
             .fillMaxWidth()
             .clip(CircleShape)
             .shadow(
@@ -157,108 +165,3 @@ private fun RowScope.BottomBarItem(
         )
     }
 }
-
-
-//@Composable
-//fun FloatingBottomBar(
-//    currentRoute: NavRoutes,
-//    onTabClick: (BottomBarTab) -> Unit,
-//    modifier: Modifier = Modifier
-//) {
-//    val tabs = listOf(
-//        BottomBarTab.Home,
-//        BottomBarTab.Schedule,
-//        BottomBarTab.Attendance,
-//        BottomBarTab.Settings
-//    )
-//
-//    Box(
-//        modifier = modifier
-//            .fillMaxWidth()
-//            .navigationBarsPadding()
-//            .padding(bottom = 20.dp, start = 15.dp, end = 15.dp),
-//        contentAlignment = Alignment.Center
-//    ) {
-//        Row(
-//            modifier = Modifier
-//                .animateContentSize( // Smoothly animate the bar width during transitions
-//                    animationSpec = spring(
-//                        dampingRatio = Spring.DampingRatioNoBouncy,
-//                        stiffness = Spring.StiffnessMedium
-//                    )
-//                )
-//                .clip(CircleShape)
-//                .background(CustomTheme.colors.secondaryBackground)
-//                .border(1.dp, CustomTheme.colors.outline, CircleShape) // Border for contrast
-//                .padding(8.dp),
-//            horizontalArrangement = Arrangement.spacedBy(12.dp),
-//            verticalAlignment = Alignment.CenterVertically
-//        ) {
-//            tabs.forEach { tab ->
-//                val isSelected = currentRoute == tab.route
-//                BottomBarItem(
-//                    tab = tab,
-//                    isSelected = isSelected,
-//                    onClick = { onTabClick(tab) }
-//                )
-//            }
-//        }
-//    }
-//}
-//
-//@Composable
-//private fun BottomBarItem(
-//    tab: BottomBarTab,
-//    isSelected: Boolean,
-//    onClick: () -> Unit
-//) {
-//    // Dark theme colors from CustomTheme
-//    val backgroundColor by animateColorAsState(
-//        targetValue = if (isSelected) CustomTheme.colors.primary else CustomTheme.colors.outline.copy(alpha = 0.5f),
-//        animationSpec = spring(stiffness = Spring.StiffnessLow)
-//    )
-//    val contentColor by animateColorAsState(
-//        targetValue = if (isSelected) Color.White else CustomTheme.colors.secondaryText,
-//        animationSpec = spring(stiffness = Spring.StiffnessLow)
-//    )
-//
-//    Box(
-//        modifier = Modifier
-//            .animateContentSize( // Animates the item's own width change
-//                animationSpec = spring(
-//                    dampingRatio = Spring.DampingRatioNoBouncy,
-//                    stiffness = Spring.StiffnessMedium
-//                )
-//            )
-//            .clip(CircleShape)
-//            .background(backgroundColor)
-//            .clickable(
-//                interactionSource = remember { MutableInteractionSource() },
-//                indication = null,
-//                onClick = onClick
-//            )
-//            .padding(horizontal = if (isSelected) 20.dp else 14.dp, vertical = 12.dp),
-//        contentAlignment = Alignment.Center
-//    ) {
-//        Row(
-//            verticalAlignment = Alignment.CenterVertically,
-//            horizontalArrangement = Arrangement.spacedBy(8.dp)
-//        ) {
-//            Icon(
-//                imageVector = tab.icon,
-//                contentDescription = tab.title,
-//                tint = contentColor,
-//                modifier = Modifier.size(24.dp)
-//            )
-//            if (isSelected) {
-//                Text(
-//                    text = tab.title,
-//                    color = contentColor,
-//                    fontSize = 14.sp,
-//                    fontWeight = FontWeight.Bold,
-//                    maxLines = 1
-//                )
-//            }
-//        }
-//    }
-//}

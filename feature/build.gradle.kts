@@ -78,6 +78,7 @@ kotlin {
                 implementation(libs.androidx.datastore)
                 implementation(libs.androidx.datastore.preferences)
                 implementation(libs.kermit)
+                implementation(libs.kotlinx.datetime)
 
                 implementation(libs.compose.runtime)
                 implementation(libs.compose.foundation)

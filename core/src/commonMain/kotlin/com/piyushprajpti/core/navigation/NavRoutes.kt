@@ -42,4 +42,28 @@ sealed interface NavRoutes: NavKey  {
     // notifications
     @Serializable
     data object Notifications: NavRoutes, NavKey
+
+    // quick actions
+    @Serializable
+    data object Leave : NavRoutes, NavKey
+    @Serializable
+    data object ApplyLeave : NavRoutes, NavKey
+    @Serializable
+    data object Fees : NavRoutes, NavKey
+    @Serializable
+    data object Library : NavRoutes, NavKey
+    @Serializable
+    data object Documents : NavRoutes, NavKey
+    @Serializable
+    data object Marks : NavRoutes, NavKey
+    @Serializable
+    data object Exam : NavRoutes, NavKey
+    @Serializable
+    data object Hostel : NavRoutes, NavKey
+    @Serializable
+    data object Events : NavRoutes, NavKey
+    @Serializable
+    data object Assignment : NavRoutes, NavKey
+    @Serializable
+    data object Transport : NavRoutes, NavKey
 }

@@ -122,7 +122,7 @@ fun HomeScreen(
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 SectionTitle("QUICK ACTIONS")
                 QuickActionsGrid(
-                    actions = state.quickActions,
+                    actions = QuickAction.entries,
                     onClick = onQuickActionClick
                 )
             }

@@ -11,6 +11,8 @@ import com.piyushprajpti.feature.schedule.ScheduleViewModel
 import com.piyushprajpti.feature.settings.change_password.ChangePasswordViewModel
 import com.piyushprajpti.feature.settings.profile.ProfileViewModel
 import com.piyushprajpti.feature.settings.root.SettingsViewModel
+import com.piyushprajpti.leave.leave_apply.ApplyLeaveViewModel
+import com.piyushprajpti.leave.leave_history.LeaveHistoryViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -37,5 +39,9 @@ val featureModule = module {
     // home
     viewModelOf(::HomeViewModel)
     viewModelOf(::NotificationViewModel)
+
+    // leave
+    viewModelOf(::LeaveHistoryViewModel)
+    viewModelOf(::ApplyLeaveViewModel)
 
 }

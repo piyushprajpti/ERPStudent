@@ -30,5 +30,16 @@ val serializableNavModule = SerializersModule {
         // notifications
         subclass(NavRoutes.Notifications::class, NavRoutes.Notifications.serializer())
 
+        // quick actions
+        subclass(NavRoutes.Leave::class, NavRoutes.Leave.serializer())
+        subclass(NavRoutes.Fees::class, NavRoutes.Fees.serializer())
+        subclass(NavRoutes.Library::class, NavRoutes.Library.serializer())
+        subclass(NavRoutes.Documents::class, NavRoutes.Documents.serializer())
+        subclass(NavRoutes.Marks::class, NavRoutes.Marks.serializer())
+        subclass(NavRoutes.Exam::class, NavRoutes.Exam.serializer())
+        subclass(NavRoutes.Hostel::class, NavRoutes.Hostel.serializer())
+        subclass(NavRoutes.Events::class, NavRoutes.Events.serializer())
+        subclass(NavRoutes.Assignment::class, NavRoutes.Assignment.serializer())
+        subclass(NavRoutes.Transport::class, NavRoutes.Transport.serializer())
     }
 }

@@ -17,7 +17,7 @@ fun mainEntryProvider(
         is NavRoutes.Home -> NavEntry(key) {
             HomeScreen(
                 onNotificationClick = { backStack.add(NavRoutes.Notifications) },
-                onQuickActionClick = {}
+                onQuickActionClick = { quickAction -> backStack.add(quickAction.route) }
             )
         }
 

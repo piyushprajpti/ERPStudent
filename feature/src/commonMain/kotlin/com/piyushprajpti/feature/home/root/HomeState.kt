@@ -4,7 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Assignment
 import androidx.compose.material.icons.automirrored.outlined.ExitToApp
 import androidx.compose.material.icons.automirrored.outlined.LibraryBooks
-import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Description
 import androidx.compose.material.icons.outlined.Event
 import androidx.compose.material.icons.outlined.Grade
@@ -13,6 +12,7 @@ import androidx.compose.material.icons.outlined.HomeWork
 import androidx.compose.material.icons.outlined.Payments
 import androidx.compose.material.icons.outlined.School
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.piyushprajpti.core.navigation.NavRoutes
 
 data class HomeState(
     val userName: String = "Arjun Mehta",
@@ -33,11 +33,6 @@ data class HomeState(
         attendancePercentage = 86,
         feesDue = 500,
         booksCount = 5
-    ),
-    val quickActions: List<QuickAction> = listOf(
-        QuickAction.Notices, QuickAction.Leave, QuickAction.Fees, QuickAction.Library, QuickAction.Documents,
-        QuickAction.Marks, QuickAction.Exam, QuickAction.Hostel, QuickAction.Events, QuickAction.Assignment,
-        QuickAction.Transport
     ),
     val todaySchedule: List<ScheduleItem> = listOf(
         ScheduleItem("12:00 PM", "DBMS Theory", "Hall 301"),
@@ -66,18 +61,21 @@ data class HomeStats(
     val booksCount: Int
 )
 
-sealed class QuickAction(val title: String, val icon: ImageVector) {
-    data object Notices : QuickAction("Notices", Icons.Outlined.CalendarMonth)
-    data object Leave : QuickAction("Leave", Icons.AutoMirrored.Outlined.ExitToApp)
-    data object Fees : QuickAction("Fees", Icons.Outlined.Payments)
-    data object Library : QuickAction("Library", Icons.AutoMirrored.Outlined.LibraryBooks)
-    data object Documents : QuickAction("Documents", Icons.Outlined.Description)
-    data object Marks : QuickAction("Marks", Icons.Outlined.Grade)
-    data object Exam : QuickAction("Exam", Icons.Outlined.HistoryEdu)
-    data object Hostel : QuickAction("Hostel", Icons.Outlined.HomeWork)
-    data object Events : QuickAction("Events", Icons.Outlined.Event)
-    data object Assignment : QuickAction("Assignment", Icons.AutoMirrored.Outlined.Assignment)
-    data object Transport : QuickAction("Transport", Icons.Outlined.School)
+enum class QuickAction(
+    val title: String, 
+    val icon: ImageVector, 
+    val route: NavRoutes
+) {
+    Leave("Leave", Icons.AutoMirrored.Outlined.ExitToApp, NavRoutes.Leave),
+    Fees("Fees", Icons.Outlined.Payments, NavRoutes.Fees),
+    Library("Library", Icons.AutoMirrored.Outlined.LibraryBooks, NavRoutes.Library),
+    Documents("Documents", Icons.Outlined.Description, NavRoutes.Documents),
+    Marks("Marks", Icons.Outlined.Grade, NavRoutes.Marks),
+    Exam("Exam", Icons.Outlined.HistoryEdu, NavRoutes.Exam),
+    Hostel("Hostel", Icons.Outlined.HomeWork, NavRoutes.Hostel),
+    Events("Events", Icons.Outlined.Event, NavRoutes.Events),
+    Assignment("Assignment", Icons.AutoMirrored.Outlined.Assignment, NavRoutes.Assignment),
+    Transport("Transport", Icons.Outlined.School, NavRoutes.Transport)
 }
 
 data class ScheduleItem(

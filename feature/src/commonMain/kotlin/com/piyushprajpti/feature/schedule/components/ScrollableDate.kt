@@ -106,34 +106,33 @@ fun DateItem(
 ) {
     val dayName = date.dayOfWeek.name.take(3)
     val monthName = date.month.name.take(3)
-    val dayNumber = date.day
 
-        Column(
-            modifier = Modifier
-                .clip(RoundedCornerShape(16.dp))
-                .background(if (isSelected) CustomTheme.colors.primary else CustomTheme.colors.secondaryBackground)
-                .clickable(onClick = onClick)
-                .padding(horizontal = 20.dp, vertical = 20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
-            Text(
-                text = monthName,
-                color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Medium
-            )
-            Text(
-                text = dayNumber.toString(),
-                color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = dayName,
-                color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Medium
-            )
-        }
+    Column(
+        modifier = Modifier
+            .clip(RoundedCornerShape(16.dp))
+            .background(if (isSelected) CustomTheme.colors.primary else CustomTheme.colors.secondaryBackground)
+            .clickable(onClick = onClick)
+            .padding(horizontal = 20.dp, vertical = 20.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(5.dp)
+    ) {
+        Text(
+            text = monthName,
+            color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Medium
+        )
+        Text(
+            text = date.day.toString(),
+            color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = dayName,
+            color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Medium
+        )
     }
+}

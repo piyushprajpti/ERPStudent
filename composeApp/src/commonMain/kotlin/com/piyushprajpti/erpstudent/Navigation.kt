@@ -24,10 +24,10 @@ import com.piyushprajpti.core.navigation.NavRoutes
 import com.piyushprajpti.core.navigation.serializableNavModule
 import com.piyushprajpti.feature.auth.authEntryProvider
 import com.piyushprajpti.feature.common.commonEntryProvider
+import com.piyushprajpti.feature.components.FloatingBottomBar
+import com.piyushprajpti.feature.components.LocalBottomBarPadding
 import com.piyushprajpti.feature.mainEntryProvider
 import com.piyushprajpti.feature.settings.settingsEntryProvider
-import com.piyushprajpti.feature.utils.FloatingBottomBar
-import com.piyushprajpti.feature.utils.LocalBottomBarPadding
 
 @Composable
 fun Navigation(authState: AuthState) {

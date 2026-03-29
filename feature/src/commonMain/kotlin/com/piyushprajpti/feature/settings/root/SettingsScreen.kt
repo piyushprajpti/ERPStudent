@@ -17,24 +17,29 @@ import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.NotificationsActive
+import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.settings.util.SettingsDivider
-import com.piyushprajpti.feature.settings.util.SettingsInfoCard
-import com.piyushprajpti.feature.settings.util.SettingsInfoItem
-import com.piyushprajpti.feature.settings.util.SettingsSwitchItem
-import com.piyushprajpti.feature.utils.LocalBottomBarPadding
-import com.piyushprajpti.feature.utils.loading_helper.LoadingWidget
-import com.piyushprajpti.feature.utils.message_helper.composables.AlertDialog
-import com.piyushprajpti.feature.utils.message_helper.composables.ToastWidget
+import com.piyushprajpti.feature.components.LocalBottomBarPadding
+import com.piyushprajpti.feature.components.loading_helper.LoadingWidget
+import com.piyushprajpti.feature.components.message_helper.composables.AlertDialog
+import com.piyushprajpti.feature.components.message_helper.composables.ToastWidget
+import com.piyushprajpti.feature.settings.components.SettingsDivider
+import com.piyushprajpti.feature.settings.components.SettingsInfoCard
+import com.piyushprajpti.feature.settings.components.SettingsInfoItem
+import com.piyushprajpti.feature.settings.components.SettingsSwitchItem
+import com.piyushprajpti.feature.settings.components.ThemeSelectionDialog
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -47,12 +52,22 @@ fun SettingsScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val uriHandler = LocalUriHandler.current
 
+    var showThemeDialog by remember { mutableStateOf(false) }
+
     val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val bottomBarPadding = LocalBottomBarPadding.current
 
     LoadingWidget(viewModel.loadingHelper.state.value)
     ToastWidget(viewModel.messageHelper)
     AlertDialog(viewModel.messageHelper)
+
+    if (showThemeDialog) {
+        ThemeSelectionDialog(
+            currentTheme = state.currentTheme,
+            onThemeSelected = { viewModel.onEvent(SettingsEvent.ChangeTheme(it)) },
+            onDismissRequest = { showThemeDialog = false }
+        )
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -74,6 +89,14 @@ fun SettingsScreen(
                     leadingIcon = Icons.Default.Person,
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                     onClick = { onProfileClick() }
+                )
+                SettingsDivider()
+                SettingsInfoItem(
+                    title = "App Theme",
+                    subtitle = state.currentTheme.label,
+                    leadingIcon = Icons.Default.Palette,
+                    trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    onClick = { showThemeDialog = true }
                 )
                 SettingsDivider()
                 SettingsInfoItem(
@@ -149,13 +172,13 @@ fun SettingsScreen(
                 SettingsInfoItem(
                     title = "Terms of Service",
                     trailingIcon = Icons.AutoMirrored.Filled.OpenInNew,
-                    onClick = { uriHandler.openUri("https://s8ul.live/") }
+                    onClick = { uriHandler.openUri("https://www.google.com/") }
                 )
                 SettingsDivider()
                 SettingsInfoItem(
                     title = "Privacy Policy",
                     trailingIcon = Icons.AutoMirrored.Filled.OpenInNew,
-                    onClick = { uriHandler.openUri("https://s8ul.live/") }
+                    onClick = { uriHandler.openUri("https://www.google.com/") }
                 )
             }
         }

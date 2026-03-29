@@ -1,12 +1,12 @@
 package com.piyushprajpti.feature.attendance
 
 import androidx.lifecycle.ViewModel
-import com.piyushprajpti.feature.attendance.utils.AttendanceStatus
-import com.piyushprajpti.feature.attendance.utils.AttendanceTrend
-import com.piyushprajpti.feature.attendance.utils.SubjectAttendance
-import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
-import com.piyushprajpti.feature.utils.message_helper.MessageHelper
-import com.piyushprajpti.feature.utils.message_helper.model.Alert
+import com.piyushprajpti.feature.attendance.components.AttendanceStatus
+import com.piyushprajpti.feature.attendance.components.AttendanceTrend
+import com.piyushprajpti.feature.attendance.components.SubjectAttendance
+import com.piyushprajpti.feature.components.loading_helper.LoadingHelper
+import com.piyushprajpti.feature.components.message_helper.MessageHelper
+import com.piyushprajpti.feature.components.message_helper.model.Alert
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

@@ -2,8 +2,8 @@ package com.piyushprajpti.feature.settings.profile
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
-import com.piyushprajpti.feature.utils.message_helper.MessageHelper
+import com.piyushprajpti.feature.components.loading_helper.LoadingHelper
+import com.piyushprajpti.feature.components.message_helper.MessageHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart

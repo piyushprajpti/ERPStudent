@@ -1,8 +1,8 @@
 package com.piyushprajpti.feature.attendance
 
-import com.piyushprajpti.feature.attendance.utils.AttendanceStatus
-import com.piyushprajpti.feature.attendance.utils.DailySchedule
-import com.piyushprajpti.feature.attendance.utils.SubjectAttendance
+import com.piyushprajpti.feature.attendance.components.AttendanceStatus
+import com.piyushprajpti.feature.attendance.components.DailySchedule
+import com.piyushprajpti.feature.attendance.components.SubjectAttendance
 import kotlinx.datetime.LocalDate
 
 data class AttendanceState(

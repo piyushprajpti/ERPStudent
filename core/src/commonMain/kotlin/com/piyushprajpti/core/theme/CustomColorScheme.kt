@@ -25,19 +25,35 @@ val LocalCustomColorScheme = staticCompositionLocalOf<CustomColorScheme> {
 
 val DarkThemeColorScheme = CustomColorScheme(
     primary = Color(0xFFE16349),
-    primaryBackground = Color(0xFF0E0909),
-    secondaryBackground = Color(0xFF1D1513),
-    primaryText = Color(0xFFFFFFFF),
+    primaryBackground = Color(0xFF000000),
+    secondaryBackground = Color(0xFF121212),
+    primaryText = Color(0xFFF5F5F5),
     secondaryText = Color(0xFFB0B0B0),
     tertiaryText = Color(0xFF757575),
-    outline = Color(0xFF3D2C28),
-    error = Color(0xFFC62828),
-    success = Color(0xFF1B9B4E),
-    warning = Color(0xFFFFD54F),
-    info = Color(0xFF215ECC),
+    outline = Color(0xFF2C2C2C),
+    error = Color(0xFFCF6679),
+    success = Color(0xFF81C784),
+    warning = Color(0xFFFFB74D),
+    info = Color(0xFF64B5F6),
+    white = Color(0xFFFFFFFF),
+    black = Color(0xFF000000),
+)
+
+val LightThemeColorScheme = CustomColorScheme(
+    primary = Color(0xFFE16349),
+    primaryBackground = Color(0xFFFFFFFF),
+    secondaryBackground = Color(0xFFF6F8FA),
+    primaryText = Color(0xFF24292F),
+    secondaryText = Color(0xFF57606A),
+    tertiaryText = Color(0xFF6E7781),
+    outline = Color(0xFFD0D7DE),
+    error = Color(0xFFCF222E),
+    success = Color(0xFF1A7F37),
+    warning = Color(0xFF9A6700),
+    info = Color(0xFF0969DA),
     white = Color(0xFFFFFFFF),
     black = Color(0xFF000000),
 )
 
 val CustomDarkColorScheme = DarkThemeColorScheme
-val CustomLightColorScheme = DarkThemeColorScheme
+val CustomLightColorScheme = LightThemeColorScheme

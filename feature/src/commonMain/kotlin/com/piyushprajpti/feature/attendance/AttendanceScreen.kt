@@ -30,13 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.attendance.utils.AttendanceSummaryCard
-import com.piyushprajpti.feature.attendance.utils.OverallAttendanceCircular
-import com.piyushprajpti.feature.attendance.utils.SubjectAttendanceCard
-import com.piyushprajpti.feature.utils.LocalBottomBarPadding
-import com.piyushprajpti.feature.utils.loading_helper.LoadingWidget
-import com.piyushprajpti.feature.utils.message_helper.composables.AlertDialog
-import com.piyushprajpti.feature.utils.message_helper.composables.ToastWidget
+import com.piyushprajpti.feature.attendance.components.AttendanceSummaryCard
+import com.piyushprajpti.feature.attendance.components.OverallAttendanceCircular
+import com.piyushprajpti.feature.attendance.components.SubjectAttendanceCard
+import com.piyushprajpti.feature.components.LocalBottomBarPadding
+import com.piyushprajpti.feature.components.loading_helper.LoadingWidget
+import com.piyushprajpti.feature.components.message_helper.composables.AlertDialog
+import com.piyushprajpti.feature.components.message_helper.composables.ToastWidget
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

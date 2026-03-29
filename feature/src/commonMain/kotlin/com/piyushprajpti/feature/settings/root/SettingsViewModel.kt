@@ -1,13 +1,16 @@
 package com.piyushprajpti.feature.settings.root
 
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.piyushprajpti.core.constants.APP_THEME
+import com.piyushprajpti.core.datastore.PreferenceDataStore
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.core.utils.getAppVersion
 import com.piyushprajpti.domain.usecase.auth.LogoutUseCase
-import com.piyushprajpti.feature.utils.loading_helper.LoadingHelper
-import com.piyushprajpti.feature.utils.message_helper.MessageHelper
-import com.piyushprajpti.feature.utils.message_helper.model.Alert
+import com.piyushprajpti.feature.components.loading_helper.LoadingHelper
+import com.piyushprajpti.feature.components.message_helper.MessageHelper
+import com.piyushprajpti.feature.components.message_helper.model.Alert
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -16,7 +19,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(
-    private val logoutUseCase: LogoutUseCase
+    private val logoutUseCase: LogoutUseCase,
+    private val preferenceDataStore: PreferenceDataStore
 ) : ViewModel() {
 
     val loadingHelper = LoadingHelper()
@@ -24,15 +28,34 @@ class SettingsViewModel(
 
     private val _state = MutableStateFlow(SettingsState())
     val state = _state.onStart {
-        _state.update { it.copy(appVersion = getAppVersion()) }
+        loadInitialData()
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = SettingsState()
     )
 
+    private fun loadInitialData() {
+        viewModelScope.launch {
+            preferenceDataStore.getValue(stringPreferencesKey(APP_THEME))
+                .collect { themeLabel ->
+                    val theme = AppTheme.entries.find { it.label == themeLabel }
+                        ?: AppTheme.DEVICE_DEFAULT
+
+                    _state.update {
+                        it.copy(
+                            currentTheme = theme,
+                            appVersion = getAppVersion()
+                        )
+                    }
+                }
+        }
+    }
+
     fun onEvent(event: SettingsEvent) {
         when (event) {
+            is SettingsEvent.ChangeTheme -> onThemeChange(event.theme)
+
             is SettingsEvent.ToggleAllNotifications -> {
                 _state.update { it.copy(allNotifications = event.enabled) }
             }
@@ -59,6 +82,13 @@ class SettingsViewModel(
                     )
                 )
             }
+        }
+    }
+
+    private fun onThemeChange(theme: AppTheme) {
+        viewModelScope.launch {
+            preferenceDataStore.setValue(stringPreferencesKey(APP_THEME), theme.label)
+            _state.update { it.copy(currentTheme = theme) }
         }
     }
 

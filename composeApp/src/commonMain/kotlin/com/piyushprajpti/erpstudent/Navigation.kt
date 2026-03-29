@@ -27,6 +27,7 @@ import com.piyushprajpti.feature.common.commonEntryProvider
 import com.piyushprajpti.feature.components.FloatingBottomBar
 import com.piyushprajpti.feature.components.LocalBottomBarPadding
 import com.piyushprajpti.feature.di.mainEntryProvider
+import com.piyushprajpti.feature.home.homeEntryProvider
 import com.piyushprajpti.feature.settings.settingsEntryProvider
 
 @Composable
@@ -64,7 +65,8 @@ fun Navigation(authState: AuthState) {
             ::authEntryProvider,
             ::commonEntryProvider,
             ::mainEntryProvider,
-            ::settingsEntryProvider
+            ::settingsEntryProvider,
+            ::homeEntryProvider
         )
     }
 

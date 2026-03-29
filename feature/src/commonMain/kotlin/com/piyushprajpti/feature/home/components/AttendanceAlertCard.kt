@@ -26,7 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.home.AttendanceAlert
+import com.piyushprajpti.feature.home.root.AttendanceAlert
 
 @Composable
 fun AttendanceAlertCard(

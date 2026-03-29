@@ -38,4 +38,8 @@ sealed interface NavRoutes: NavKey  {
     data object Profile: NavRoutes, NavKey
     @Serializable
     data object ChangePassword: NavRoutes, NavKey
+
+    // notifications
+    @Serializable
+    data object Notifications: NavRoutes, NavKey
 }

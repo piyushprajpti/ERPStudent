@@ -1,4 +1,4 @@
-package com.piyushprajpti.feature.home
+package com.piyushprajpti.feature.home.root
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

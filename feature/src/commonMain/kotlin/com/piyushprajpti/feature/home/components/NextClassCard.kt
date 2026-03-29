@@ -25,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.home.NextClass
+import com.piyushprajpti.feature.home.root.NextClass
 
 @Composable
 fun NextClassCard(nextClass: NextClass) {

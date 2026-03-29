@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.home.ScheduleItem
+import com.piyushprajpti.feature.home.root.ScheduleItem
 
 @Composable
 fun ScheduleItemCard(item: ScheduleItem) {

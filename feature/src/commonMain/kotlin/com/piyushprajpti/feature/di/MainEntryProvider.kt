@@ -5,7 +5,7 @@ import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import com.piyushprajpti.core.navigation.NavRoutes
 import com.piyushprajpti.feature.attendance.AttendanceScreen
-import com.piyushprajpti.feature.home.HomeScreen
+import com.piyushprajpti.feature.home.root.HomeScreen
 import com.piyushprajpti.feature.schedule.ScheduleScreen
 import com.piyushprajpti.feature.settings.root.SettingsScreen
 
@@ -15,7 +15,10 @@ fun mainEntryProvider(
 ): NavEntry<NavKey>? {
     return when (key) {
         is NavRoutes.Home -> NavEntry(key) {
-            HomeScreen()
+            HomeScreen(
+                onNotificationClick = { backStack.add(NavRoutes.Notifications) },
+                onQuickActionClick = {}
+            )
         }
 
         is NavRoutes.Attendance -> NavEntry(key) {

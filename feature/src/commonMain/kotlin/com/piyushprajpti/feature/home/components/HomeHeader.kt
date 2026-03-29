@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.home.HomeState
+import com.piyushprajpti.feature.home.root.HomeState
 
 @Composable
 fun HomeHeader(

@@ -1,4 +1,4 @@
-package com.piyushprajpti.feature.home
+package com.piyushprajpti.feature.home.root
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +37,9 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = koinViewModel()
+    viewModel: HomeViewModel = koinViewModel(),
+    onNotificationClick: () -> Unit,
+    onQuickActionClick: (QuickAction) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -62,7 +64,10 @@ fun HomeScreen(
     ) {
         // Header
         item {
-            HomeHeader(state)
+            HomeHeader(
+                state = state,
+                onNotificationClick = onNotificationClick
+            )
         }
 
         // Attendance Alert
@@ -116,7 +121,10 @@ fun HomeScreen(
         item {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 SectionTitle("QUICK ACTIONS")
-                QuickActionsGrid(state.quickActions)
+                QuickActionsGrid(
+                    actions = state.quickActions,
+                    onClick = onQuickActionClick
+                )
             }
         }
 

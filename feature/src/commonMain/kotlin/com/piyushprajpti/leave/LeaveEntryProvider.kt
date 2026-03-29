@@ -12,7 +12,7 @@ fun leaveEntryProvider(
     backStack: NavBackStack<NavKey>
 ): NavEntry<NavKey>? {
     return when (key) {
-        is NavRoutes.Leave -> NavEntry(key) {
+        is NavRoutes.LeaveHistory -> NavEntry(key) {
             LeaveHistoryScreen(
                 onBackClick = { backStack.removeLast() },
                 onAddClick = { backStack.add(NavRoutes.ApplyLeave) }

@@ -62,11 +62,11 @@ data class HomeStats(
 )
 
 enum class QuickAction(
-    val title: String, 
-    val icon: ImageVector, 
+    val title: String,
+    val icon: ImageVector,
     val route: NavRoutes
 ) {
-    Leave("Leave", Icons.AutoMirrored.Outlined.ExitToApp, NavRoutes.Leave),
+    Leave("Leave", Icons.AutoMirrored.Outlined.ExitToApp, NavRoutes.LeaveHistory),
     Fees("Fees", Icons.Outlined.Payments, NavRoutes.Fees),
     Library("Library", Icons.AutoMirrored.Outlined.LibraryBooks, NavRoutes.Library),
     Documents("Documents", Icons.Outlined.Description, NavRoutes.Documents),

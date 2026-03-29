@@ -45,7 +45,7 @@ sealed interface NavRoutes: NavKey  {
 
     // quick actions
     @Serializable
-    data object Leave : NavRoutes, NavKey
+    data object LeaveHistory : NavRoutes, NavKey
     @Serializable
     data object ApplyLeave : NavRoutes, NavKey
     @Serializable

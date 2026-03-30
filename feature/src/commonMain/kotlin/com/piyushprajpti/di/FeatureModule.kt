@@ -5,6 +5,7 @@ import com.piyushprajpti.feature.auth.login.LoginViewModel
 import com.piyushprajpti.feature.auth.tenant.TenantViewModel
 import com.piyushprajpti.feature.common.reset_password.ResetPasswordViewModel
 import com.piyushprajpti.feature.common.support.SupportViewModel
+import com.piyushprajpti.feature.fees.payment.FeesPaymentViewModel
 import com.piyushprajpti.feature.fees.summary.FeesSummaryViewModel
 import com.piyushprajpti.feature.home.notifications.NotificationViewModel
 import com.piyushprajpti.feature.home.root.HomeViewModel
@@ -47,5 +48,6 @@ val featureModule = module {
 
     // fees
     viewModelOf(::FeesSummaryViewModel)
+    viewModelOf(::FeesPaymentViewModel)
 
 }

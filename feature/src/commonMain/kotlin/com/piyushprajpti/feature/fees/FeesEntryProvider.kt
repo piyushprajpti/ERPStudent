@@ -4,6 +4,7 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
 import com.piyushprajpti.core.navigation.NavRoutes
+import com.piyushprajpti.feature.fees.payment.FeesPaymentScreen
 import com.piyushprajpti.feature.fees.summary.FeesSummaryScreen
 
 fun feesEntryProvider(
@@ -13,6 +14,13 @@ fun feesEntryProvider(
     return when (key) {
         is NavRoutes.FeesSummary -> NavEntry(key) {
             FeesSummaryScreen(
+                onBackClick = { backStack.removeLast() },
+                onPayNowClick = {backStack.add(NavRoutes.FeesPayment) }
+            )
+        }
+
+        is NavRoutes.FeesPayment -> NavEntry(key) {
+            FeesPaymentScreen(
                 onBackClick = { backStack.removeLast() }
             )
         }

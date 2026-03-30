@@ -1,4 +1,4 @@
-package com.piyushprajpti.feature.fees.summary.components
+package com.piyushprajpti.feature.fees.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

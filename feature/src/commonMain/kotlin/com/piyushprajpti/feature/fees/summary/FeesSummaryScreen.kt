@@ -38,15 +38,16 @@ import com.piyushprajpti.components.TopBar
 import com.piyushprajpti.components.loading_helper.LoadingWidget
 import com.piyushprajpti.components.message_helper.composables.AlertDialog
 import com.piyushprajpti.components.message_helper.composables.ToastWidget
-import com.piyushprajpti.feature.fees.summary.components.FeeActionItem
-import com.piyushprajpti.feature.fees.summary.components.FeeSummaryBox
-import com.piyushprajpti.feature.fees.summary.components.StudentProfileHeader
-import com.piyushprajpti.feature.fees.summary.components.TotalFeeCard
+import com.piyushprajpti.feature.fees.components.FeeActionItem
+import com.piyushprajpti.feature.fees.components.FeeSummaryBox
+import com.piyushprajpti.feature.fees.components.StudentProfileHeader
+import com.piyushprajpti.feature.fees.components.TotalFeeCard
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun FeesSummaryScreen(
     onBackClick: () -> Unit,
+    onPayNowClick: () -> Unit,
     viewModel: FeesSummaryViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -158,7 +159,7 @@ fun FeesSummaryScreen(
 
         PrimaryActionButton(
             text = "Pay Now (${state.payNowAmount})",
-            onClick = { viewModel.onEvent(FeesSummaryEvent.OnPayNowClick) },
+            onClick = onPayNowClick,
             modifier = Modifier
                 .padding(15.dp),
             content = {

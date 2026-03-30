@@ -17,6 +17,8 @@ import com.piyushprajpti.feature.library.book_detail.LibraryBookDetailViewModel
 import com.piyushprajpti.feature.library.dashboard.LibraryDashboardViewModel
 import com.piyushprajpti.feature.library.due_and_fines.LibraryDueViewModel
 import com.piyushprajpti.feature.library.search.LibrarySearchViewModel
+import com.piyushprajpti.feature.marks.grade_card.GradeCardViewModel
+import com.piyushprajpti.feature.marks.overview.MarksOverviewViewModel
 import com.piyushprajpti.feature.schedule.ScheduleViewModel
 import com.piyushprajpti.feature.settings.change_password.ChangePasswordViewModel
 import com.piyushprajpti.feature.settings.profile.ProfileViewModel
@@ -66,4 +68,7 @@ val featureModule = module {
     viewModelOf(::DocumentListViewModel)
     viewModelOf(::DocumentRequestViewModel)
 
+    // marks
+    viewModelOf(::MarksOverviewViewModel)
+    viewModelOf(::GradeCardViewModel)
 }

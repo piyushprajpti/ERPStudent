@@ -70,7 +70,7 @@ enum class QuickAction(
     Fees("Fees", Icons.Outlined.Payments, NavRoutes.FeesSummary),
     Library("Library", Icons.AutoMirrored.Outlined.LibraryBooks, NavRoutes.LibraryDashboard),
     Documents("Documents", Icons.Outlined.Description, NavRoutes.DocumentList),
-    Marks("Marks", Icons.Outlined.Grade, NavRoutes.Marks),
+    Marks("Marks", Icons.Outlined.Grade, NavRoutes.MarksOverview),
     Exam("Exam", Icons.Outlined.HistoryEdu, NavRoutes.Exam),
     Hostel("Hostel", Icons.Outlined.HomeWork, NavRoutes.Hostel),
     Events("Events", Icons.Outlined.Event, NavRoutes.Events),

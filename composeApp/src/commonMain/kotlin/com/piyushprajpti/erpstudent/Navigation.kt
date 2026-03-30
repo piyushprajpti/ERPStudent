@@ -32,6 +32,7 @@ import com.piyushprajpti.feature.fees.feesEntryProvider
 import com.piyushprajpti.feature.home.homeEntryProvider
 import com.piyushprajpti.feature.leave.leaveEntryProvider
 import com.piyushprajpti.feature.library.libraryEntryProvider
+import com.piyushprajpti.feature.marks.marksEntryProvider
 import com.piyushprajpti.feature.settings.settingsEntryProvider
 
 @Composable
@@ -75,6 +76,7 @@ fun Navigation(authState: AuthState) {
             ::feesEntryProvider,
             ::libraryEntryProvider,
             ::documentEntryProvider,
+            ::marksEntryProvider,
         )
     }
 

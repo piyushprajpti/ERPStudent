@@ -20,7 +20,10 @@
     - Add navigation bar padding to the `contentPadding` of scrollable containers (LazyColumn/verticalScroll) or to the root layout to ensure content is not hidden behind system bars.
 - **Scrollability:** Every page must be scrollable (usually via `LazyColumn` or `Modifier.verticalScroll`).
 - **Padding:** Use a default corner/screen padding of `15.dp`.
-- **Typography:** Keep font sizes professional and normal. Avoid excessively large text. **NEVER use `MaterialTheme.typography` styles anywhere.**
+- **Typography:** 
+    - Keep font sizes professional and normal. Avoid excessively large text. 
+    - **NEVER use `MaterialTheme.typography` or `CustomTheme.typography` styles anywhere.**
+    - There is no typography defined in the theme. Always use direct properties like `fontSize`, `fontWeight`, and `color` within the `Text` composable.
 - **Rounding:** Use consistent corner rounding (e.g., `RoundedCornerShape(15.dp)` or as defined in the theme).
 - **Currency:** Always use the Rupee symbol (₹) for currency values.
 

@@ -11,6 +11,10 @@ import com.piyushprajpti.feature.home.notifications.NotificationViewModel
 import com.piyushprajpti.feature.home.root.HomeViewModel
 import com.piyushprajpti.feature.leave.leave_apply.ApplyLeaveViewModel
 import com.piyushprajpti.feature.leave.leave_history.LeaveHistoryViewModel
+import com.piyushprajpti.feature.library.book_detail.LibraryBookDetailViewModel
+import com.piyushprajpti.feature.library.dashboard.LibraryDashboardViewModel
+import com.piyushprajpti.feature.library.due_and_fines.LibraryDueViewModel
+import com.piyushprajpti.feature.library.search.LibrarySearchViewModel
 import com.piyushprajpti.feature.schedule.ScheduleViewModel
 import com.piyushprajpti.feature.settings.change_password.ChangePasswordViewModel
 import com.piyushprajpti.feature.settings.profile.ProfileViewModel
@@ -50,4 +54,9 @@ val featureModule = module {
     viewModelOf(::FeesSummaryViewModel)
     viewModelOf(::FeesPaymentViewModel)
 
+    // library
+    viewModelOf(::LibraryDashboardViewModel)
+    viewModelOf(::LibrarySearchViewModel)
+    viewModelOf(::LibraryBookDetailViewModel)
+    viewModelOf(::LibraryDueViewModel)
 }

@@ -30,6 +30,7 @@ import com.piyushprajpti.feature.common.commonEntryProvider
 import com.piyushprajpti.feature.fees.feesEntryProvider
 import com.piyushprajpti.feature.home.homeEntryProvider
 import com.piyushprajpti.feature.leave.leaveEntryProvider
+import com.piyushprajpti.feature.library.libraryEntryProvider
 import com.piyushprajpti.feature.settings.settingsEntryProvider
 
 @Composable
@@ -71,6 +72,7 @@ fun Navigation(authState: AuthState) {
             ::homeEntryProvider,
             ::leaveEntryProvider,
             ::feesEntryProvider,
+            ::libraryEntryProvider,
         )
     }
 
@@ -79,7 +81,6 @@ fun Navigation(authState: AuthState) {
     }
     val showBottomBar = currentRoute in bottomBarRoutes
 
-    // Stable decorator list — allocated once, never recreated on recomposition
     val saveableDecorator = rememberSaveableStateHolderNavEntryDecorator<NavKey>()
     val viewModelDecorator = rememberViewModelStoreNavEntryDecorator<NavKey>()
     val entryDecorators = remember(saveableDecorator, viewModelDecorator) {

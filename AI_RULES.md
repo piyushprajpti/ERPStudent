@@ -19,6 +19,7 @@
 - **Padding:** Use a default corner/screen padding of `15.dp`.
 - **Typography:** Keep font sizes professional and normal. Avoid excessively large text. **NEVER use `MaterialTheme.typography` styles anywhere.**
 - **Rounding:** Use consistent corner rounding (e.g., `RoundedCornerShape(15.dp)` or as defined in the theme).
+- **Currency:** Always use the Rupee symbol (₹) for currency values.
 
 ## Functional Design & Logic
 - **Functional Implementation:** Do not just replicate the reference image literally. Use common sense to create a functional screen.
@@ -31,6 +32,7 @@
     - `LoadingWidget(viewModel.loadingHelper.state.value)`
     - `AlertDialog(viewModel.messageHelper)`
     - `ToastWidget(viewModel.messageHelper)`
+- **Loading State:** When populating dummy data or during initial load in ViewModels, **DO NOT add dummy loading delays** (e.g., `delay(2000)`). The data should be available immediately unless a real network call is being simulated/made.
 
 ## Best Practices
 - Use `sealed interface` for Events.

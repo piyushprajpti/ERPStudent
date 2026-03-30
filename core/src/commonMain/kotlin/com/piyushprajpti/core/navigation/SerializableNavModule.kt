@@ -38,7 +38,16 @@ val serializableNavModule = SerializersModule {
         subclass(NavRoutes.FeesSummary::class, NavRoutes.FeesSummary.serializer())
         subclass(NavRoutes.FeesPayment::class, NavRoutes.FeesPayment.serializer())
         subclass(NavRoutes.FeesHistory::class, NavRoutes.FeesHistory.serializer())
-        subclass(NavRoutes.Library::class, NavRoutes.Library.serializer())
+
+        // library
+        subclass(NavRoutes.LibraryDashboard::class, NavRoutes.LibraryDashboard.serializer())
+        subclass(NavRoutes.LibrarySearch::class, NavRoutes.LibrarySearch.serializer())
+        subclass(NavRoutes.LibraryBookDetail::class, NavRoutes.LibraryBookDetail.serializer())
+        subclass(NavRoutes.LibraryDue::class, NavRoutes.LibraryDue.serializer())
+
+
+
+
         subclass(NavRoutes.Documents::class, NavRoutes.Documents.serializer())
         subclass(NavRoutes.Marks::class, NavRoutes.Marks.serializer())
         subclass(NavRoutes.Exam::class, NavRoutes.Exam.serializer())

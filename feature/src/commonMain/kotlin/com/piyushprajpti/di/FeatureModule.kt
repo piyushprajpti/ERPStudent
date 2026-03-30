@@ -5,6 +5,8 @@ import com.piyushprajpti.feature.auth.login.LoginViewModel
 import com.piyushprajpti.feature.auth.tenant.TenantViewModel
 import com.piyushprajpti.feature.common.reset_password.ResetPasswordViewModel
 import com.piyushprajpti.feature.common.support.SupportViewModel
+import com.piyushprajpti.feature.documents.list.DocumentListViewModel
+import com.piyushprajpti.feature.documents.request.DocumentRequestViewModel
 import com.piyushprajpti.feature.fees.payment.FeesPaymentViewModel
 import com.piyushprajpti.feature.fees.summary.FeesSummaryViewModel
 import com.piyushprajpti.feature.home.notifications.NotificationViewModel
@@ -59,4 +61,9 @@ val featureModule = module {
     viewModelOf(::LibrarySearchViewModel)
     viewModelOf(::LibraryBookDetailViewModel)
     viewModelOf(::LibraryDueViewModel)
+
+    // document
+    viewModelOf(::DocumentListViewModel)
+    viewModelOf(::DocumentRequestViewModel)
+
 }

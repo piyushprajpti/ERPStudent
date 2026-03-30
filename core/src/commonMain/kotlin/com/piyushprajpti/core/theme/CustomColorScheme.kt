@@ -17,6 +17,9 @@ data class CustomColorScheme(
     val info: Color,
     val white: Color,
     val black: Color,
+    val orange: Color,
+    val blue: Color,
+    val purple: Color,
 )
 
 val LocalCustomColorScheme = staticCompositionLocalOf<CustomColorScheme> {
@@ -37,6 +40,9 @@ val DarkThemeColorScheme = CustomColorScheme(
     info = Color(0xFF1E88E5),
     white = Color(0xFFFFFFFF),
     black = Color(0xFF000000),
+    orange = Color(0xFFFF9800),
+    blue = Color(0xFF2196F3),
+    purple = Color(0xFF9C27B0),
 )
 
 val LightThemeColorScheme = CustomColorScheme(
@@ -53,6 +59,9 @@ val LightThemeColorScheme = CustomColorScheme(
     info = Color(0xFF1E88E5),
     white = Color(0xFFFFFFFF),
     black = Color(0xFF000000),
+    orange = Color(0xFFFF9800),
+    blue = Color(0xFF2196F3),
+    purple = Color(0xFF9C27B0),
 )
 
 val CustomDarkColorScheme = DarkThemeColorScheme

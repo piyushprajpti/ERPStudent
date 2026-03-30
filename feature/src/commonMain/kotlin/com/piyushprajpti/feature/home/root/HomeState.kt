@@ -69,7 +69,7 @@ enum class QuickAction(
     Leave("Leave", Icons.AutoMirrored.Outlined.ExitToApp, NavRoutes.LeaveHistory),
     Fees("Fees", Icons.Outlined.Payments, NavRoutes.FeesSummary),
     Library("Library", Icons.AutoMirrored.Outlined.LibraryBooks, NavRoutes.LibraryDashboard),
-    Documents("Documents", Icons.Outlined.Description, NavRoutes.Documents),
+    Documents("Documents", Icons.Outlined.Description, NavRoutes.DocumentList),
     Marks("Marks", Icons.Outlined.Grade, NavRoutes.Marks),
     Exam("Exam", Icons.Outlined.HistoryEdu, NavRoutes.Exam),
     Hostel("Hostel", Icons.Outlined.HomeWork, NavRoutes.Hostel),

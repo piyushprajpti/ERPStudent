@@ -26,7 +26,7 @@ fun PrimaryActionButton(
     isLoading: Boolean = false,
     enabled: Boolean = true,
     containerColor: Color = CustomTheme.colors.primary,
-    contentColor: Color = CustomTheme.colors.primaryText,
+    contentColor: Color = CustomTheme.colors.white,
     disabledContainerColor: Color = containerColor.copy(alpha = 0.5f),
     disabledContentColor: Color = contentColor.copy(alpha = 0.7f),
     shape: Shape = RoundedCornerShape(25.dp),

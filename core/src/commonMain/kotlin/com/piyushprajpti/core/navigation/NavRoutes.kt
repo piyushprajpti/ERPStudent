@@ -77,8 +77,11 @@ sealed interface NavRoutes : NavKey {
     data object LibraryDue : NavRoutes, NavKey
 
 
+    // documents
     @Serializable
-    data object Documents : NavRoutes, NavKey
+    data object DocumentList : NavRoutes, NavKey
+    @Serializable
+    data object DocumentRequest : NavRoutes, NavKey
 
     @Serializable
     data object Marks : NavRoutes, NavKey

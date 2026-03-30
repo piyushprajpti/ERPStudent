@@ -45,10 +45,11 @@ val serializableNavModule = SerializersModule {
         subclass(NavRoutes.LibraryBookDetail::class, NavRoutes.LibraryBookDetail.serializer())
         subclass(NavRoutes.LibraryDue::class, NavRoutes.LibraryDue.serializer())
 
+        // documents
+        subclass(NavRoutes.DocumentList::class, NavRoutes.DocumentList.serializer())
+        subclass(NavRoutes.DocumentRequest::class, NavRoutes.DocumentRequest.serializer())
 
 
-
-        subclass(NavRoutes.Documents::class, NavRoutes.Documents.serializer())
         subclass(NavRoutes.Marks::class, NavRoutes.Marks.serializer())
         subclass(NavRoutes.Exam::class, NavRoutes.Exam.serializer())
         subclass(NavRoutes.Hostel::class, NavRoutes.Hostel.serializer())

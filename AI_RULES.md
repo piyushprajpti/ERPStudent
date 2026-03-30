@@ -8,7 +8,10 @@
 
 ## UI & Styling Standards
 - **Theme:** Always use `CustomTheme.colors` from `com.piyushprajpti.college_erp_system.theme`.
-- **Colors:** NEVER use hardcoded `Color(0xFF...)` values. Use the theme colors.
+- **Colors:** 
+    - **NEVER use hardcoded `Color(0xFF...)` values.**
+    - If a new color is required, define it in `CustomColorScheme.kt` and then use it via `CustomTheme.colors`.
+    - Every new color added to the theme MUST have a suitable value for both light and dark themes.
 - **TopBar:** Always use the project's custom `TopBar` component.
 - **No Scaffold:** Do not use the material `Scaffold` component. Use custom layouts (Column/Box) with proper system bar padding.
 - **Full Screen Effect:** 

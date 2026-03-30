@@ -20,16 +20,16 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
+import com.piyushprajpti.components.FloatingBottomBar
+import com.piyushprajpti.components.LocalBottomBarPadding
 import com.piyushprajpti.core.navigation.NavRoutes
 import com.piyushprajpti.core.navigation.serializableNavModule
+import com.piyushprajpti.di.mainEntryProvider
 import com.piyushprajpti.feature.auth.authEntryProvider
 import com.piyushprajpti.feature.common.commonEntryProvider
-import com.piyushprajpti.feature.components.FloatingBottomBar
-import com.piyushprajpti.feature.components.LocalBottomBarPadding
-import com.piyushprajpti.feature.di.mainEntryProvider
 import com.piyushprajpti.feature.home.homeEntryProvider
+import com.piyushprajpti.feature.leave.leaveEntryProvider
 import com.piyushprajpti.feature.settings.settingsEntryProvider
-import com.piyushprajpti.leave.leaveEntryProvider
 
 @Composable
 fun Navigation(authState: AuthState) {

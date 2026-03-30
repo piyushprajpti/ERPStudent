@@ -2,8 +2,8 @@ package com.piyushprajpti.feature.leave.leave_apply
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.piyushprajpti.feature.components.loading_helper.LoadingHelper
-import com.piyushprajpti.feature.components.message_helper.MessageHelper
+import com.piyushprajpti.components.loading_helper.LoadingHelper
+import com.piyushprajpti.components.message_helper.MessageHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -31,26 +31,41 @@ class ApplyLeaveViewModel : ViewModel() {
             is ApplyLeaveEvent.OnLeaveTypeChange -> {
                 _state.update { it.copy(selectedLeaveType = event.leaveType) }
             }
+
             is ApplyLeaveEvent.OnFromDateChange -> {
-                _state.update { 
+                _state.update {
                     val newState = it.copy(fromDate = event.date)
-                    newState.copy(totalDays = calculateTotalDays(newState.fromDate, newState.toDate))
+                    newState.copy(
+                        totalDays = calculateTotalDays(
+                            newState.fromDate,
+                            newState.toDate
+                        )
+                    )
                 }
             }
+
             is ApplyLeaveEvent.OnToDateChange -> {
-                _state.update { 
+                _state.update {
                     val newState = it.copy(toDate = event.date)
-                    newState.copy(totalDays = calculateTotalDays(newState.fromDate, newState.toDate))
+                    newState.copy(
+                        totalDays = calculateTotalDays(
+                            newState.fromDate,
+                            newState.toDate
+                        )
+                    )
                 }
             }
+
             is ApplyLeaveEvent.OnReasonChange -> {
                 if (event.reason.length <= 300) {
                     _state.update { it.copy(reason = event.reason) }
                 }
             }
+
             ApplyLeaveEvent.OnSubmit -> {
                 submitApplication()
             }
+
             ApplyLeaveEvent.OnBackClick -> {
                 // Handled in Screen
             }

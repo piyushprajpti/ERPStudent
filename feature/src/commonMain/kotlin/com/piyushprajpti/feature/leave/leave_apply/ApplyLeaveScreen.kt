@@ -47,17 +47,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.CustomTextField
-import com.piyushprajpti.feature.components.PrimaryActionButton
-import com.piyushprajpti.feature.components.TopBar
-import com.piyushprajpti.feature.components.loading_helper.LoadingWidget
-import com.piyushprajpti.feature.components.message_helper.composables.AlertDialog
-import com.piyushprajpti.feature.components.message_helper.composables.ToastWidget
-import kotlinx.datetime.Instant
+import com.piyushprajpti.components.CustomTextField
+import com.piyushprajpti.components.PrimaryActionButton
+import com.piyushprajpti.components.TopBar
+import com.piyushprajpti.components.loading_helper.LoadingWidget
+import com.piyushprajpti.components.message_helper.composables.AlertDialog
+import com.piyushprajpti.components.message_helper.composables.ToastWidget
 import kotlinx.datetime.Month
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.koin.compose.viewmodel.koinViewModel
+import kotlin.time.Instant
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -161,7 +161,10 @@ fun ApplyLeaveScreen(
 
             Spacer(modifier = Modifier.height(25.dp))
 
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(15.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(15.dp)
+            ) {
                 DateField(
                     label = "FROM DATE",
                     date = state.fromDate,
@@ -204,7 +207,10 @@ fun ApplyLeaveScreen(
 
             Spacer(modifier = Modifier.height(25.dp))
 
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(
                     text = "REASON FOR LEAVE",
                     fontSize = 14.sp,
@@ -366,7 +372,8 @@ private fun DateField(
 }
 
 private fun formatDate(millis: Long): String {
-    val date = Instant.fromEpochMilliseconds(millis).toLocalDateTime(TimeZone.currentSystemDefault())
+    val date =
+        Instant.fromEpochMilliseconds(millis).toLocalDateTime(TimeZone.currentSystemDefault())
     val monthName = when (date.month) {
         Month.JANUARY -> "Jan"
         Month.FEBRUARY -> "Feb"

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.loading_helper.CircularLoading
+import com.piyushprajpti.components.loading_helper.CircularLoading
 
 @Composable
 fun PrimaryActionButton(

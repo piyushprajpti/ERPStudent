@@ -29,8 +29,8 @@ import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import androidx.compose.ui.zIndex
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.message_helper.MessageHelper
-import com.piyushprajpti.feature.components.message_helper.model.Alert
+import com.piyushprajpti.components.message_helper.MessageHelper
+import com.piyushprajpti.components.message_helper.model.Alert
 
 @Composable
 fun AlertDialog(messageHelper: MessageHelper) {
@@ -76,7 +76,7 @@ fun AlertDialogBase(alert: Alert?, onDismissRequest: () -> Unit) {
                     textAlign = TextAlign.Center,
                     color = CustomTheme.colors.primaryText
                 )
-                
+
                 Text(
                     text = message,
                     modifier = Modifier

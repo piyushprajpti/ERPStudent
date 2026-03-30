@@ -31,10 +31,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.LocalBottomBarPadding
-import com.piyushprajpti.feature.components.loading_helper.LoadingWidget
-import com.piyushprajpti.feature.components.message_helper.composables.AlertDialog
-import com.piyushprajpti.feature.components.message_helper.composables.ToastWidget
+import com.piyushprajpti.components.LocalBottomBarPadding
+import com.piyushprajpti.components.loading_helper.LoadingWidget
+import com.piyushprajpti.components.message_helper.composables.AlertDialog
+import com.piyushprajpti.components.message_helper.composables.ToastWidget
 import com.piyushprajpti.feature.settings.components.SettingsDivider
 import com.piyushprajpti.feature.settings.components.SettingsInfoCard
 import com.piyushprajpti.feature.settings.components.SettingsInfoItem

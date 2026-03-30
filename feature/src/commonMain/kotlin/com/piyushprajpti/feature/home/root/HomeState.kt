@@ -67,7 +67,7 @@ enum class QuickAction(
     val route: NavRoutes
 ) {
     Leave("Leave", Icons.AutoMirrored.Outlined.ExitToApp, NavRoutes.LeaveHistory),
-    Fees("Fees", Icons.Outlined.Payments, NavRoutes.Fees),
+    Fees("Fees", Icons.Outlined.Payments, NavRoutes.FeesSummary),
     Library("Library", Icons.AutoMirrored.Outlined.LibraryBooks, NavRoutes.Library),
     Documents("Documents", Icons.Outlined.Description, NavRoutes.Documents),
     Marks("Marks", Icons.Outlined.Grade, NavRoutes.Marks),

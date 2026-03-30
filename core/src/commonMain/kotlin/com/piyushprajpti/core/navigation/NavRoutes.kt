@@ -43,13 +43,19 @@ sealed interface NavRoutes: NavKey  {
     @Serializable
     data object Notifications: NavRoutes, NavKey
 
-    // quick actions
+    // leave
     @Serializable
     data object LeaveHistory : NavRoutes, NavKey
     @Serializable
     data object ApplyLeave : NavRoutes, NavKey
+
+    // fees
     @Serializable
-    data object Fees : NavRoutes, NavKey
+    data object FeesSummary : NavRoutes, NavKey
+    @Serializable
+    data object FeesPayment : NavRoutes, NavKey
+    @Serializable
+    data object FeesHistory : NavRoutes, NavKey
     @Serializable
     data object Library : NavRoutes, NavKey
     @Serializable

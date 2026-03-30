@@ -33,10 +33,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.TopBar
-import com.piyushprajpti.feature.components.loading_helper.LoadingWidget
-import com.piyushprajpti.feature.components.message_helper.composables.AlertDialog
-import com.piyushprajpti.feature.components.message_helper.composables.ToastWidget
+import com.piyushprajpti.components.TopBar
+import com.piyushprajpti.components.loading_helper.LoadingWidget
+import com.piyushprajpti.components.message_helper.composables.AlertDialog
+import com.piyushprajpti.components.message_helper.composables.ToastWidget
 import com.piyushprajpti.feature.home.components.CategoryFilterRow
 import com.piyushprajpti.feature.home.components.NotificationCard
 import com.piyushprajpti.feature.home.components.UrgentHeader

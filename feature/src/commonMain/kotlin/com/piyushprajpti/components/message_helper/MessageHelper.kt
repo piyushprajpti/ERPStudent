@@ -2,9 +2,9 @@ package com.piyushprajpti.components.message_helper
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import com.piyushprajpti.feature.components.message_helper.model.Alert
-import com.piyushprajpti.feature.components.message_helper.model.Toast
-import com.piyushprajpti.feature.components.message_helper.model.ToastType
+import com.piyushprajpti.components.message_helper.model.Alert
+import com.piyushprajpti.components.message_helper.model.Toast
+import com.piyushprajpti.components.message_helper.model.ToastType
 
 class MessageHelper {
 

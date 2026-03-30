@@ -37,12 +37,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.CustomTextField
-import com.piyushprajpti.feature.components.PrimaryActionButton
-import com.piyushprajpti.feature.components.SelectableCard
-import com.piyushprajpti.feature.components.loading_helper.LoadingWidget
-import com.piyushprajpti.feature.components.message_helper.composables.AlertDialog
-import com.piyushprajpti.feature.components.message_helper.composables.ToastWidget
+import com.piyushprajpti.components.CustomTextField
+import com.piyushprajpti.components.PrimaryActionButton
+import com.piyushprajpti.components.SelectableCard
+import com.piyushprajpti.components.loading_helper.LoadingWidget
+import com.piyushprajpti.components.message_helper.composables.AlertDialog
+import com.piyushprajpti.components.message_helper.composables.ToastWidget
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

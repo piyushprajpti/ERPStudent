@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.message_helper.MessageHelper
-import com.piyushprajpti.feature.components.message_helper.model.Toast
-import com.piyushprajpti.feature.components.message_helper.model.ToastType
+import com.piyushprajpti.components.message_helper.MessageHelper
+import com.piyushprajpti.components.message_helper.model.Toast
+import com.piyushprajpti.components.message_helper.model.ToastType
 
 @Composable
 fun ToastWidget(messageHelper: MessageHelper) {

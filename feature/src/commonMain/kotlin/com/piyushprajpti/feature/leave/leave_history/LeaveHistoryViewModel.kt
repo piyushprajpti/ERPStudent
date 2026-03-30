@@ -2,8 +2,8 @@ package com.piyushprajpti.feature.leave.leave_history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.piyushprajpti.feature.components.loading_helper.LoadingHelper
-import com.piyushprajpti.feature.components.message_helper.MessageHelper
+import com.piyushprajpti.components.loading_helper.LoadingHelper
+import com.piyushprajpti.components.message_helper.MessageHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -64,7 +64,7 @@ class LeaveHistoryViewModel : ViewModel() {
     fun onEvent(event: LeaveHistoryEvent) {
         when (event) {
             is LeaveHistoryEvent.OnStatusSelected -> {
-                _state.update { 
+                _state.update {
                     val filtered = if (event.status == LeaveStatus.All) {
                         it.leaves
                     } else {
@@ -73,9 +73,11 @@ class LeaveHistoryViewModel : ViewModel() {
                     it.copy(selectedStatus = event.status, filteredLeaves = filtered)
                 }
             }
+
             LeaveHistoryEvent.OnAddLeaveClicked -> {
                 // Navigate to Add Leave Screen
             }
+
             LeaveHistoryEvent.OnBackClicked -> {
                 // Handle back navigation
             }

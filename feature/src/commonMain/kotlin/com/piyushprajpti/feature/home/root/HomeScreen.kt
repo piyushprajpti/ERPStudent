@@ -22,10 +22,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.piyushprajpti.college_erp_system.theme.CustomTheme
-import com.piyushprajpti.feature.components.LocalBottomBarPadding
-import com.piyushprajpti.feature.components.loading_helper.LoadingWidget
-import com.piyushprajpti.feature.components.message_helper.composables.AlertDialog
-import com.piyushprajpti.feature.components.message_helper.composables.ToastWidget
+import com.piyushprajpti.components.LocalBottomBarPadding
+import com.piyushprajpti.components.loading_helper.LoadingWidget
+import com.piyushprajpti.components.message_helper.composables.AlertDialog
+import com.piyushprajpti.components.message_helper.composables.ToastWidget
 import com.piyushprajpti.feature.home.components.AttendanceAlertCard
 import com.piyushprajpti.feature.home.components.HomeHeader
 import com.piyushprajpti.feature.home.components.NextClassCard

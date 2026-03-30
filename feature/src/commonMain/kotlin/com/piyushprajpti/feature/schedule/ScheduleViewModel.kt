@@ -2,8 +2,8 @@ package com.piyushprajpti.feature.schedule
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.piyushprajpti.feature.components.loading_helper.LoadingHelper
-import com.piyushprajpti.feature.components.message_helper.MessageHelper
+import com.piyushprajpti.components.loading_helper.LoadingHelper
+import com.piyushprajpti.components.message_helper.MessageHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -83,7 +83,7 @@ class ScheduleViewModel : ViewModel() {
                 location = "",
                 isFreePeriod = true
             ),
-             ScheduleItem(
+            ScheduleItem(
                 id = "6",
                 subject = "Algorithm Design",
                 professor = "Dr. James Wilson",

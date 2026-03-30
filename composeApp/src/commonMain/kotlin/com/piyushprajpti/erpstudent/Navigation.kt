@@ -27,6 +27,7 @@ import com.piyushprajpti.core.navigation.serializableNavModule
 import com.piyushprajpti.di.mainEntryProvider
 import com.piyushprajpti.feature.auth.authEntryProvider
 import com.piyushprajpti.feature.common.commonEntryProvider
+import com.piyushprajpti.feature.fees.feesEntryProvider
 import com.piyushprajpti.feature.home.homeEntryProvider
 import com.piyushprajpti.feature.leave.leaveEntryProvider
 import com.piyushprajpti.feature.settings.settingsEntryProvider
@@ -68,7 +69,8 @@ fun Navigation(authState: AuthState) {
             ::mainEntryProvider,
             ::settingsEntryProvider,
             ::homeEntryProvider,
-            ::leaveEntryProvider
+            ::leaveEntryProvider,
+            ::feesEntryProvider,
         )
     }
 

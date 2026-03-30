@@ -2,8 +2,8 @@ package com.piyushprajpti.feature.home.notifications
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.piyushprajpti.feature.components.loading_helper.LoadingHelper
-import com.piyushprajpti.feature.components.message_helper.MessageHelper
+import com.piyushprajpti.components.loading_helper.LoadingHelper
+import com.piyushprajpti.components.message_helper.MessageHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
@@ -29,9 +29,11 @@ class NotificationViewModel : ViewModel() {
             is NotificationEvent.OnCategorySelected -> {
                 _state.update { it.copy(selectedCategory = event.category) }
             }
+
             is NotificationEvent.OnNotificationClick -> {
                 // Handle notification click
             }
+
             NotificationEvent.OnBackClick -> {
                 // Handle back click - usually via navigation, but we can have it here if needed
             }
@@ -70,7 +72,7 @@ class NotificationViewModel : ViewModel() {
                 isUrgent = false,
                 isRead = true
             ),
-             Notification(
+            Notification(
                 id = "4",
                 title = "End Semester Examination Schedule",
                 description = "The final examination schedule for all departments has been released. Please check the portal for details.",

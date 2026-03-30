@@ -3,7 +3,8 @@
 ## Architecture & Structure
 - **Screen Pattern:** Every screen must consist of four files: `[Name]Screen.kt`, `[Name]ViewModel.kt`, `[Name]State.kt`, and `[Name]Event.kt`.
 - **Clean Code:** Keep the main `Screen.kt` file clean. Move UI components into a `components` sub-folder within the feature module (e.g., `feature/home/components/`).
-- **ViewModel Data:** Always populate ViewModels with extensive dummy data that covers all possible states and edge cases for testing.
+- **ViewModel Data:** Always populate ViewModels with extensive dummy data that covers all possible states and edge cases for testing. Create more dummy data additional to the present in image covering all features and cases of the screen.
+- **Navigation Back Handling:** Do not handle `onBackClick` within the ViewModel. Pass an `onBackClick: () -> Unit` lambda directly into the Screen Composable to handle navigation at the caller level.
 
 ## UI & Styling Standards
 - **Theme:** Always use `CustomTheme.colors` from `com.piyushprajpti.college_erp_system.theme`.
@@ -12,7 +13,8 @@
 - **No Scaffold:** Do not use the material `Scaffold` component. Use custom layouts (Column/Box) with proper system bar padding.
 - **Full Screen Effect:** 
     - Always add `statusBarsPadding()` to the root screen element.
-    - Add navigation bar padding (e.g., `navigationBarsPadding()` or `LocalBottomBarPadding.current`) to the `contentPadding` of scrollable containers (LazyColumn/verticalScroll) to ensure content is not hidden behind system bars or bottom bars.
+    - **Navigation Bar Padding:** Always use `navigationBarsPadding()` modifier. **DO NOT use `LocalBottomBarPadding.current`.**
+    - Add navigation bar padding to the `contentPadding` of scrollable containers (LazyColumn/verticalScroll) or to the root layout to ensure content is not hidden behind system bars.
 - **Scrollability:** Every page must be scrollable (usually via `LazyColumn` or `Modifier.verticalScroll`).
 - **Padding:** Use a default corner/screen padding of `15.dp`.
 - **Typography:** Keep font sizes professional and normal. Avoid excessively large text. **NEVER use `MaterialTheme.typography` styles anywhere.**

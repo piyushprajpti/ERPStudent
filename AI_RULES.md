@@ -40,6 +40,15 @@
     - `ToastWidget(viewModel.messageHelper)`
 - **Loading State:** When populating dummy data or during initial load in ViewModels, **DO NOT add dummy loading delays** (e.g., `delay(2000)`). The data should be available immediately unless a real network call is being simulated/made.
 
+## Dummy Data Assets
+- **Profile Image:** `https://cdn-icons-png.flaticon.com/512/15297/15297661.png`
+- **QR Code:** `https://img.freepik.com/premium-vector/modern-square-sample-black-qr-code-icon-white-background_131186-1524.jpg`
+- **Student ID Photo:** `https://www.clipartmax.com/png/middle/144-1442578_flat-person-icon-d.png`
+- **Book Covers:**
+    - `https://m.media-amazon.com/images/I/41xShlnTZTL._SX376_BO1,204,203,200_.jpg` (Clean Code)
+    - `https://m.media-amazon.com/images/I/51szD9HC9pL._SX395_BO1,204,203,200_.jpg` (The Pragmatic Programmer)
+    - `https://m.media-amazon.com/images/I/41T5H8u7fUL._SX331_BO1,204,203,200_.jpg` (Refactoring)
+
 ## Best Practices
 - Use `sealed interface` for Events.
 - Use `data class` for State with default values.

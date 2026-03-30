@@ -53,8 +53,11 @@ val serializableNavModule = SerializersModule {
         subclass(NavRoutes.MarksOverview::class, NavRoutes.MarksOverview.serializer())
         subclass(NavRoutes.GradeCard::class, NavRoutes.GradeCard.serializer())
 
-        // examl
-        subclass(NavRoutes.Exam::class, NavRoutes.Exam.serializer())
+        // exam
+        subclass(NavRoutes.ExamSchedule::class, NavRoutes.ExamSchedule.serializer())
+        subclass(NavRoutes.ExamHallTicket::class, NavRoutes.ExamHallTicket.serializer())
+
+
         subclass(NavRoutes.Hostel::class, NavRoutes.Hostel.serializer())
         subclass(NavRoutes.Events::class, NavRoutes.Events.serializer())
         subclass(NavRoutes.Assignment::class, NavRoutes.Assignment.serializer())

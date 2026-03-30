@@ -71,7 +71,7 @@ enum class QuickAction(
     Library("Library", Icons.AutoMirrored.Outlined.LibraryBooks, NavRoutes.LibraryDashboard),
     Documents("Documents", Icons.Outlined.Description, NavRoutes.DocumentList),
     Marks("Marks", Icons.Outlined.Grade, NavRoutes.MarksOverview),
-    Exam("Exam", Icons.Outlined.HistoryEdu, NavRoutes.Exam),
+    Exam("Exam", Icons.Outlined.HistoryEdu, NavRoutes.ExamSchedule),
     Hostel("Hostel", Icons.Outlined.HomeWork, NavRoutes.Hostel),
     Events("Events", Icons.Outlined.Event, NavRoutes.Events),
     Assignment("Assignment", Icons.AutoMirrored.Outlined.Assignment, NavRoutes.Assignment),

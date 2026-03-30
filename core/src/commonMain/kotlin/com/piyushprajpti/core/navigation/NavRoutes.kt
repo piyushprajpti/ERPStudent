@@ -89,8 +89,11 @@ sealed interface NavRoutes : NavKey {
     @Serializable
     data object GradeCard : NavRoutes, NavKey
 
+    // exam
     @Serializable
-    data object Exam : NavRoutes, NavKey
+    data object ExamSchedule : NavRoutes, NavKey
+    @Serializable
+    data object ExamHallTicket : NavRoutes, NavKey
 
     @Serializable
     data object Hostel : NavRoutes, NavKey

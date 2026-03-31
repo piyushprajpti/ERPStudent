@@ -13,6 +13,10 @@ import com.piyushprajpti.feature.fees.payment.FeesPaymentViewModel
 import com.piyushprajpti.feature.fees.summary.FeesSummaryViewModel
 import com.piyushprajpti.feature.home.notifications.NotificationViewModel
 import com.piyushprajpti.feature.home.root.HomeViewModel
+import com.piyushprajpti.feature.hostel.complaints.HostelComplaintViewModel
+import com.piyushprajpti.feature.hostel.dashboard.HostelDashboardViewModel
+import com.piyushprajpti.feature.hostel.gate_pass.HostelGatePassViewModel
+import com.piyushprajpti.feature.hostel.mess.HostelMessViewModel
 import com.piyushprajpti.feature.leave.leave_apply.ApplyLeaveViewModel
 import com.piyushprajpti.feature.leave.leave_history.LeaveHistoryViewModel
 import com.piyushprajpti.feature.library.book_detail.LibraryBookDetailViewModel
@@ -77,4 +81,10 @@ val featureModule = module {
     // exam
     viewModelOf(::ExamScheduleViewModel)
     viewModelOf(::ExamHallTicketViewModel)
+
+    // hostel
+    viewModelOf(::HostelDashboardViewModel)
+    viewModelOf(::HostelComplaintViewModel)
+    viewModelOf(::HostelGatePassViewModel)
+    viewModelOf(::HostelMessViewModel)
 }

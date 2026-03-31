@@ -72,7 +72,7 @@ enum class QuickAction(
     Documents("Documents", Icons.Outlined.Description, NavRoutes.DocumentList),
     Marks("Marks", Icons.Outlined.Grade, NavRoutes.MarksOverview),
     Exam("Exam", Icons.Outlined.HistoryEdu, NavRoutes.ExamSchedule),
-    Hostel("Hostel", Icons.Outlined.HomeWork, NavRoutes.Hostel),
+    Hostel("Hostel", Icons.Outlined.HomeWork, NavRoutes.HostelDashboard),
     Events("Events", Icons.Outlined.Event, NavRoutes.Events),
     Assignment("Assignment", Icons.AutoMirrored.Outlined.Assignment, NavRoutes.Assignment),
     Transport("Transport", Icons.Outlined.School, NavRoutes.Transport)

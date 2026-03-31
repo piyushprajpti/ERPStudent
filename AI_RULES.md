@@ -3,6 +3,7 @@
 ## Architecture & Structure
 - **Screen Pattern:** Every screen must consist of four files: `[Name]Screen.kt`, `[Name]ViewModel.kt`, `[Name]State.kt`, and `[Name]Event.kt`.
 - **Clean Code:** Keep the main `Screen.kt` file clean. Move UI components into a `components` sub-folder within the feature module (e.g., `feature/home/components/`).
+- **Reusable Components:** Always check for existing reusable components in `com.piyushprajpti.components` before creating new ones. If a component (like Date/Time selectors, buttons, text fields) is likely to be used on multiple screens, create it as a reusable component in the common components directory.
 - **ViewModel Data:** Always populate ViewModels with extensive dummy data that covers all possible states and edge cases for testing. Create more dummy data additional to the present in image covering all features and cases of the screen.
 - **Navigation Back Handling:** Do not handle `onBackClick` within the ViewModel. Pass an `onBackClick: () -> Unit` lambda directly into the Screen Composable to handle navigation at the caller level.
 

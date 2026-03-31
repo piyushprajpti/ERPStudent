@@ -31,6 +31,7 @@ import com.piyushprajpti.feature.documents.documentEntryProvider
 import com.piyushprajpti.feature.exam.examEntryProvider
 import com.piyushprajpti.feature.fees.feesEntryProvider
 import com.piyushprajpti.feature.home.homeEntryProvider
+import com.piyushprajpti.feature.hostel.hostelEntryProvider
 import com.piyushprajpti.feature.leave.leaveEntryProvider
 import com.piyushprajpti.feature.library.libraryEntryProvider
 import com.piyushprajpti.feature.marks.marksEntryProvider
@@ -79,6 +80,7 @@ fun Navigation(authState: AuthState) {
             ::documentEntryProvider,
             ::marksEntryProvider,
             ::examEntryProvider,
+            ::hostelEntryProvider,
 
         )
     }

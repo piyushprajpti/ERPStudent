@@ -7,6 +7,8 @@ import com.piyushprajpti.feature.common.reset_password.ResetPasswordViewModel
 import com.piyushprajpti.feature.common.support.SupportViewModel
 import com.piyushprajpti.feature.documents.list.DocumentListViewModel
 import com.piyushprajpti.feature.documents.request.DocumentRequestViewModel
+import com.piyushprajpti.feature.events.dashboard.EventDashboardViewModel
+import com.piyushprajpti.feature.events.detail.EventDetailViewModel
 import com.piyushprajpti.feature.exam.hall_ticket.ExamHallTicketViewModel
 import com.piyushprajpti.feature.exam.schedule.ExamScheduleViewModel
 import com.piyushprajpti.feature.fees.payment.FeesPaymentViewModel
@@ -87,4 +89,8 @@ val featureModule = module {
     viewModelOf(::HostelComplaintViewModel)
     viewModelOf(::HostelGatePassViewModel)
     viewModelOf(::HostelMessViewModel)
+
+    // events
+    viewModelOf(::EventDashboardViewModel)
+    viewModelOf(::EventDetailViewModel)
 }

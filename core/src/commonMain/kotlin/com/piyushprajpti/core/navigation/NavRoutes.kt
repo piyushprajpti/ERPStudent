@@ -105,8 +105,11 @@ sealed interface NavRoutes : NavKey {
     @Serializable
     data object HostelComplaint : NavRoutes, NavKey
 
+    // events
     @Serializable
-    data object Events : NavRoutes, NavKey
+    data object EventDashboard : NavRoutes, NavKey
+    @Serializable
+    data object EventDetail : NavRoutes, NavKey
 
     @Serializable
     data object Assignment : NavRoutes, NavKey

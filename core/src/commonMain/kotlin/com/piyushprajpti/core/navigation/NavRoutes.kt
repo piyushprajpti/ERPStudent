@@ -111,9 +111,15 @@ sealed interface NavRoutes : NavKey {
     @Serializable
     data object EventDetail : NavRoutes, NavKey
 
+    // assignment
     @Serializable
-    data object Assignment : NavRoutes, NavKey
+    data object AssignmentDashboard : NavRoutes, NavKey
+    @Serializable
+    data object AssignmentSubmit : NavRoutes, NavKey
 
+    // transport
     @Serializable
-    data object Transport : NavRoutes, NavKey
+    data object TransportDashboard : NavRoutes, NavKey
+    @Serializable
+    data object TransportTracking : NavRoutes, NavKey
 }

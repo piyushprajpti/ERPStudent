@@ -68,7 +68,11 @@ val serializableNavModule = SerializersModule {
         subclass(NavRoutes.EventDetail::class, NavRoutes.EventDetail.serializer())
 
         // assignment
-        subclass(NavRoutes.Assignment::class, NavRoutes.Assignment.serializer())
-        subclass(NavRoutes.Transport::class, NavRoutes.Transport.serializer())
+        subclass(NavRoutes.AssignmentDashboard::class, NavRoutes.AssignmentDashboard.serializer())
+        subclass(NavRoutes.AssignmentSubmit::class, NavRoutes.AssignmentSubmit.serializer())
+
+        // transport
+        subclass(NavRoutes.TransportDashboard::class, NavRoutes.TransportDashboard.serializer())
+        subclass(NavRoutes.TransportTracking::class, NavRoutes.TransportTracking.serializer())
     }
 }

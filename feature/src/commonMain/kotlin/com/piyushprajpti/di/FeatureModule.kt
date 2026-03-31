@@ -1,5 +1,7 @@
 package com.piyushprajpti.di
 
+import com.piyushprajpti.feature.assignment.dashboard.AssignmentDashboardViewModel
+import com.piyushprajpti.feature.assignment.submission.AssignmentSubmissionViewModel
 import com.piyushprajpti.feature.attendance.AttendanceViewModel
 import com.piyushprajpti.feature.auth.login.LoginViewModel
 import com.piyushprajpti.feature.auth.tenant.TenantViewModel
@@ -31,6 +33,8 @@ import com.piyushprajpti.feature.schedule.ScheduleViewModel
 import com.piyushprajpti.feature.settings.change_password.ChangePasswordViewModel
 import com.piyushprajpti.feature.settings.profile.ProfileViewModel
 import com.piyushprajpti.feature.settings.root.SettingsViewModel
+import com.piyushprajpti.feature.transport.dashboard.TransportDashboardViewModel
+import com.piyushprajpti.feature.transport.tracking.TransportTrackingViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -93,4 +97,12 @@ val featureModule = module {
     // events
     viewModelOf(::EventDashboardViewModel)
     viewModelOf(::EventDetailViewModel)
+
+    // assignment
+    viewModelOf(::AssignmentDashboardViewModel)
+    viewModelOf(::AssignmentSubmissionViewModel)
+
+    // transport
+    viewModelOf(::TransportDashboardViewModel)
+    viewModelOf(::TransportTrackingViewModel)
 }

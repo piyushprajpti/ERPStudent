@@ -25,6 +25,7 @@ import com.piyushprajpti.components.LocalBottomBarPadding
 import com.piyushprajpti.core.navigation.NavRoutes
 import com.piyushprajpti.core.navigation.serializableNavModule
 import com.piyushprajpti.di.mainEntryProvider
+import com.piyushprajpti.feature.assignment.assignmentEntryProvider
 import com.piyushprajpti.feature.auth.authEntryProvider
 import com.piyushprajpti.feature.common.commonEntryProvider
 import com.piyushprajpti.feature.documents.documentEntryProvider
@@ -37,6 +38,7 @@ import com.piyushprajpti.feature.leave.leaveEntryProvider
 import com.piyushprajpti.feature.library.libraryEntryProvider
 import com.piyushprajpti.feature.marks.marksEntryProvider
 import com.piyushprajpti.feature.settings.settingsEntryProvider
+import com.piyushprajpti.feature.transport.transportEntryProvider
 
 @Composable
 fun Navigation(authState: AuthState) {
@@ -83,6 +85,8 @@ fun Navigation(authState: AuthState) {
             ::examEntryProvider,
             ::hostelEntryProvider,
             ::eventEntryProvider,
+            ::assignmentEntryProvider,
+            ::transportEntryProvider,
 
             )
     }

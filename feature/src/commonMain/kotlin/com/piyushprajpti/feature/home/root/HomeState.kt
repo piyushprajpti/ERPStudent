@@ -74,8 +74,8 @@ enum class QuickAction(
     Exam("Exam", Icons.Outlined.HistoryEdu, NavRoutes.ExamSchedule),
     Hostel("Hostel", Icons.Outlined.HomeWork, NavRoutes.HostelDashboard),
     Events("Events", Icons.Outlined.Event, NavRoutes.EventDashboard),
-    Assignment("Assignment", Icons.AutoMirrored.Outlined.Assignment, NavRoutes.Assignment),
-    Transport("Transport", Icons.Outlined.School, NavRoutes.Transport)
+    Assignment("Assignment", Icons.AutoMirrored.Outlined.Assignment, NavRoutes.AssignmentDashboard),
+    Transport("Transport", Icons.Outlined.School, NavRoutes.TransportDashboard)
 }
 
 data class ScheduleItem(

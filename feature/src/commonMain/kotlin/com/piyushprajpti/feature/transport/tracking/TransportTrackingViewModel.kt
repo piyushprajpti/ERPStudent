@@ -24,7 +24,13 @@ class TransportTrackingViewModel : ViewModel() {
         initialValue = TransportTrackingState()
     )
 
+    private var isDataLoaded = false
+
     private fun loadData() {
+        // Prevent redundant data loading
+        if (isDataLoaded) return
+        isDataLoaded = true
+
         _state.update {
             it.copy(
                 routeName = "Route 42",
@@ -46,16 +52,35 @@ class TransportTrackingViewModel : ViewModel() {
     fun onEvent(event: TransportTrackingEvent) {
         when (event) {
             is TransportTrackingEvent.ToggleAlert -> {
-                _state.update { it.copy(isAlertEnabled = event.enabled) }
+                // Only update if value actually changed
+                if (_state.value.isAlertEnabled != event.enabled) {
+                    _state.update { it.copy(isAlertEnabled = event.enabled) }
+                }
             }
 
             TransportTrackingEvent.Refresh -> {
                 loadData()
             }
 
-            TransportTrackingEvent.FocusMyLocation -> {}
-            TransportTrackingEvent.ZoomIn -> {}
-            TransportTrackingEvent.ZoomOut -> {}
+            TransportTrackingEvent.FocusMyLocation -> {
+                _state.update { it.copy(cameraTrigger = CameraTrigger.FocusMyLocation) }
+                resetCameraTrigger()
+            }
+            TransportTrackingEvent.ZoomIn -> {
+                _state.update { it.copy(cameraTrigger = CameraTrigger.ZoomIn) }
+                resetCameraTrigger()
+            }
+            TransportTrackingEvent.ZoomOut -> {
+                _state.update { it.copy(cameraTrigger = CameraTrigger.ZoomOut) }
+                resetCameraTrigger()
+            }
+            is TransportTrackingEvent.PermissionResult -> {
+                _state.update { it.copy(isLocationPermissionGranted = event.isGranted) }
+            }
         }
+    }
+
+    private fun resetCameraTrigger() {
+        _state.update { it.copy(cameraTrigger = null) }
     }
 }

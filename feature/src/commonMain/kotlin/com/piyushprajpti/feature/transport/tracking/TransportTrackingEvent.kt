@@ -6,4 +6,5 @@ sealed interface TransportTrackingEvent {
     data object ZoomIn : TransportTrackingEvent
     data object ZoomOut : TransportTrackingEvent
     data object FocusMyLocation : TransportTrackingEvent
+    data class PermissionResult(val isGranted: Boolean) : TransportTrackingEvent
 }

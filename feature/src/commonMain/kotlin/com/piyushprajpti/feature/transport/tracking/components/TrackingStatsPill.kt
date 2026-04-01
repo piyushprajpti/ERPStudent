@@ -38,43 +38,56 @@ fun TrackingStatsPill(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Default.Route,
-                contentDescription = null,
-                tint = CustomTheme.colors.primary,
-                modifier = Modifier.size(18.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "Distance: $distance",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = CustomTheme.colors.primaryText
-            )
-        }
-
-        Box(
-            modifier = Modifier
-                .width(1.dp)
-                .height(20.dp)
-                .background(CustomTheme.colors.outline)
-        )
-
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Default.AccessTime,
-                contentDescription = null,
-                tint = CustomTheme.colors.primary,
-                modifier = Modifier.size(18.dp)
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "ETA: $eta",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold,
-                color = CustomTheme.colors.primaryText
-            )
-        }
+        DistanceStat(distance)
+        Divider()
+        ETAStat(eta)
     }
+}
+
+@Composable
+private fun DistanceStat(distance: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = Icons.Default.Route,
+            contentDescription = null,
+            tint = CustomTheme.colors.primary,
+            modifier = Modifier.size(18.dp)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = "Distance: $distance",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = CustomTheme.colors.primaryText
+        )
+    }
+}
+
+@Composable
+private fun ETAStat(eta: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            imageVector = Icons.Default.AccessTime,
+            contentDescription = null,
+            tint = CustomTheme.colors.primary,
+            modifier = Modifier.size(18.dp)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = "ETA: $eta",
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Bold,
+            color = CustomTheme.colors.primaryText
+        )
+    }
+}
+
+@Composable
+private fun Divider() {
+    Box(
+        modifier = Modifier
+            .width(1.dp)
+            .height(20.dp)
+            .background(CustomTheme.colors.outline)
+    )
 }

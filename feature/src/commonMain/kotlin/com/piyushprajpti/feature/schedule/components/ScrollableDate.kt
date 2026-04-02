@@ -118,19 +118,19 @@ fun DateItem(
     ) {
         Text(
             text = monthName,
-            color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
+            color = if (isSelected) CustomTheme.colors.white else CustomTheme.colors.secondaryText,
             fontSize = 12.sp,
             fontWeight = FontWeight.Medium
         )
         Text(
             text = date.day.toString(),
-            color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
+            color = if (isSelected) CustomTheme.colors.white else CustomTheme.colors.secondaryText,
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
             text = dayName,
-            color = if (isSelected) CustomTheme.colors.primaryText else CustomTheme.colors.secondaryText,
+            color = if (isSelected) CustomTheme.colors.white else CustomTheme.colors.secondaryText,
             fontSize = 12.sp,
             fontWeight = FontWeight.Medium
         )

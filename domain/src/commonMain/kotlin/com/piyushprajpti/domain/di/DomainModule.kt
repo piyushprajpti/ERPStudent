@@ -10,6 +10,7 @@ import com.piyushprajpti.domain.usecase.common.ForgotPasswordUseCase
 import com.piyushprajpti.domain.usecase.common.ResetPasswordUseCase
 import com.piyushprajpti.domain.usecase.common.SubmitSupportUseCase
 import com.piyushprajpti.domain.usecase.common.VerifyOtpUseCase
+import com.piyushprajpti.domain.usecase.user.GetUserUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -26,4 +27,7 @@ val domainModule = module {
 
     // common use cases
     factory { SubmitSupportUseCase(get()) }
+
+    // user use cases
+    factory { GetUserUseCase(get()) }
 }

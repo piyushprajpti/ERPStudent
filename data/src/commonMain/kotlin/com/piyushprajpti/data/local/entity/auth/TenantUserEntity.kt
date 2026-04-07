@@ -2,10 +2,10 @@ package com.piyushprajpti.data.local.entity.auth
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.piyushprajpti.domain.model.auth.User
+import com.piyushprajpti.domain.model.auth.TenantUser
 
-@Entity(tableName = "users")
-data class UserEntity(
+@Entity(tableName = "tenant_users")
+data class TenantUserEntity(
     @PrimaryKey val id: String,
     val tenantId: String,
     val email: String,
@@ -19,7 +19,7 @@ data class UserEntity(
     val updatedAt: String
 )
 
-fun UserEntity.toDomain() = User(
+fun TenantUserEntity.toDomain() = TenantUser(
     id = id,
     tenantId = tenantId,
     email = email,
@@ -33,7 +33,7 @@ fun UserEntity.toDomain() = User(
     updatedAt = updatedAt
 )
 
-fun User.toEntity() = UserEntity(
+fun TenantUser.toEntity() = TenantUserEntity(
     id = id,
     tenantId = tenantId,
     email = email,

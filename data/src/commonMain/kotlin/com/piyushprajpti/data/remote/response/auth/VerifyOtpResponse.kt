@@ -1,4 +1,4 @@
-package com.piyushprajpti.data.remote.response
+package com.piyushprajpti.data.remote.response.auth
 
 import kotlinx.serialization.Serializable
 

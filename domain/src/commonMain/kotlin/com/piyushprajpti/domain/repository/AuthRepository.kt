@@ -1,4 +1,4 @@
-package com.piyushprajpti.domain.repository.auth
+package com.piyushprajpti.domain.repository
 
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.domain.model.auth.Tenant

@@ -1,7 +1,7 @@
 package com.piyushprajpti.domain.usecase.auth
 
 import com.piyushprajpti.domain.model.auth.Tenant
-import com.piyushprajpti.domain.repository.auth.AuthRepository
+import com.piyushprajpti.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetSavedTenantUseCase(private val repository: AuthRepository) {

@@ -1,6 +1,6 @@
 package com.piyushprajpti.domain.model.auth
 
-data class User(
+data class TenantUser(
     val id: String = "",
     val tenantId: String = "",
     val email: String = "",

@@ -1,5 +1,12 @@
 package com.piyushprajpti.core.http
 
+suspend fun <T : Any, R : Any> Result<T>.map(transform: suspend (T) -> R): Result<R> {
+    return when (this) {
+        is Result.Success -> Result.Success(transform(data))
+        is Result.Error -> Result.Error(error)
+    }
+}
+
 suspend fun <T : Any> Result<T>.onSuccess(action: suspend (T) -> Unit): Result<T> {
     if (this is Result.Success) action(data)
     return this

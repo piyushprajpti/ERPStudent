@@ -11,8 +11,12 @@ object ApiConstants {
         const val CHANGE_PASSWORD = "auth/change-password"
     }
 
-    object User {
+    object TenantUser {
         const val PROFILE = "user/profile"
+    }
+
+    object User {
+        const val PROFILE = "students/profile"
     }
 
     object Common {

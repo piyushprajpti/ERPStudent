@@ -1,4 +1,4 @@
-package com.piyushprajpti.data.repository.common
+package com.piyushprajpti.data.repository
 
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.data.remote.request.common.ForgotPasswordRequest
@@ -6,7 +6,7 @@ import com.piyushprajpti.data.remote.request.common.ResetPasswordRequest
 import com.piyushprajpti.data.remote.request.common.SupportRequest
 import com.piyushprajpti.data.remote.request.common.VerifyOtpRequest
 import com.piyushprajpti.data.remote.service.common.CommonApiService
-import com.piyushprajpti.domain.repository.common.CommonRepository
+import com.piyushprajpti.domain.repository.CommonRepository
 
 class CommonRepositoryImpl(
     private val apiService: CommonApiService

@@ -1,10 +1,10 @@
-package com.piyushprajpti.data.local.dao.auth
+package com.piyushprajpti.data.local.dao.user
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.piyushprajpti.data.local.entity.auth.UserEntity
+import com.piyushprajpti.data.local.entity.user.UserEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

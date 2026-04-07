@@ -1,4 +1,4 @@
-package com.piyushprajpti.data.repository.auth
+package com.piyushprajpti.data.repository
 
 import androidx.datastore.preferences.core.stringPreferencesKey
 import co.touchlab.kermit.Logger
@@ -9,7 +9,8 @@ import com.piyushprajpti.core.http.ApiException
 import com.piyushprajpti.core.http.ErrorCode
 import com.piyushprajpti.core.http.Result
 import com.piyushprajpti.data.local.dao.auth.TenantDao
-import com.piyushprajpti.data.local.dao.auth.UserDao
+import com.piyushprajpti.data.local.dao.auth.TenantUserDao
+import com.piyushprajpti.data.local.dao.user.UserDao
 import com.piyushprajpti.data.local.entity.auth.toDomain
 import com.piyushprajpti.data.local.entity.auth.toEntity
 import com.piyushprajpti.data.remote.request.auth.ChangePasswordRequest
@@ -18,7 +19,7 @@ import com.piyushprajpti.data.remote.response.auth.toDomain
 import com.piyushprajpti.data.remote.response.auth.toEntity
 import com.piyushprajpti.data.remote.service.auth.AuthApiService
 import com.piyushprajpti.domain.model.auth.Tenant
-import com.piyushprajpti.domain.repository.auth.AuthRepository
+import com.piyushprajpti.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -26,6 +27,7 @@ import kotlinx.coroutines.flow.map
 class AuthRepositoryImpl(
     private val apiService: AuthApiService,
     private val tenantDao: TenantDao,
+    private val tenantUserDao: TenantUserDao,
     private val userDao: UserDao,
     private val preferenceDataStore: PreferenceDataStore
 ) : AuthRepository {
@@ -76,7 +78,7 @@ class AuthRepositoryImpl(
         return when (val result = apiService.login(loginRequest)) {
             is Result.Success -> {
                 try {
-                    userDao.clearUser()
+                    tenantUserDao.clearUser()
 
                     preferenceDataStore.setValue(
                         stringPreferencesKey(ACCESS_TOKEN),
@@ -88,7 +90,7 @@ class AuthRepositoryImpl(
                     )
 
                     Logger.e("TAG") { result.data.toString() }
-                    userDao.insertUser(result.data.data.user.toEntity())
+                    tenantUserDao.insertUser(result.data.data.user.toEntity())
 
                     Result.Success(true)
                 } catch (e: Exception) {
@@ -111,8 +113,9 @@ class AuthRepositoryImpl(
             is Result.Success -> {
                 try {
                     preferenceDataStore.clearAll()
-                    userDao.clearUser()
+                    tenantUserDao.clearUser()
                     tenantDao.clearTenants()
+                    userDao.clearUser()
                     Result.Success(true)
                 } catch (e: Exception) {
                     Result.Error(
@@ -133,7 +136,7 @@ class AuthRepositoryImpl(
         currentPassword: String,
         newPassword: String
     ): Result<Boolean> {
-        val user = userDao.getUser().first()
+        val user = tenantUserDao.getUser().first()
             ?: return Result.Error(
                 ApiException(
                     error = ErrorCode.USER_NOT_FOUND,

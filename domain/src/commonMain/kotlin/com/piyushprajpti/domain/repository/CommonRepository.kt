@@ -1,4 +1,4 @@
-package com.piyushprajpti.domain.repository.common
+package com.piyushprajpti.domain.repository
 
 import com.piyushprajpti.core.http.Result
 

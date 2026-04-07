@@ -1,7 +1,7 @@
 package com.piyushprajpti.domain.usecase.common
 
 import com.piyushprajpti.core.http.Result
-import com.piyushprajpti.domain.repository.common.CommonRepository
+import com.piyushprajpti.domain.repository.CommonRepository
 
 class SubmitSupportUseCase(private val repository: CommonRepository) {
     suspend operator fun invoke(name: String, email: String, subject: String, description: String): Result<Unit> {

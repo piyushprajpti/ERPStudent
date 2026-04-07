@@ -1,7 +1,7 @@
 package com.piyushprajpti.data.remote.response.auth
 
-import com.piyushprajpti.data.local.entity.auth.UserEntity
-import com.piyushprajpti.domain.model.auth.User
+import com.piyushprajpti.data.local.entity.auth.TenantUserEntity
+import com.piyushprajpti.domain.model.auth.TenantUser
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -33,7 +33,7 @@ data class UserData(
     val roles: List<String> = emptyList()
 )
 
-fun UserData.toEntity() = UserEntity(
+fun UserData.toEntity() = TenantUserEntity(
     id = id,
     tenantId = tenantId,
     email = email,
@@ -47,7 +47,7 @@ fun UserData.toEntity() = UserEntity(
     updatedAt = updatedAt
 )
 
-fun UserData.toDomain() = User(
+fun UserData.toDomain() = TenantUser(
     id = id,
     tenantId = tenantId,
     email = email,

@@ -6,15 +6,20 @@ import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
+import androidx.room.TypeConverters
 import com.piyushprajpti.data.local.dao.auth.TenantDao
-import com.piyushprajpti.data.local.dao.auth.UserDao
+import com.piyushprajpti.data.local.dao.auth.TenantUserDao
+import com.piyushprajpti.data.local.dao.user.UserDao
 import com.piyushprajpti.data.local.entity.auth.TenantEntity
-import com.piyushprajpti.data.local.entity.auth.UserEntity
+import com.piyushprajpti.data.local.entity.auth.TenantUserEntity
+import com.piyushprajpti.data.local.entity.user.UserEntity
 
-@Database(entities = [TenantEntity::class, UserEntity::class], version = 2)
+@Database(entities = [TenantEntity::class, TenantUserEntity::class, UserEntity::class], version = 4)
+@TypeConverters(Converters::class)
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class LocalDatabase : RoomDatabase() {
     abstract fun tenantDao(): TenantDao
+    abstract fun tenantUserDao(): TenantUserDao
     abstract fun userDao(): UserDao
 }
 

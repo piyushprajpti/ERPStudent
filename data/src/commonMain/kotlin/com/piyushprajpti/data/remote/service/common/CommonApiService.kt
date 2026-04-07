@@ -7,7 +7,7 @@ import com.piyushprajpti.data.remote.request.common.ForgotPasswordRequest
 import com.piyushprajpti.data.remote.request.common.ResetPasswordRequest
 import com.piyushprajpti.data.remote.request.common.SupportRequest
 import com.piyushprajpti.data.remote.request.common.VerifyOtpRequest
-import com.piyushprajpti.data.remote.response.VerifyOtpResponse
+import com.piyushprajpti.data.remote.response.auth.VerifyOtpResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody

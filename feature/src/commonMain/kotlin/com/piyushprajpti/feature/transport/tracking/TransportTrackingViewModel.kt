@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.piyushprajpti.components.loading_helper.LoadingHelper
 import com.piyushprajpti.components.message_helper.MessageHelper
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -14,6 +16,9 @@ class TransportTrackingViewModel : ViewModel() {
 
     val loadingHelper = LoadingHelper()
     val messageHelper = MessageHelper()
+
+    private val _cameraEvents = MutableSharedFlow<CameraTrigger>(extraBufferCapacity = 16)
+    val cameraEvents = _cameraEvents.asSharedFlow()
 
     private val _state = MutableStateFlow(TransportTrackingState())
     val state = _state.onStart {
@@ -31,6 +36,18 @@ class TransportTrackingViewModel : ViewModel() {
         if (isDataLoaded) return
         isDataLoaded = true
 
+        val dummyRoute = listOf(
+            Location(23.0450, 72.5680), // Bus location
+            Location(23.0415, 72.5685),
+            Location(23.0380, 72.5695),
+            Location(23.0350, 72.5702),
+            Location(23.0335, 72.5710), // User location (in between bus & college)
+            Location(23.0300, 72.5718),
+            Location(23.0265, 72.5722),
+            Location(23.0240, 72.5717),
+            Location(23.0225, 72.5714)  // College location
+        )
+
         _state.update {
             it.copy(
                 routeName = "Route 42",
@@ -43,8 +60,9 @@ class TransportTrackingViewModel : ViewModel() {
                 currentSpeed = "35 km/h",
                 isAlertEnabled = true,
                 collegeLocation = Location(23.0225, 72.5714),
-                busLocation = Location(23.0330, 72.5850),
-                userLocation = Location(23.0120, 72.5600)
+                busLocation = Location(23.0450, 72.5680),
+                userLocation = Location(23.0335, 72.5710),
+                routePoints = dummyRoute
             )
         }
     }
@@ -63,24 +81,17 @@ class TransportTrackingViewModel : ViewModel() {
             }
 
             TransportTrackingEvent.FocusMyLocation -> {
-                _state.update { it.copy(cameraTrigger = CameraTrigger.FocusMyLocation) }
-                resetCameraTrigger()
+                _cameraEvents.tryEmit(CameraTrigger.FocusMyLocation)
             }
             TransportTrackingEvent.ZoomIn -> {
-                _state.update { it.copy(cameraTrigger = CameraTrigger.ZoomIn) }
-                resetCameraTrigger()
+                _cameraEvents.tryEmit(CameraTrigger.ZoomIn)
             }
             TransportTrackingEvent.ZoomOut -> {
-                _state.update { it.copy(cameraTrigger = CameraTrigger.ZoomOut) }
-                resetCameraTrigger()
+                _cameraEvents.tryEmit(CameraTrigger.ZoomOut)
             }
             is TransportTrackingEvent.PermissionResult -> {
                 _state.update { it.copy(isLocationPermissionGranted = event.isGranted) }
             }
         }
-    }
-
-    private fun resetCameraTrigger() {
-        _state.update { it.copy(cameraTrigger = null) }
     }
 }

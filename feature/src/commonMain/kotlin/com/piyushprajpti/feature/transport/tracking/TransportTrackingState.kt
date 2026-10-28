@@ -14,6 +14,7 @@ data class TransportTrackingState(
     val collegeLocation: Location = Location(0.0, 0.0),
     val busLocation: Location = Location(0.0, 0.0),
     val userLocation: Location = Location(0.0, 0.0),
+    val routePoints: List<Location> = emptyList(),
     val cameraTrigger: CameraTrigger? = null,
     val isLocationPermissionGranted: Boolean = false
 )

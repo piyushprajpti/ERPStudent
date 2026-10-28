@@ -81,16 +81,9 @@ private fun TrackingMapLayer(
     state: TransportTrackingState,
     viewModel: TransportTrackingViewModel
 ) {
-    // Memoized callbacks to prevent recreation
-    val onZoomIn = remember { { viewModel.onEvent(TransportTrackingEvent.ZoomIn) } }
-    val onZoomOut = remember { { viewModel.onEvent(TransportTrackingEvent.ZoomOut) } }
-    val onMyLocation = remember { { viewModel.onEvent(TransportTrackingEvent.FocusMyLocation) } }
-
     TrackingMap(
         state = state,
-        onZoomIn = onZoomIn,
-        onZoomOut = onZoomOut,
-        onMyLocation = onMyLocation
+        cameraEvents = viewModel.cameraEvents
     )
 }
 

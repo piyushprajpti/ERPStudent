@@ -8,14 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.piyushprajpti.feature.transport.tracking.CameraTrigger
 import com.piyushprajpti.feature.transport.tracking.TransportTrackingState
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 actual fun TrackingMap(
     state: TransportTrackingState,
-    onZoomIn: () -> Unit,
-    onZoomOut: () -> Unit,
-    onMyLocation: () -> Unit,
+    cameraEvents: Flow<CameraTrigger>?,
     modifier: Modifier
 ) {
     Box(

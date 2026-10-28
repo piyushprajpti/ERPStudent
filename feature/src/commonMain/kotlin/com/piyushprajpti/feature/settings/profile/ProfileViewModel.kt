@@ -72,19 +72,9 @@ class ProfileViewModel(
                 ProfileItem("ADMISSION DATE", DateConverter.formatDate(admissionDate), isFullWidth = true)
             ),
             contactDetails = listOf(
-                ProfileItem(
-                    "PHONE",
-                    userData.phone ?: "N/A",
-                    isFullWidth = true,
-                    icon = ProfileIcon.Phone
-                ),
+                ProfileItem("PHONE",userData.phone ?: "N/A",isFullWidth = true,icon = ProfileIcon.Phone),
                 ProfileItem("EMAIL", userData.email, isFullWidth = true, icon = ProfileIcon.Email),
-                ProfileItem(
-                    "ADDRESS",
-                    userData.address ?: "N/A",
-                    isFullWidth = true,
-                    icon = ProfileIcon.Location
-                )
+                ProfileItem("ADDRESS",userData.address ?: "N/A",isFullWidth = true,icon = ProfileIcon.Location)
             ),
             guardianDetails = guardians.flatMap { guardian ->
                 listOf(
